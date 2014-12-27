@@ -8,23 +8,24 @@ Actualmente el timbrado esta implementado con el proveedor CODEX
 
 Para poder configurar e instalar la localización se requiere:
 - Razón social y RFC para tu compañía
-- Certificado y contraseña proporcionado por SAT para timbrar tus documentos
+- Certificado y contraseña proporcionado por el SAT para el timbrado de los documentos
+- Ant (http://ant.apache.org)
 
-## Instalar ultima versión de ADempiere  y la localización
+## Instalacón de la localización
 
-- Descarga e Instala ADempiere desde http://bintray.com/adempiere/Official-Repository/
-- Crea un clone de la localización git clone https://github.com/adempiere/LMX.git
+- Descarga e instala la ultima versión de ADempiere (http://bintray.com/adempiere/Official-Repository/)
+- Descargar la localización usando git clone https://github.com/adempiere/LMX.git
 - Establece la propiedad adempiere.home editando el archivo build.properties
-- Ejecuta ant install
+- Ejecuta el comando ant install
 - Importar y aplicar el script LMX.xml con la definición del diccionario de aplicaciones
     - Application Dictionary -> Import migration from XML [File Name: org.eevolution.LMX/xml/LMX.xml]
     - Application Dictionary -> Migration , busca el script LMX y aplica en tu instalación
-- Crear la configuración requerida para tu compañía
+- Crear la configuración requerida para tu compañía en ADempiere
 
 ## Configuración de la localización
 
 - Crear un registro de información de impuesto LMX Localization -> LMX Tax Information
-    - Agregar esquema del CFDI CFDI Schema XML (cfdv32.xsd.xml)
+    - Agregar esquema del CFDI Schema XML (cfdv32.xsd.xml)
     - Agregar transformador XSLT CFDI Transformer XSLT (ADempiereConvertMutator.xslt) de ADempiere
     - Agregar transformador XSLT CFDI Transformer String XSLT (CadenaOriginal.xslt) para la cadena original
 - Crear un registro para el certificado y agregar secuencias de documentos LMX Localization -> LMX Certificate CFDI
