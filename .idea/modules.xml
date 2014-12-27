@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiereTrunk.iml" filepath="$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiereTrunk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/org.eevolution.LMX.iml" filepath="$PROJECT_DIR$/org.eevolution.LMX.iml" />
+    </modules>
+  </component>
+</project>
+

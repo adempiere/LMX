@@ -1,0 +1,56 @@
+<component name="libraryTable">
+  <library name="lib25">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/commons-net-1.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/c3p0-0.9.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/groovy-engine.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/barbecue-1.5-beta1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ant-launcher.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ant-contrib-1.0b1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/xml-apis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/activation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/swingx-0.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/postgresql.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/c3p0-oracle-thin-extras-0.9.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/activemq-core-5.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jcommon-1.0.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jnlp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/groovy-all-1.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/standard.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jpedal.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/bsh-2.0b5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/cglib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jgraph.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ant-commons-net.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jpayment.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/script-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/commons-codec.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/javaee.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/Verisign.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/logkit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/xjavadoc-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jython.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/bsh-engine.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jfreechart-1.0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ojdbc14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jython-engine.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/itext-1.4.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/wizard.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/commons-collections-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/xercesImpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/looks-2.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/poi-3.0.1-FINAL-20070705.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/jsp-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/tools/lib/ocrs12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

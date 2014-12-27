@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="lib26">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/patches.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/adempiereApps.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/adempiereRoot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/posteritaPatches.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/zkcustomization.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/CInstall.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/zkpatches.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/postgresql.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/CompiereJasperReqs.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/CSTools.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/customization.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/posterita.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/oracle.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/glassfish.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/jboss.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/Adempiere.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/sqlj.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../workspace/adempiereTrunk/adempiere/Adempiere/lib/CCTools.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

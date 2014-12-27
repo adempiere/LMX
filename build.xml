@@ -1,0 +1,124 @@
+<project name="LMX" default="dist" basedir=".">
+    <description>
+        Building LMX.jar
+        by
+        Victor Perez 
+        http://www.e-evolution.com
+    </description>
+  <!-- set global properties for this build -->
+  <property file="build.properties"/>
+  <import file="${adempiere.trunk}/utils_dev/properties.xml"/>	
+  <property name="src" location="base/src:src/main/java/LMX"/>
+  <property name="srcZK" location="zkwebui/WEB-INF/classes"/>
+  <property name="srcSwing" location="${src}:client/src"/>
+  <property name="build" location="build"/>
+  <property name="buildZK" location="buildZK"/>
+  <property name="buildSwing" location="buildSwing"/>
+  <property name="dist"  location="dist"/>
+
+  <path id="lib.class.path">
+  	
+  	 <pathelement location="${adempiere.trunk}/zkwebui/WEB-INF/classes"/>
+     <fileset dir="${adempiere.trunk}/lib">
+        <include name="*.jar"/>
+     </fileset>
+  	<fileset dir="${adempiere.trunk}/serverApps/src/web/WEB-INF/lib">
+  	        <include name="*.jar"/>
+  	     </fileset>
+    <fileset dir="${adempiere.trunk}/install/build/Adempiere/lib">
+       <include name="Adempiere.jar"/>
+    </fileset>
+  	<fileset dir="${adempiere.trunk}/lib">
+  	        <include name="webui.war"/>
+  	</fileset>
+    <fileset dir="${adempiere.trunk}/packages">
+       <include name="*.jar"/>
+    </fileset>
+  	<fileset dir="${adempiere.trunk}/zkwebui/WEB-INF/lib">
+  	       <include name="*.jar"/>
+   </fileset>
+  </path>
+
+  <target name="init" depends="clean">
+    <echo message="Trunk location: ${adempiere.trunk}"/>
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  	<mkdir dir="${buildZK}/WEB-INF/classes"/>
+    <mkdir dir="${buildSwing}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac  target="1.6" encoding="UTF-8" srcdir="${src}" destdir="${build}">
+      <classpath refid="lib.class.path"/>
+    </javac>
+
+  </target>
+	
+  <target name="compileZK" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac  target="1.6" encoding="UTF-8" srcdir="${srcZK}" destdir="${buildZK}/WEB-INF/classes">
+      <include name="**/org/adempiere/webui/**/*.java"/>
+    	 <include name="**/org/adempiere/webui/apps/from/**/*.java"/>
+      <include name="**/org/eevolution/form/**/*.java"/>
+      <classpath refid="lib.class.path"/>
+    </javac>
+
+  </target>
+
+  <target name="compileSwing" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac  target="1.6" encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">
+       <classpath refid="lib.class.path"/>
+    </javac>
+
+  </target>
+
+  <target name="dist" depends="distCustomization,compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/LMX.jar" basedir="${build}"/>
+    <delete dir="${build}"/>
+    <delete dir="${buildZK}"/>
+    <delete dir="${buildSwing}"/>
+  </target>
+	
+ <target name="distCustomization" depends="compileSwing"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/LMX.jar" basedir="${buildSwing}"/>
+ 	
+ 	<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+ 	 <jar jarfile="${dist}/lib/LMXzk.jar" basedir="${buildZK}"/>
+
+    <!-- Create target Libero deployment -->
+    <mkdir dir="${env.ADEMPIERE_HOME}/lib/"/>
+
+    <!-- Transfer customization.jar -->
+    <copy file="${dist}/lib/LMX.jar" todir="${env.ADEMPIERE_HOME}/lib"/>
+    <copy file="${dist}/lib/LMX.jar" todir="${adempiere.trunk}/lib/"/>
+ 	<copy file="${dist}/lib/LMXzk.jar" todir="${env.ADEMPIERE_HOME}/lib"/>
+ 	<copy file="${dist}/lib/LMXzk.jar" todir="${adempiere.trunk}/lib/"/>
+
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+  	<delete dir="${buildZK}/WEB-INF/classes"/>
+  	<delete dir="${buildSwing}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
