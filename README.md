@@ -37,4 +37,4 @@ Copyright (C) 2003-2014 e-Evolution Consultants All Rights Reserved.
 Código disponible con licencia [GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt).
 
 ## Contacto
-[Victor Perez, e-Evolution] (victor.perez@e-evoution.com)
+Victor Perez victor.perez@e-evoution.com , e-Evolution
