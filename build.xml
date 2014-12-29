@@ -52,7 +52,7 @@
   <target name="compile" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.6" encoding="UTF-8" srcdir="${src}" destdir="${build}">
+    <javac  target="1.7" encoding="UTF-8" srcdir="${src}" destdir="${build}">
       <classpath refid="lib.class.path"/>
     </javac>
 
@@ -61,7 +61,7 @@
   <target name="compileZK" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.6" encoding="UTF-8" srcdir="${srcZK}" destdir="${buildZK}/WEB-INF/classes">
+    <javac  target="1.7" encoding="UTF-8" srcdir="${srcZK}" destdir="${buildZK}/WEB-INF/classes">
       <include name="**/org/adempiere/webui/**/*.java"/>
     	 <include name="**/org/adempiere/webui/apps/from/**/*.java"/>
       <include name="**/org/eevolution/form/**/*.java"/>
@@ -73,7 +73,7 @@
   <target name="compileSwing" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.6" encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">
+    <javac  target="1.7" encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">
        <classpath refid="lib.class.path"/>
     </javac>
 
@@ -121,4 +121,14 @@
   	<delete dir="${buildSwing}"/>
     <delete dir="${dist}"/>
   </target>
+
+    <target name="install"
+            description="Instalando localización en el directorio de ADempiere" >
+        <mkdir dir="${adempiere.home}/packages/LMX/lib"/>
+        <mkdir dir="${adempiere.home}/zkpackages/LMX/lib"/>
+        <copy file="${dist}/lib/LMX.jar" todir="${adempiere.home}/packages/LMX/lib"/>
+        <copy file="${dist}/lib/LMXzk.jar" todir="${adempiere.home}/zkpackages/LMX/lib"/>
+    </target>
+
+
 </project>

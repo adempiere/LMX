@@ -19913,11 +19913,11 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="4570" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75002" Table="AD_Field">
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">75084</Data>
         <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
         <Data AD_Column_ID="167" Column="AD_Field_ID">75002</Data>
-        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
         <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
@@ -21240,6 +21240,11 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="4890" StepType="AD">
       <PO AD_Table_ID="101" Action="I" Record_ID="75269" Table="AD_Column">
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
         <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
         <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="109" Column="AD_Column_ID">75269</Data>
@@ -21281,11 +21286,6 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
         <Data AD_Column_ID="127" Column="SeqNo">2</Data>
         <Data AD_Column_ID="551" Column="Updated">2014-12-26 13:55:40.563</Data>
-        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
-        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
-        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
-        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
-        <Data AD_Column_ID="110" Column="Version">0</Data>
       </PO>
     </Step>
     <Step SeqNo="4900" StepType="AD">
@@ -24104,6 +24104,224 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="53257" Column="Updated">2014-12-26 14:01:39.916</Data>
         <Data AD_Column_ID="53258" Column="UpdatedBy">100</Data>
       </PO>
+    </Step>
+    <Step SeqNo="5790" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75033" Table="AD_Field">
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained" oldValue="true">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5800" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75002" Table="AD_Field">
+        <Data AD_Column_ID="169" Column="Description" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+        <Data AD_Column_ID="170" Column="Help" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+        <Data AD_Column_ID="168" Column="Name" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5810" StepType="AD">
+      <PO AD_Table_ID="276" Action="U" Record_ID="57643" Table="AD_Element">
+        <Data AD_Column_ID="2604" Column="Description" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+        <Data AD_Column_ID="2605" Column="Help" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+        <Data AD_Column_ID="2603" Column="Name" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+        <Data AD_Column_ID="4299" Column="PrintName" oldValue="Localization MÃ©xico Certificate">Localization México Certificate</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5820" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75002" Table="AD_Field">
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isOldNull="true">54027</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5830" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75014" Table="AD_Field">
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isOldNull="true">54029</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5840" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74977" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="false">true</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="0">150</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5850" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74977" Table="AD_Field">
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isOldNull="true">54025</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5860" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74996" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="true">false</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="10">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5870" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74997" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="20">10</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5880" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74998" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="30">20</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5890" StepType="AD">
+      <PO AD_Table_ID="106" Action="U" Record_ID="54026" Table="AD_Tab">
+        <Data AD_Column_ID="162" Column="Description" oldValue="CFD Certificate Define">CFDI Certificate Define</Data>
+        <Data AD_Column_ID="163" Column="Help" oldValue="The CFD Certificate Definition Tab defines a Certificate to generate Digital Document.">The CFDI Certificate Definition Tab defines a Certificate to generate Digital Document.</Data>
+        <Data AD_Column_ID="161" Column="Name" oldValue="CFD Certificate">CFDI Certificate</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="5900" StepType="AD">
+      <PO AD_Table_ID="106" Action="U" Record_ID="54023" Table="AD_Tab">
+        <Data AD_Column_ID="162" Column="Description" oldValue="CFD Addenda Define">CFDI Addenda Define</Data>
+        <Data AD_Column_ID="163" Column="Help" oldValue="The CFD Addenda Tab defines a Addenda to generate Digital Document.">The CFDI Addenda Tab defines a Addenda to generate Digital Document.</Data>
+        <Data AD_Column_ID="161" Column="Name" oldValue="CFD Addenda">CFDI Addenda</Data>
+      </PO>
+    </Step>
+    <Step DBType="ALL" Parse="Y" SeqNo="5910" StepType="SQL">
+      <SQLStatement>CREATE OR REPLACE VIEW LMX_TRASLADOS AS 
+SELECT it.AD_Client_ID , it.AD_Org_ID, it.C_Invoice_ID,to_char(it.taxamt,'99999999990.99') as Trasladoimporte,it.C_Tax_ID as C_Tax_ID,trim(t.taxindicator) as Trasladoimpuesto,to_char(t.rate,'90.99') as Trasladotasa
+FROM C_InvoiceTax it
+INNER JOIN c_tax t on t.c_tax_id=it.c_tax_id and t.rate &gt;= 0;</SQLStatement>
+      <RollbackStatement>DROP VIEW LMX_TRASLADOS;</RollbackStatement>
+    </Step>
+    <Step DBType="ALL" Parse="Y" SeqNo="5920" StepType="SQL">
+      <SQLStatement>CREATE OR REPLACE VIEW LMX_RETENCIONES AS 
+SELECT it.AD_Client_ID , it.AD_Org_ID, it.C_Invoice_ID , to_char(it.taxamt,'9999999990.99') as Retencionimporte,trim(t.taxindicator) as Retencionimpuesto
+FROM C_InvoiceTax it
+INNER JOIN C_Tax t on t.c_tax_id=it.c_tax_id and t.rate &lt; 0;</SQLStatement>
+      <RollbackStatement>DROP VIEW LMX_RETENCIONES;</RollbackStatement>
+    </Step>
+    <Step DBType="ALL" Parse="Y" SeqNo="5930" StepType="SQL">
+      <SQLStatement>CREATE OR REPLACE VIEW LMX_INFORMACIONADUANERA AS 
+SELECT il.AD_Client_ID , il.AD_Org_ID, il.C_Invoice_ID, il.C_InvoiceLine_ID,
+(SELECT ai.Value FROM M_AttributeInstance ai
+LEFT JOIN M_Attribute a ON (a.M_Attribute_ID=ai.M_Attribute_ID)
+WHERE ai.M_AttributeSetInstance_ID=il.M_AttributeSetInstance_ID AND a.Name='numero') AS Numero,
+(SELECT ai.Value FROM M_AttributeInstance ai
+LEFT JOIN M_Attribute a ON (a.M_Attribute_ID=ai.M_Attribute_ID)
+WHERE ai.M_AttributeSetInstance_ID=il.M_AttributeSetInstance_ID AND a.Name='fecha') AS Fecha,
+(SELECT ai.Value FROM M_AttributeInstance ai
+LEFT JOIN M_Attribute a ON (a.M_Attribute_ID=ai.M_Attribute_ID)
+WHERE ai.M_AttributeSetInstance_ID=il.M_AttributeSetInstance_ID AND a.Name='aduana') AS Aduana
+FROM C_InvoiceLine il;
+ </SQLStatement>
+      <RollbackStatement>DROP VIEW LMX_INFORMACIONADUANERA;</RollbackStatement>
+    </Step>
+    <Step DBType="ALL" Parse="Y" SeqNo="5940" StepType="SQL">
+      <SQLStatement>CREATE OR REPLACE  VIEW LMX_CONCEPTOS AS
+   SELECT 'es_MX' AS AD_Language, il.ad_client_id                                                   ,
+    il.ad_org_id                                                            ,
+    il.c_invoice_id                                                         ,
+    il.c_invoiceline_id,
+    il.linenetamt                                   AS conceptoimporte      ,
+    il.qtyinvoiced                                  AS conceptocantidad     ,
+    TO_CHAR(il.priceactual, '99999999990.99') AS conceptovalorunitario ,
+    (SELECT c_uom_trl.uomsymbol
+       FROM c_uom_trl
+      WHERE c_uom_trl.ad_language = 'es_MX'
+    AND c_uom_trl.c_uom_id = il.c_uom_id
+    )  AS conceptounidad ,
+    COALESCE(p.name, il.description , ch.name )  AS conceptodescription ,
+    /*CASE
+      WHEN bp.isdiscountprinted = 'Y'
+      THEN COALESCE(bpp.vendorproductno, COALESCE(p.upc, p.sku, p.value, i.poreference))
+      ELSE COALESCE(p.upc, p.sku, p.value, i.poreference)
+    END AS conceptonoidentificacion*/
+    CASE
+    WHEN il.M_Product_ID IS NOT NULL THEN p.value
+    ELSE ch.name END AS conceptonoidentificacion
+FROM c_invoiceline il
+  LEFT JOIN c_invoice i
+       ON i.c_invoice_id = il.c_invoice_id
+  LEFT JOIN c_bpartner bp
+       ON bp.c_bpartner_id = i.c_bpartner_id
+  LEFT JOIN c_bpartner_product bpp
+       ON bpp.c_bpartner_id = bp.c_bpartner_id
+  AND bpp.m_product_id      = il.m_product_id
+  LEFT JOIN m_product p
+       ON p.m_product_id = il.m_product_id
+  LEFT JOIN c_charge ch ON (ch.C_Charge_ID = il.C_Charge_ID)
+  LEFT JOIN c_uom uom
+       ON uom.c_uom_id = p.c_uom_id
+  LEFT JOIN m_attributesetinstance ai
+       ON ai.m_attributesetinstance_id = p.m_attributesetinstance_id;</SQLStatement>
+      <RollbackStatement>DROP VIEW LMX_CONCEPTOS;</RollbackStatement>
+    </Step>
+    <Step DBType="ALL" Parse="Y" SeqNo="5950" StepType="SQL">
+      <SQLStatement>CREATE OR REPLACE VIEW LMX_COMPROBANTE AS 
+SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
+    i.AD_Org_ID,
+    i.C_Invoice_ID,
+    COALESCE(substr(i.documentno,LENGTH(seq.prefix)+1), i.documentno) AS Folio,
+    (SELECT SUM(taxamt) FROM c_invoicetax it INNER JOIN c_tax t ON t.c_tax_id  =it.c_tax_id WHERE c_invoice_id=i.c_invoice_id AND t.rate &lt; 0) AS TotalImpuestosRetenidos,
+    i.GrandTotal AS Total,
+    i.TotalLines AS SubTotal,
+    (SELECT SUM(taxamt) FROM c_invoicetax it INNER JOIN c_tax t ON t.c_tax_id  =it.c_tax_id WHERE c_invoice_id=i.c_invoice_id AND t.rate &gt;= 0) AS TotalImpuestosTrasladados,
+    'MXP' AS Moneda,
+    '3.2' AS Version,
+    TO_CHAR(getdate(), 'yyyy-mm-dd"T"HH24:MI:SS') AS Fecha,
+    'Pago en Una Sola Exhibicion' AS FormaDePago ,
+    (SELECT name FROM ad_ref_list_trl WHERE ad_language ='es_MX' AND ad_ref_list_id IN (SELECT ad_ref_list_id FROM ad_ref_list WHERE AD_Reference_ID=195 AND value=i.paymentrule)) AS MetodoDePago,
+    bp.Name AS ReceptorNombre,
+    bp.TaxID AS ReceptorRfc,
+    bp.NAICS AS NumCtaPago,
+    l.Address1 AS ReceptorCalle,
+    l.Address4 AS ReceptorReferencia,
+    l.RegionName AS ReceptorEstado ,
+    l.Postal AS ReceptorCodigoPostal,
+    l.Address2  AS ReceptorColonia,
+    l.Address3  AS ReceptorMunicipio,
+    l.City    AS ReceptorLocalidad,
+    fi.TaxID  AS EmisorRfc,
+    'Regimen General de Ley Personas Morales' AS Regimen,
+    fi.Name  AS EmisorNombre ,
+    c.Name AS ReceptorPais ,
+    ol.Postal AS ExpedidoEnCodigoPostal,
+    ol.Address2 AS ExpedidoEnColonia,
+    ol.Address3 AS ExpedidoEnLocalidad,
+    ol.Address4  AS ExpedidoEnReferencia,
+    ol.City  AS ExpedidoEnMunicipio,
+    COALESCE(ol.RegionName,rol.name) AS ExpedidoEnEstado,
+    ol.address1   AS ExpedidoEnCalle,
+    oc.Name  AS ExpedidoEnPais,
+    el.address2  AS EmisorColonia,
+    el.address1  AS EmisorCalle,
+    el.address3   AS EmisorLocalidad,
+    el.address4  AS EmisorreRerencia,
+    el.City  AS EmisorMunicipio,
+    COALESCE(el.RegionName ,rel.name) AS EmisorEstado,
+    el.Postal  AS EmisorCodigoPostal,
+    ec.Name   AS EmisorPais,
+    pt.Name  AS CondicionesDePago,
+    seq.prefix  AS Serie ,
+    TRIM(dt.description) AS TipoDeComprobante,
+    '' AS NoAprobacion,
+    ''  AS AnoAprobacion,
+    oln.ExternalNo  AS ExpedidoEnNoExterior,
+    oln.InternalNo   AS ExpedidoEnNoInterior,
+    en.ExternalNo  AS EmisorNoExterior,
+    en.InternalNo  AS EmisorNoInterior,
+    ln.ExternalNo  AS ReceptorNoExterior,
+    ln.InternalNo  AS ReceptorNoInterior
+    FROM C_Invoice i
+  INNER JOIN C_BPartner bp ON bp.c_bpartner_id=i.c_bpartner_id
+  INNER JOIN C_BPartner_Location bpl ON bpl.c_bpartner_location_id=i.c_bpartner_location_id
+  LEFT JOIN C_Location l ON l.c_location_id=bpl.c_location_id
+  LEFT JOIN LMX_Tax fi ON (fi.AD_Client_ID=i.AD_Client_ID)     
+  LEFT JOIN C_Country c ON c.c_country_id=l.c_country_id
+  LEFT JOIN AD_OrgInfo o ON o.ad_org_id=i.ad_org_id
+  LEFT JOIN C_Location ol ON ol.c_location_id=o.c_location_id
+  LEFT JOIN C_Region rol ON (rol.C_Region_ID = ol.C_Region_ID)     
+  LEFT JOIN C_Country oc ON oc.c_country_id=ol.c_country_id
+  LEFT JOIN C_Location el ON (el.C_Location_ID=fi.C_Location_ID) 
+  LEFT JOIN C_Region rel ON(rel.C_Region_ID=el.C_Region_ID)
+  LEFT JOIN C_Country ec ON ec.c_country_id=el.c_country_id
+  LEFT JOIN C_DocType dt ON dt.c_doctype_id=i.c_doctypetarget_id
+  LEFT JOIN C_PaymentTerm pt ON pt.c_paymentterm_id=i.c_paymentterm_id
+  LEFT JOIN AD_Sequence seq ON seq.ad_sequence_id=dt.docnosequence_id
+  LEFT JOIN LMX_Location oln ON oln.c_location_id = ol.c_location_id
+  LEFT JOIN LMX_Location en ON en.c_location_id = el.c_location_id
+  LEFT JOIN LMX_Location ln ON ln.c_location_id = l.c_location_id;</SQLStatement>
+      <RollbackStatement>DROP VIEW LMX_COMPROBANTE;</RollbackStatement>
     </Step>
   </Migration>
 </Migrations>
