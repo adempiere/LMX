@@ -43,9 +43,10 @@ public class MLMXInvoice extends X_LMX_Invoice {
     public MLMXInvoice(Properties ctx, ResultSet rs, String trxName) {
         super(ctx, rs, trxName);
     }
+
     public MLMXInvoice(MInvoice invoice)
     {
         super(invoice.getCtx() , 0 , invoice.get_TrxName());
-        setC_Invoice_ID(getC_Invoice_ID());
+        setC_Invoice_ID(invoice.getC_Invoice_ID());
     }
 }

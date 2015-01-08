@@ -55,17 +55,22 @@ import org.compiere.model.MImage;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MQuery;
 import org.compiere.model.Query;
+import org.compiere.util.Ini;
 import org.eevolution.LMX.engine.LMXVendorEngine;
 import org.eevolution.LMX.engine.LMXVendorInterface;
-import org.eevolution.LMX.model.*;
 import org.compiere.model.PrintInfo;
 import org.compiere.model.X_C_Invoice;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportEngine;
 import org.compiere.util.Env;
-import org.compiere.util.Ini;
 import org.compiere.util.Language;
 import org.compiere.util.Login;
+import org.eevolution.LMX.model.I_LMX_Vendor;
+import org.eevolution.LMX.model.MLMXAddenda;
+import org.eevolution.LMX.model.MLMXCertificate;
+import org.eevolution.LMX.model.MLMXInvoice;
+import org.eevolution.LMX.model.MLMXTax;
+import org.eevolution.LMX.model.MLMXVendorService;
 import org.eevolution.LMX.util.SHA1;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -142,10 +147,7 @@ public final class LMXCFDI {
 
 			invoiceCFDI = new MLMXInvoice(po);
 			invoiceCFDI.setTaxID(taxInfo.getTaxID());
-			invoiceCFDI.saveEx();;
-
-			//invoice.setTaxID(taxInfo.getTaxID());
-			//invoice.saveEx();
+			invoiceCFDI.saveEx();
 
 			CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(),
 					taxInfo.getCFDISchema_ID()).getData());
@@ -194,7 +196,7 @@ public final class LMXCFDI {
 	public String reverseInvoiceStamp(MInvoice reverseInvoice)
 			throws Exception {		
 		getToken();
-		final Source response = service.execute(invoice,
+		final Source response = service.execute(invoiceCFDI,
 				MLMXVendorService.SOAPSERVICETYPE_CancelStamp);
 		String cancelXML = parse(response);
 		MAttachment eAttach = new MAttachment(invoice.getCtx(), invoice
@@ -218,11 +220,11 @@ public final class LMXCFDI {
 
 	}
 
-	public static StringWriter getXMLFromReportEngine(MInvoice invoice) {
+	public static StringWriter getXMLFromReportEngine(MInvoice invoice , int printFormatId) {
 		MClient client = MClient.get(invoice.getCtx());
 		Language language = client.getLanguage();
 		// Get Format & Data
-		MPrintFormat format = MPrintFormat.get(invoice.getCtx(), 50202, false);
+		MPrintFormat format = MPrintFormat.get(invoice.getCtx(), printFormatId , false);
 		format.setLanguage(language);
 		format.setTranslationLanguage(language);
 		// query
@@ -251,7 +253,7 @@ public final class LMXCFDI {
 
 	public String getCFDI(MInvoice invoice) throws TransformerException {
 		// get XML from ADempiere format
-		StringWriter xmlReport = getXMLFromReportEngine(invoice);
+		StringWriter xmlReport = getXMLFromReportEngine(invoice , addInfo.getAD_PrintFormat_ID());
 		StringWriter transformedCFDI = new StringWriter();
 		// Generate CFDI using transformer
 		transform(new StreamSource(CFDI_XSLT), new StreamSource(
@@ -299,11 +301,6 @@ public final class LMXCFDI {
 		invoiceCFDI.setCFDISATCertificate(getNoCertificateSAT());
 		invoiceCFDI.saveEx();
 
-		/*invoice.setCFDISello(getSeal());
-		invoice.setCFDISelloSAT(getSealSAT());
-		invoice.setCFDINoCertificadoSAT(getNoCertificateSAT());
-		invoice.saveEx();*/
-
 		generateQR();
 
 		MAttachment eAttach = new MAttachment(invoice.getCtx(), invoice
@@ -326,13 +323,6 @@ public final class LMXCFDI {
 
 	public static void main(String[] args) throws Exception {
 
-		Ini.setProperty(Ini.P_UID, "SuperUser");
-		Ini.setProperty(Ini.P_PWD, "bod781012c41bvglass2000");
-		Ini.setProperty(Ini.P_ROLE, "Bode Admin");
-		Ini.setProperty(Ini.P_CLIENT, "Bode Vidrio S.A. de C.V.");
-		Ini.setProperty(Ini.P_ORG, "Irapuato, Gto");
-		Ini.setProperty(Ini.P_WAREHOUSE, "Irapuato");
-		Ini.setProperty(Ini.P_LANGUAGE, "English");
 		org.compiere.Adempiere.startup(true);
 		Login login = new Login(Env.getCtx());
 		login.batchLogin();
@@ -342,14 +332,18 @@ public final class LMXCFDI {
 		//		null).setClient_ID().setOrderBy("DateInvoiced").list();
 		
 		List<MInvoice> invoices = new Query(Env.getCtx(), MInvoice.Table_Name,
-				"DocumentNo='B304175'",
+				"DocumentNo='B1195'",
 				null).setClient_ID().setOrderBy("DateInvoiced").list();
 		
 		for (MInvoice invoice : invoices) {
-			System.out.println("Factura processado ... "
+			System.out.println("Factura procesando ... "
 					+ invoice.getDocumentNo());
-			regenerate(invoice);
-			System.out.println("Factura processada ... "
+			//regenerate(invoice);
+			LMXCFDI cdfdi = LMXCFDI.get();
+			cdfdi.setInvoice(invoice);
+			cdfdi.generate();
+
+			System.out.println("Factura procesado ... "
 					+ invoice.getDocumentNo());
 		}
 		
@@ -391,20 +385,11 @@ public final class LMXCFDI {
 		invoiceCFDI.setCFDIXML(CFDI);
 		invoiceCFDI.saveEx();
 
-		//invoice.setCFDIXML(CFDI);
-		//invoice.saveEx();
-
 		cdfdi.updateDateInvoice();
 		invoiceCFDI.setCFDISeal(cdfdi.getSeal());
 		invoiceCFDI.setCFDISATSeal(cdfdi.getSealSAT());
 		invoiceCFDI.setCFDISATCertificate(cdfdi.getNoCertificateSAT());
 		invoiceCFDI.saveEx();
-
-		/*invoice.setCFDISello(cdfdi.getSeal());
-		invoice.setCFDISelloSAT(cdfdi.getSealSAT());
-		invoice.setCFDINoCertificadoSAT(cdfdi.getNoCertificateSAT());
-		invoice.setSendEMail(true);
-		invoice.saveEx();*/
 
 		MImage image = new MImage(Env.getCtx(), invoiceCFDI.getCFDIQR_ID(), null);
 		if (image != null)
@@ -448,7 +433,7 @@ public final class LMXCFDI {
 
 	private void generateQR() {
 		try {
-			final Source response = service.execute(invoice,
+			final Source response = service.execute(invoiceCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_QR);
 			String res = parse(response);
 			String qrString = res.substring(res.indexOf("<Imagen>") + 8, res
@@ -464,7 +449,6 @@ public final class LMXCFDI {
 			image.setBinaryData(qrImage);
 			image.saveEx();
 
-			//invoice.setCFDIQR_ID(image.getAD_Image_ID());
 			invoiceCFDI.setCFDIQR_ID(image.getAD_Image_ID());
 			invoice.saveEx();
 		} catch (Exception e) {
@@ -476,7 +460,7 @@ public final class LMXCFDI {
 	private String getCFDIXML() {
 		try {
 			getToken();
-			final Source response = service.execute(invoice,
+			final Source response = service.execute(invoiceCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_QueryDocument);
 			String result = parse(response);
 			String xml = result.substring(result.indexOf("<DatosXML>") + 10,
@@ -574,13 +558,11 @@ public final class LMXCFDI {
 		// xml = xml.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
 
 		invoiceCFDI.setCFDIXML(xml);
-		invoiceCFDI.saveEx();;
-
-		//invoice.setCFDIXML(xml);
-		//invoice.saveEx();
+		invoiceCFDI.saveEx();
 
 		try {
-			final Source response = service.execute(invoice,
+
+			final Source response = service.execute(invoiceCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_GenerateStamp);
 			String stampXML = parse(response);
 			if (stampXML.contains("![CDATA["))
@@ -597,11 +579,8 @@ public final class LMXCFDI {
 			invoiceCFDI.setCFDIXML(CFDI);
 			invoiceCFDI.saveEx();
 
-			//invoice.setCFDIXML(CFDI);
-			//invoice.saveEx();
 			xmlF = pasteAddenda(stampXML);
-			//invoice.setCFDIUUID(getUUID());
-			//invoice.saveEx();
+
 			invoiceCFDI.setCFDIUUID(getCFDI());
 
 		} catch (Exception e) {
@@ -702,7 +681,7 @@ public final class LMXCFDI {
 	public String getToken() {
 
 		try {
-			Source response = service.execute(invoice,
+			Source response = service.execute(invoiceCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_Token);
 			final String xml = parse(response);
 			String token = getElement(xml, "Token");
@@ -714,15 +693,12 @@ public final class LMXCFDI {
 			token = sha1.getHash(toHash2);
 			invoiceCFDI.setCFDIToken(token);
 			invoiceCFDI.saveEx();
-			//invoice.setCFDIToken(token);
-			//invoice.saveEx();
 			return token;
 		} catch (NoSuchAlgorithmException ex) {
 			throw new AdempiereException(ex.getMessage());
 		} catch (Exception e) {
 			throw new AdempiereException(e.getMessage());
 		}
-
 	}
 
 	private static String parse(final Source response)
@@ -730,6 +706,7 @@ public final class LMXCFDI {
 		assert response != null;
 		final Transformer transformer = TransformerFactory.newInstance()
 				.newTransformer();
+
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF8");
 		final StringWriter writer = new StringWriter();
 		final StreamResult result = new StreamResult(writer);

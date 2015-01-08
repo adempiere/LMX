@@ -18,14 +18,13 @@
 
 package org.eevolution.LMX.engine;
 
-import org.compiere.model.MInvoice;
+import org.eevolution.LMX.model.MLMXInvoice;
 
 import javax.xml.transform.Source;
-import java.util.List;
 
 /**
  * Created by e-Evolution on 26/12/13.
  */
 public interface LMXVendorInterface {
-   public Source execute(MInvoice invoice , String typeService) throws Exception;
+   public Source execute(MLMXInvoice invoice , String typeService) throws Exception;
 }

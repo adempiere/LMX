@@ -24,6 +24,7 @@ import org.compiere.model.MInvoice;
 import org.compiere.util.Env;
 import org.eevolution.LMX.engine.LMXVendorInterface;
 import org.eevolution.LMX.engine.LMXVendorServiceInterface;
+import org.eevolution.LMX.model.MLMXInvoice;
 import org.eevolution.LMX.model.MLMXVendor;
 import org.eevolution.LMX.util.WebServiceConnector;
 
@@ -43,7 +44,7 @@ public class LMXEcodexService implements LMXVendorInterface {
             throw new AdempiereException("Implementación para este proveedor de servicios no existe: "+ getClass().getCanonicalName());
     }
 
-    public Source execute(MInvoice invoice  , String SOAPType)  throws Exception {
+    public Source execute(MLMXInvoice invoice  , String SOAPType)  throws Exception {
     {
             LMXVendorServiceInterface service = m_vendor.getService(SOAPType);
             final WebServiceConnector wsc = new WebServiceConnector();
