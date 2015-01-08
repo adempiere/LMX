@@ -7,7 +7,7 @@
     </description>
   <!-- set global properties for this build -->
   <property file="build.properties"/>
-  <import file="${adempiere.trunk}/utils_dev/properties.xml"/>	
+  <!--import file="${adempiere.trunk}/utils_dev/properties.xml"/-->	
   <property name="src" location="base/src:src/main/java/LMX"/>
   <property name="srcZK" location="zkwebui/WEB-INF/classes"/>
   <property name="srcSwing" location="${src}:client/src"/>

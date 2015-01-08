@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_VendorService
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_VendorService (Properties ctx, int LMX_VendorService_ID, String trxName)
@@ -71,7 +71,9 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
     }
 
 	/** Set Vendor CFDI SOAP Service ID.
-		@param LMX_VendorService_ID Vendor CFDI SOAP Service ID	  */
+		@param LMX_VendorService_ID 
+		Vendor CFDI SOAP Service ID
+	  */
 	public void setLMX_VendorService_ID (int LMX_VendorService_ID)
 	{
 		if (LMX_VendorService_ID < 1) 
@@ -81,7 +83,8 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
 	}
 
 	/** Get Vendor CFDI SOAP Service ID.
-		@return Vendor CFDI SOAP Service ID	  */
+		@return Vendor CFDI SOAP Service ID
+	  */
 	public int getLMX_VendorService_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_VendorService_ID);
@@ -220,8 +223,8 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
 		return (String)get_Value(COLUMNNAME_SOAPServiceName);
 	}
 
-	/** SOAPServiceType AD_Reference_ID=1000000 */
-	public static final int SOAPSERVICETYPE_AD_Reference_ID=1000000;
+	/** SOAPServiceType AD_Reference_ID=53766 */
+	public static final int SOAPSERVICETYPE_AD_Reference_ID=53766;
 	/** Cancel Stamp = CD */
 	public static final String SOAPSERVICETYPE_CancelStamp = "CD";
 	/** Generate Stamp = GS */

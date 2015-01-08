@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_CertificateLine
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_CertificateLine (Properties ctx, int LMX_CertificateLine_ID, String trxName)
@@ -101,8 +101,10 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 		return ii.intValue();
 	}
 
-	/** Set Localization MÃ©xico Certificate Line ID.
-		@param LMX_CertificateLine_ID Localization MÃ©xico Certificate Line ID	  */
+	/** Set MX Certificate Lines.
+		@param LMX_CertificateLine_ID 
+		MX Certificate Lines
+	  */
 	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID)
 	{
 		if (LMX_CertificateLine_ID < 1) 
@@ -111,8 +113,9 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, Integer.valueOf(LMX_CertificateLine_ID));
 	}
 
-	/** Get Localization MÃ©xico Certificate Line ID.
-		@return Localization MÃ©xico Certificate Line ID	  */
+	/** Get MX Certificate Lines.
+		@return MX Certificate Lines
+	  */
 	public int getLMX_CertificateLine_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_CertificateLine_ID);
@@ -126,9 +129,9 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 		return (org.eevolution.LMX.model.I_LMX_Certificate)MTable.get(getCtx(), org.eevolution.LMX.model.I_LMX_Certificate.Table_Name)
 			.getPO(getLMX_Certificate_ID(), get_TrxName());	}
 
-	/** Set Localization MÃ©xico Certificate.
+	/** Set Localization México Certificate.
 		@param LMX_Certificate_ID 
-		Localization MÃ©xico Certificate
+		Localization México Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID)
 	{
@@ -138,8 +141,8 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 			set_ValueNoCheck (COLUMNNAME_LMX_Certificate_ID, Integer.valueOf(LMX_Certificate_ID));
 	}
 
-	/** Get Localization MÃ©xico Certificate.
-		@return Localization MÃ©xico Certificate
+	/** Get Localization México Certificate.
+		@return Localization México Certificate
 	  */
 	public int getLMX_Certificate_ID () 
 	{

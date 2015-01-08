@@ -2,7 +2,7 @@
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 
-<listEntry value="/home/oracle/workspace/adempiereTrunk/base/src/org/compiere/Adempiere.java"/>
+<listEntry value="/Users/e-Evolution/Desktop/Develop/ADempiere/adempiere.git/base/src/org/compiere/Adempiere.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -15,5 +15,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.compiere.Adempiere"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eevolution.LMX"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DPropertyFile=/home/oracle/Adempiere.properties"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DPropertyFile=/Users/e-Evolution/Adempiere.properties"/>
 </launchConfiguration>

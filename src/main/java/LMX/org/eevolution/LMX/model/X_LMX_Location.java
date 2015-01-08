@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_Location
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_Location extends PO implements I_LMX_Location, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_Location (Properties ctx, int LMX_Location_ID, String trxName)
@@ -50,7 +50,7 @@ public class X_LMX_Location extends PO implements I_LMX_Location, I_Persistent
     }
 
     /** AccessLevel
-      * @return 7 - System - Client - Org 
+      * @return 3 - Client - Org 
       */
     protected int get_AccessLevel()
     {

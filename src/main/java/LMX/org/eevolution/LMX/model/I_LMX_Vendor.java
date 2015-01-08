@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_Vendor
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_Vendor 
 {
@@ -31,7 +31,7 @@ public interface I_LMX_Vendor
     /** TableName=LMX_Vendor */
     public static final String Table_Name = "LMX_Vendor";
 
-    /** AD_Table_ID=1000007 */
+    /** AD_Table_ID=53915 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);

@@ -24,14 +24,14 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for LMX_Vendor
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_Vendor extends PO implements I_LMX_Vendor, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_Vendor (Properties ctx, int LMX_Vendor_ID, String trxName)

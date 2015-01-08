@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_Certificate
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_Certificate (Properties ctx, int LMX_Certificate_ID, String trxName)
@@ -199,9 +199,9 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		return (String)get_Value(COLUMNNAME_DocumentNo);
 	}
 
-	/** Set Localization MÃ©xico Certificate.
+	/** Set Localization México Certificate.
 		@param LMX_Certificate_ID 
-		Localization MÃ©xico Certificate
+		Localization México Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID)
 	{
@@ -211,8 +211,8 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 			set_ValueNoCheck (COLUMNNAME_LMX_Certificate_ID, Integer.valueOf(LMX_Certificate_ID));
 	}
 
-	/** Get Localization MÃ©xico Certificate.
-		@return Localization MÃ©xico Certificate
+	/** Get Localization México Certificate.
+		@return Localization México Certificate
 	  */
 	public int getLMX_Certificate_ID () 
 	{

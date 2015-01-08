@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_Location
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_Location 
 {
@@ -31,14 +31,14 @@ public interface I_LMX_Location
     /** TableName=LMX_Location */
     public static final String Table_Name = "LMX_Location";
 
-    /** AD_Table_ID=1000004 */
+    /** AD_Table_ID=53911 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org 
+    /** AccessLevel = 3 - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(7);
+    BigDecimal accessLevel = BigDecimal.valueOf(3);
 
     /** Load Meta Data */
 

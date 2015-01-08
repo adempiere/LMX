@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_Addenda
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_Addenda 
 {
@@ -31,7 +31,7 @@ public interface I_LMX_Addenda
     /** TableName=LMX_Addenda */
     public static final String Table_Name = "LMX_Addenda";
 
-    /** AD_Table_ID=1000003 */
+    /** AD_Table_ID=53904 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -62,6 +62,21 @@ public interface I_LMX_Addenda
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
+
+    /** Column name AD_PrintFormat_ID */
+    public static final String COLUMNNAME_AD_PrintFormat_ID = "AD_PrintFormat_ID";
+
+	/** Set Print Format.
+	  * Data Print Format
+	  */
+	public void setAD_PrintFormat_ID (int AD_PrintFormat_ID);
+
+	/** Get Print Format.
+	  * Data Print Format
+	  */
+	public int getAD_PrintFormat_ID();
+
+	public org.compiere.model.I_AD_PrintFormat getAD_PrintFormat() throws RuntimeException;
 
     /** Column name CFDITransformer_ID */
     public static final String COLUMNNAME_CFDITransformer_ID = "CFDITransformer_ID";

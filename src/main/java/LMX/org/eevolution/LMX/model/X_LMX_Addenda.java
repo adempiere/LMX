@@ -24,14 +24,14 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for LMX_Addenda
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_Addenda (Properties ctx, int LMX_Addenda_ID, String trxName)
@@ -39,6 +39,7 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
       super (ctx, LMX_Addenda_ID, trxName);
       /** if (LMX_Addenda_ID == 0)
         {
+			setAD_PrintFormat_ID (0);
 			setC_BPartner_ID (0);
 			setLMX_Addenda_ID (0);
 			setName (null);
@@ -72,6 +73,34 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	public org.compiere.model.I_AD_PrintFormat getAD_PrintFormat() throws RuntimeException
+    {
+		return (org.compiere.model.I_AD_PrintFormat)MTable.get(getCtx(), org.compiere.model.I_AD_PrintFormat.Table_Name)
+			.getPO(getAD_PrintFormat_ID(), get_TrxName());	}
+
+	/** Set Print Format.
+		@param AD_PrintFormat_ID 
+		Data Print Format
+	  */
+	public void setAD_PrintFormat_ID (int AD_PrintFormat_ID)
+	{
+		if (AD_PrintFormat_ID < 1) 
+			set_Value (COLUMNNAME_AD_PrintFormat_ID, null);
+		else 
+			set_Value (COLUMNNAME_AD_PrintFormat_ID, Integer.valueOf(AD_PrintFormat_ID));
+	}
+
+	/** Get Print Format.
+		@return Data Print Format
+	  */
+	public int getAD_PrintFormat_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintFormat_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	/** Set CFDI Transformer XSLT.
 		@param CFDITransformer_ID 

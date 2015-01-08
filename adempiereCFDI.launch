@@ -2,7 +2,7 @@
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 
-<listEntry value="/home/oracle/Desktop/org.eevolution.LMX/src/main/java/LMX/org/eevolution/process/LMXCFDI.java"/>
+<listEntry value="/Users/e-Evolution/Desktop/Develop/ADempiere/org.eevolution.LMX/src/main/java/LMX/org/eevolution/process/LMXCFDI.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -15,5 +15,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eevolution.process.LMXCFDI"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eevolution.LMX"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DPropertyFile=/home/oracle/Adempiere.properties"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DPropertyFile=/Users/e-Evolution/Adempiere.properties"/>
 </launchConfiguration>

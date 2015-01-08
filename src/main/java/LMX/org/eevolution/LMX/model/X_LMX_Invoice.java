@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_Invoice
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC - $Id$ */
+ *  @version Release 3.8.0 - $Id$ */
 public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20141224L;
+	private static final long serialVersionUID = 20150108L;
 
     /** Standard Constructor */
     public X_LMX_Invoice (Properties ctx, int LMX_Invoice_ID, String trxName)

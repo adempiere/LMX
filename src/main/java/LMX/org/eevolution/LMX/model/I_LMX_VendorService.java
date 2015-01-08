@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_VendorService
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_VendorService 
 {
@@ -31,7 +31,7 @@ public interface I_LMX_VendorService
     /** TableName=LMX_VendorService */
     public static final String Table_Name = "LMX_VendorService";
 
-    /** AD_Table_ID=1000008 */
+    /** AD_Table_ID=53916 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -95,10 +95,14 @@ public interface I_LMX_VendorService
     /** Column name LMX_VendorService_ID */
     public static final String COLUMNNAME_LMX_VendorService_ID = "LMX_VendorService_ID";
 
-	/** Set Vendor CFDI SOAP Service ID	  */
+	/** Set Vendor CFDI SOAP Service ID.
+	  * Vendor CFDI SOAP Service ID
+	  */
 	public void setLMX_VendorService_ID (int LMX_VendorService_ID);
 
-	/** Get Vendor CFDI SOAP Service ID	  */
+	/** Get Vendor CFDI SOAP Service ID.
+	  * Vendor CFDI SOAP Service ID
+	  */
 	public int getLMX_VendorService_ID();
 
     /** Column name LMX_Vendor_ID */

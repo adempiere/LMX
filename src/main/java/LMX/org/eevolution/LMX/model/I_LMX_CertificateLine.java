@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_CertificateLine
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_CertificateLine 
 {
@@ -31,7 +31,7 @@ public interface I_LMX_CertificateLine
     /** TableName=LMX_CertificateLine */
     public static final String Table_Name = "LMX_CertificateLine";
 
-    /** AD_Table_ID=1000006 */
+    /** AD_Table_ID=53906 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -110,22 +110,26 @@ public interface I_LMX_CertificateLine
     /** Column name LMX_CertificateLine_ID */
     public static final String COLUMNNAME_LMX_CertificateLine_ID = "LMX_CertificateLine_ID";
 
-	/** Set Localization MÃ©xico Certificate Line ID	  */
+	/** Set MX Certificate Lines.
+	  * MX Certificate Lines
+	  */
 	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID);
 
-	/** Get Localization MÃ©xico Certificate Line ID	  */
+	/** Get MX Certificate Lines.
+	  * MX Certificate Lines
+	  */
 	public int getLMX_CertificateLine_ID();
 
     /** Column name LMX_Certificate_ID */
     public static final String COLUMNNAME_LMX_Certificate_ID = "LMX_Certificate_ID";
 
-	/** Set Localization MÃ©xico Certificate.
-	  * Localization MÃ©xico Certificate
+	/** Set Localization México Certificate.
+	  * Localization México Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID);
 
-	/** Get Localization MÃ©xico Certificate.
-	  * Localization MÃ©xico Certificate
+	/** Get Localization México Certificate.
+	  * Localization México Certificate
 	  */
 	public int getLMX_Certificate_ID();
 

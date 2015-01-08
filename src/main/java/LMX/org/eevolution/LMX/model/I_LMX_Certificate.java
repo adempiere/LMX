@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_Certificate
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0RC
+ *  @version Release 3.8.0
  */
 public interface I_LMX_Certificate 
 {
@@ -31,7 +31,7 @@ public interface I_LMX_Certificate
     /** TableName=LMX_Certificate */
     public static final String Table_Name = "LMX_Certificate";
 
-    /** AD_Table_ID=1000005 */
+    /** AD_Table_ID=53905 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -173,13 +173,13 @@ public interface I_LMX_Certificate
     /** Column name LMX_Certificate_ID */
     public static final String COLUMNNAME_LMX_Certificate_ID = "LMX_Certificate_ID";
 
-	/** Set Localization MÃ©xico Certificate.
-	  * Localization MÃ©xico Certificate
+	/** Set Localization México Certificate.
+	  * Localization México Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID);
 
-	/** Get Localization MÃ©xico Certificate.
-	  * Localization MÃ©xico Certificate
+	/** Get Localization México Certificate.
+	  * Localization México Certificate
 	  */
 	public int getLMX_Certificate_ID();
 
