@@ -83,7 +83,7 @@ public final class LMXCFDI {
 	private MLMXCertificate certificate = null;
 	private LMXVendorInterface service = null;
 	private MLMXTax taxInfo = null;
-	private MLMXAddenda addInfo = null;
+	private MLMXAddenda addendaInfo = null;
 	private String CFDI = null;
 
 	private static LMXCFDI s_instance = null;
@@ -122,17 +122,17 @@ public final class LMXCFDI {
 				throw new AdempiereException(
 						"No existe infomración de la compañia");
 
-			if (addInfo == null)
-				addInfo = MLMXAddenda.getByBPartnerId(invoice.getCtx(), taxInfo
+			if (addendaInfo == null)
+				addendaInfo = MLMXAddenda.getByBPartnerId(invoice.getCtx(), taxInfo
 						.getC_BPartner_ID(), invoice.get_TrxName());
 
 			MLMXAddenda addInfoCustomer = MLMXAddenda.getByBPartnerId(invoice
 					.getCtx(), invoice.getC_BPartner_ID(), invoice
 					.get_TrxName());
 			if (addInfoCustomer != null)
-				addInfo = addInfoCustomer;
+				addendaInfo = addInfoCustomer;
 
-			if (addInfo == null)
+			if (addendaInfo == null)
 				throw new AdempiereException(
 						"No hay esquema para comprobante Fiscal Digital");
 
@@ -145,10 +145,6 @@ public final class LMXCFDI {
 			if (service == null)
 				throw new AdempiereException("No existe ningun integrador");
 
-			invoiceCFDI = new MLMXInvoice(po);
-			invoiceCFDI.setTaxID(taxInfo.getTaxID());
-			invoiceCFDI.saveEx();
-
 			CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(),
 					taxInfo.getCFDISchema_ID()).getData());
 
@@ -158,7 +154,7 @@ public final class LMXCFDI {
 					Env.getCtx(), taxInfo.getCFDITransformerString_ID())
 					.getData());
 			CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(
-					Env.getCtx(), addInfo.getCFDITransformer_ID()).getData());
+					Env.getCtx(), addendaInfo.getCFDITransformer_ID()).getData());
 
 			if (CFDI_ADDENDA_XSLT == null)
 				throw new AdempiereException(
@@ -174,9 +170,6 @@ public final class LMXCFDI {
 
 		try {
 			if (invoice.isReversal()) {
-				// reverseInvoiceStamp((MInvoice) invoice.getReversal(),
-				// invoice.getC_Invoice_ID());
-				// Codigo para versiones obsoletas de Adempiere
 				reverseInvoiceStamp((MInvoice) getReversal(invoice));
 
 			} else
@@ -194,27 +187,31 @@ public final class LMXCFDI {
 	}
 
 	public String reverseInvoiceStamp(MInvoice reverseInvoice)
-			throws Exception {		
+			throws Exception {
+		invoiceCFDI = MLMXInvoice.getInvoice(reverseInvoice);
 		getToken();
 		final Source response = service.execute(invoiceCFDI,
 				MLMXVendorService.SOAPSERVICETYPE_CancelStamp);
 		String cancelXML = parse(response);
-		MAttachment eAttach = new MAttachment(invoice.getCtx(), invoice
-				.get_Table_ID(), invoice.getC_Invoice_ID(), invoice
+		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
+				.get_Table_ID(), invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI
 				.get_TrxName());
-		eAttach.setTitle("Acuse de Recibo CFDI");
-		eAttach.addEntry("Acuse de Recibo CFDI" + invoice.getDocumentNo() + ".xml", getCFDI()
+		attachment.setTitle("Acuse de Recibo CFDI");
+		attachment.addEntry("Acuse de Recibo CFDI" + invoice.getDocumentNo() + ".xml", cancelXML
 				.getBytes("UTF-8"));
-		eAttach.addTextMsg(cancelXML);
-		eAttach.saveEx();
+		attachment.addTextMsg(cancelXML);
+		attachment.saveEx();
 
-		MAttachmentNote attNote = new MAttachmentNote(invoice.getCtx(), 0,
-				invoice.get_TrxName());
-		attNote.setAD_Attachment_ID(eAttach.get_ID());
-		attNote.setAD_User_ID(100);
-		attNote.set_ValueOfColumn("TEXTMSG", cancelXML);
-		attNote.setTitle(invoice.getDocumentNo());
-		attNote.saveEx();
+		MAttachmentNote attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0,
+				invoiceCFDI.get_TrxName());
+		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
+		attachmentNote.setAD_User_ID(100);
+		attachmentNote.setTextMsg(cancelXML);
+		attachmentNote.setTitle(invoice.getDocumentNo());
+		attachmentNote.saveEx();
+
+		invoiceCFDI.setIsCancelled(true);
+		invoiceCFDI.saveEx();
 		
 		return cancelXML;
 
@@ -231,16 +228,16 @@ public final class LMXCFDI {
 		MQuery query = new MQuery(X_C_Invoice.Table_Name);
 		query.addRestriction(X_C_Invoice.COLUMNNAME_C_Invoice_ID, MQuery.EQUAL,
 				invoice.getC_Invoice_ID());
-		PrintInfo info = new PrintInfo(invoice.getDocumentNo(),
+		PrintInfo printInfo = new PrintInfo(invoice.getDocumentNo(),
 				X_C_Invoice.Table_ID, invoice.getC_Invoice_ID(), invoice
 						.getC_BPartner_ID());
-		info.setCopies(1);
-		info.setDocumentCopy(false); // true prints "Copy" on second
-		info.setPrinterName(format.getPrinterName());
+		printInfo.setCopies(1);
+		printInfo.setDocumentCopy(false); // true prints "Copy" on second
+		printInfo.setPrinterName(format.getPrinterName());
 
 		// Engine
 		ReportEngine reportEngine = new ReportEngine(invoice.getCtx(), format,
-				query, info, invoice.get_TrxName());
+				query, printInfo, invoice.get_TrxName());
 		if (reportEngine == null)
 			throw new AdempiereException("@NotFound@ @M_PrintFormat_ID@");
 
@@ -253,7 +250,7 @@ public final class LMXCFDI {
 
 	public String getCFDI(MInvoice invoice) throws TransformerException {
 		// get XML from ADempiere format
-		StringWriter xmlReport = getXMLFromReportEngine(invoice , addInfo.getAD_PrintFormat_ID());
+		StringWriter xmlReport = getXMLFromReportEngine(invoice, addendaInfo.getAD_PrintFormat_ID());
 		StringWriter transformedCFDI = new StringWriter();
 		// Generate CFDI using transformer
 		transform(new StreamSource(CFDI_XSLT), new StreamSource(
@@ -271,6 +268,10 @@ public final class LMXCFDI {
 
 	private void createInvoiceStamp() throws TransformerException, IOException,
 			SAXException, URISyntaxException {
+
+		invoiceCFDI = new MLMXInvoice(invoice);
+		invoiceCFDI.setTaxID(getRFC());
+		invoiceCFDI.saveEx();
 
 		// String tmpDir = System.getProperty("user.home");
 		// if (!tmpDir.endsWith(File.separator))
@@ -299,29 +300,39 @@ public final class LMXCFDI {
 		invoiceCFDI.setCFDISeal(getSeal());
 		invoiceCFDI.setCFDISATSeal(getSealSAT());
 		invoiceCFDI.setCFDISATCertificate(getNoCertificateSAT());
+		invoiceCFDI.setCFDIString(stringCFDI);
+		invoiceCFDI.setCFDIXML(getCFDI());
 		invoiceCFDI.saveEx();
 
 		generateQR();
 
-		MAttachment eAttach = new MAttachment(invoice.getCtx(), invoice
-				.get_Table_ID(), invoice.getC_Invoice_ID(), invoice
+		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
+				.get_Table_ID(), invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI
 				.get_TrxName());
-		eAttach.setTitle("CFD");
-		eAttach.addEntry("CFD" + invoice.getDocumentNo() + ".xml", getCFDI()
+		attachment.setTitle("CFD");
+		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", getCFDI()
 				.getBytes("UTF-8"));
-		eAttach.addTextMsg(stringCFDI);
-		eAttach.saveEx();
+		attachment.addTextMsg(stringCFDI);
+		attachment.saveEx();
 
-		MAttachmentNote attNote = new MAttachmentNote(invoice.getCtx(), 0,
-				invoice.get_TrxName());
-		attNote.setAD_Attachment_ID(eAttach.get_ID());
-		attNote.setAD_User_ID(100);
-		attNote.set_ValueOfColumn("TEXTMSG", getCFDI());
-		attNote.setTitle(invoice.getDocumentNo());
-		attNote.saveEx();
+		MAttachmentNote attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0,
+				invoiceCFDI.get_TrxName());
+		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
+		attachmentNote.setAD_User_ID(100);
+		attachmentNote.setTitle(invoice.getDocumentNo());
+		attachmentNote.setTextMsg(getCFDI());
+		attachmentNote.saveEx();
 	}
 
 	public static void main(String[] args) throws Exception {
+
+		Ini.setProperty(Ini.P_UID, "SuperUser");
+		Ini.setProperty(Ini.P_PWD, "System");
+		Ini.setProperty(Ini.P_ROLE, "AHVR admin");
+		Ini.setProperty(Ini.P_CLIENT, "Aldo Hugo Vargas Rodríguez");
+		Ini.setProperty(Ini.P_ORG, "Matriz");
+		Ini.setProperty(Ini.P_WAREHOUSE, "Estándar");
+		Ini.setProperty(Ini.P_LANGUAGE, "English");
 
 		org.compiere.Adempiere.startup(true);
 		Login login = new Login(Env.getCtx());
@@ -336,14 +347,14 @@ public final class LMXCFDI {
 				null).setClient_ID().setOrderBy("DateInvoiced").list();
 		
 		for (MInvoice invoice : invoices) {
-			System.out.println("Factura procesando ... "
+			System.out.println("Factura ... "
 					+ invoice.getDocumentNo());
 			//regenerate(invoice);
 			LMXCFDI cdfdi = LMXCFDI.get();
 			cdfdi.setInvoice(invoice);
 			cdfdi.generate();
 
-			System.out.println("Factura procesado ... "
+			System.out.println("Factura procesada ... "
 					+ invoice.getDocumentNo());
 		}
 		
@@ -388,47 +399,47 @@ public final class LMXCFDI {
 		cdfdi.updateDateInvoice();
 		invoiceCFDI.setCFDISeal(cdfdi.getSeal());
 		invoiceCFDI.setCFDISATSeal(cdfdi.getSealSAT());
+		invoiceCFDI.setCFDIString(cdfdi.getOriginalString(cdfdi.getCFDI()));
 		invoiceCFDI.setCFDISATCertificate(cdfdi.getNoCertificateSAT());
 		invoiceCFDI.saveEx();
 
-		MImage image = new MImage(Env.getCtx(), invoiceCFDI.getCFDIQR_ID(), null);
+		MImage image = new MImage(invoiceCFDI.getCtx(), invoiceCFDI.getCFDIQR_ID(), null);
 		if (image != null)
 			image.deleteEx(true);
 
 		cdfdi.generateQR();
 
-		MAttachment eAttach = new Query(Env.getCtx(), MAttachment.Table_Name,
+		MAttachment attachment = new Query(invoiceCFDI.getCtx(), MAttachment.Table_Name,
 				"AD_Table_ID=? AND Record_ID=?", null).setClient_ID()
-				.setParameters(invoice.get_Table_ID(),
-						invoice.getC_Invoice_ID()).first();
-		if (eAttach != null) {
-			for (int i = 0; i <= eAttach.getEntries().length; i = i + 1) {
-				eAttach.deleteEntry(i);
+				.setParameters(invoiceCFDI.get_Table_ID(),
+						invoiceCFDI.getLMX_Invoice_ID()).first();
+		if (attachment != null) {
+			for (int i = 0; i <= attachment.getEntries().length; i = i + 1) {
+				attachment.deleteEntry(i);
 			}
 		} else
-			eAttach = new MAttachment(invoice.getCtx(), invoice.get_Table_ID(),
-					invoice.getC_Invoice_ID(), invoice.get_TrxName());
+			attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI.get_Table_ID(),
+					invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI.get_TrxName());
 
-		eAttach.setTitle("CFD");
-		eAttach.addEntry("CFD" + invoice.getDocumentNo() + ".xml", cdfdi
+		attachment.setTitle("CFD");
+		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", cdfdi
 				.getCFDI().getBytes("UTF-8"));
-		eAttach.addTextMsg(cdfdi.getOriginalString(cdfdi.getCFDI()));
-		eAttach.saveEx();
+		attachment.addTextMsg(cdfdi.getOriginalString(cdfdi.getCFDI()));
+		attachment.saveEx();
 
-		MAttachmentNote attNote = new Query(Env.getCtx(),
+		MAttachmentNote attachmentNote = new Query(invoiceCFDI.getCtx(),
 				MAttachmentNote.Table_Name, "AD_Attachment_ID=?", null)
-				.setClient_ID().setParameters(eAttach.getAD_Attachment_ID())
+				.setClient_ID().setParameters(attachment.getAD_Attachment_ID())
 				.first();
 
-		if (attNote == null)
-			attNote = new MAttachmentNote(invoice.getCtx(), 0, invoice
+		if (attachmentNote == null)
+			attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0, invoiceCFDI
 					.get_TrxName());
 
-		attNote.setAD_Attachment_ID(eAttach.get_ID());
-		attNote.setAD_User_ID(100);
-		attNote.set_ValueOfColumn("TEXTMSG", cdfdi.getCFDI());
-		attNote.setTitle(invoice.getDocumentNo());
-		attNote.saveEx();
+		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
+		attachmentNote.setAD_User_ID(100);
+		attachmentNote.setTitle(invoice.getDocumentNo());
+		attachmentNote.saveEx();
 	}
 
 	private void generateQR() {
@@ -450,7 +461,8 @@ public final class LMXCFDI {
 			image.saveEx();
 
 			invoiceCFDI.setCFDIQR_ID(image.getAD_Image_ID());
-			invoice.saveEx();
+			invoiceCFDI.saveEx();
+
 		} catch (Exception e) {
 			throw new AdempiereException(e);
 		}
@@ -486,6 +498,8 @@ public final class LMXCFDI {
 			invoice.setDateInvoiced(invoiceDate);
 			invoice.setDateAcct(invoiceDate);
 			invoice.saveEx();
+			invoiceCFDI.setCFDISealingDate(fecha);
+			invoiceCFDI.saveEx();
 		} catch (Exception e) {
 			throw new AdempiereException(e);
 		}
@@ -530,8 +544,7 @@ public final class LMXCFDI {
 	private String getSealSAT() {
 
 		String tmpSeal = CFDI.substring(CFDI.indexOf("selloSAT=") + 10);
-		tmpSeal.substring(0, tmpSeal.indexOf("\" xsi:schemaLocation="));
-		return tmpSeal;
+		return tmpSeal.substring(0, tmpSeal.indexOf("\" xsi:schemaLocation="));
 
 	}
 
@@ -581,7 +594,7 @@ public final class LMXCFDI {
 
 			xmlF = pasteAddenda(stampXML);
 
-			invoiceCFDI.setCFDIUUID(getCFDI());
+			invoiceCFDI.setCFDIUUID(getUUID());
 
 		} catch (Exception e) {
 			throw new AdempiereException(e.toString());
@@ -729,16 +742,12 @@ public final class LMXCFDI {
 			ind = xml.indexOf("noCertificado=\"");
 			fp = xml.substring(0, ind);
 			sp = xml.substring(ind, xml.length());
-			xml = fp + " certificado=\"\" " + sp; // +
-													// getCertificateBASE64Encoder(m_Key_Store).replaceAll("\n",
-													// "") + "\" " + sp;
+			xml = fp + " certificado=\"\" " + sp;
 
 			ind = xml.indexOf("noCertificado=\"") + 15;
 			fp = xml.substring(0, ind);
 			sp = xml.substring(ind, xml.length());
 			xml = fp + certificate.getDocumentNo() + sp;
-			// seal = ""; // sello.replaceAll("\n", "");
-
 			return xml;
 		} catch (Exception e) {
 			throw new AdempiereException(
@@ -768,7 +777,7 @@ public final class LMXCFDI {
 	}
 
 	private String getRFC() {
-		return getTax().getTaxID();
+		return getTax().getC_BPartner().getTaxID();
 	}
 
 }
