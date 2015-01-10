@@ -30,7 +30,7 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150108L;
+	private static final long serialVersionUID = 20150109L;
 
     /** Standard Constructor */
     public X_LMX_Invoice (Properties ctx, int LMX_Invoice_ID, String trxName)
@@ -70,8 +70,8 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
       return sb.toString();
     }
 
-	/** Set CFDI QR Id.
-		@param CFDIQR_ID CFDI QR Id	  */
+	/** Set CFDI QR ID.
+		@param CFDIQR_ID CFDI QR ID	  */
 	public void setCFDIQR_ID (int CFDIQR_ID)
 	{
 		if (CFDIQR_ID < 1) 
@@ -80,8 +80,8 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 			set_Value (COLUMNNAME_CFDIQR_ID, Integer.valueOf(CFDIQR_ID));
 	}
 
-	/** Get CFDI QR Id.
-		@return CFDI QR Id	  */
+	/** Get CFDI QR ID.
+		@return CFDI QR ID	  */
 	public int getCFDIQR_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_CFDIQR_ID);
@@ -144,6 +144,23 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 	public String getCFDISealingDate () 
 	{
 		return (String)get_Value(COLUMNNAME_CFDISealingDate);
+	}
+
+	/** Set CFDI String.
+		@param CFDIString 
+		CFDI String
+	  */
+	public void setCFDIString (String CFDIString)
+	{
+		set_Value (COLUMNNAME_CFDIString, CFDIString);
+	}
+
+	/** Get CFDI String.
+		@return CFDI String
+	  */
+	public String getCFDIString () 
+	{
+		return (String)get_Value(COLUMNNAME_CFDIString);
 	}
 
 	/** Set CFDI Token.
@@ -214,6 +231,30 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Set Cancelled.
+		@param IsCancelled 
+		The transaction was cancelled
+	  */
+	public void setIsCancelled (boolean IsCancelled)
+	{
+		set_Value (COLUMNNAME_IsCancelled, Boolean.valueOf(IsCancelled));
+	}
+
+	/** Get Cancelled.
+		@return The transaction was cancelled
+	  */
+	public boolean isCancelled () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsCancelled);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
 	}
 
 	/** Set LMX Invoice Information ID.

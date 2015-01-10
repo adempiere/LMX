@@ -31,7 +31,7 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150108L;
+	private static final long serialVersionUID = 20150109L;
 
     /** Standard Constructor */
     public X_LMX_Addenda (Properties ctx, int LMX_Addenda_ID, String trxName)

@@ -30,7 +30,7 @@ public class X_LMX_Location extends PO implements I_LMX_Location, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150108L;
+	private static final long serialVersionUID = 20150109L;
 
     /** Standard Constructor */
     public X_LMX_Location (Properties ctx, int LMX_Location_ID, String trxName)

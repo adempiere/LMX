@@ -30,7 +30,7 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150108L;
+	private static final long serialVersionUID = 20150109L;
 
     /** Standard Constructor */
     public X_LMX_Certificate (Properties ctx, int LMX_Certificate_ID, String trxName)

@@ -31,7 +31,7 @@ public class X_LMX_Tax extends PO implements I_LMX_Tax, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150108L;
+	private static final long serialVersionUID = 20150109L;
 
     /** Standard Constructor */
     public X_LMX_Tax (Properties ctx, int LMX_Tax_ID, String trxName)

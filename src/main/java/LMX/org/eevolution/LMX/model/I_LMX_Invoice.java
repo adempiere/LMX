@@ -66,10 +66,10 @@ public interface I_LMX_Invoice
     /** Column name CFDIQR_ID */
     public static final String COLUMNNAME_CFDIQR_ID = "CFDIQR_ID";
 
-	/** Set CFDI QR Id	  */
+	/** Set CFDI QR ID	  */
 	public void setCFDIQR_ID (int CFDIQR_ID);
 
-	/** Get CFDI QR Id	  */
+	/** Get CFDI QR ID	  */
 	public int getCFDIQR_ID();
 
     /** Column name CFDISATCertificate */
@@ -107,6 +107,19 @@ public interface I_LMX_Invoice
 
 	/** Get CFDI Sealing Date	  */
 	public String getCFDISealingDate();
+
+    /** Column name CFDIString */
+    public static final String COLUMNNAME_CFDIString = "CFDIString";
+
+	/** Set CFDI String.
+	  * CFDI String
+	  */
+	public void setCFDIString (String CFDIString);
+
+	/** Get CFDI String.
+	  * CFDI String
+	  */
+	public String getCFDIString();
 
     /** Column name CFDIToken */
     public static final String COLUMNNAME_CFDIToken = "CFDIToken";
@@ -178,6 +191,19 @@ public interface I_LMX_Invoice
 	  * The record is active in the system
 	  */
 	public boolean isActive();
+
+    /** Column name IsCancelled */
+    public static final String COLUMNNAME_IsCancelled = "IsCancelled";
+
+	/** Set Cancelled.
+	  * The transaction was cancelled
+	  */
+	public void setIsCancelled (boolean IsCancelled);
+
+	/** Get Cancelled.
+	  * The transaction was cancelled
+	  */
+	public boolean isCancelled();
 
     /** Column name LMX_Invoice_ID */
     public static final String COLUMNNAME_LMX_Invoice_ID = "LMX_Invoice_ID";
