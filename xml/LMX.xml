@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="LMX" Name="Localización para México" ReleaseNo="1" SeqNo="1">
+  <Migration EntityType="D" Name="Localización para México" ReleaseNo="1" SeqNo="1">
     <Comments>Localización para Mexico para generar CFDI</Comments>
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="882" Action="I" Record_ID="50024" Table="AD_EntityType">
@@ -1261,6 +1261,9 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="320" StepType="AD">
       <PO AD_Table_ID="101" Action="I" Record_ID="75088" Table="AD_Column">
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
         <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
         <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="109" Column="AD_Column_ID">75088</Data>
@@ -1302,9 +1305,6 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
         <Data AD_Column_ID="127" Column="SeqNo" isNewNull="true"/>
         <Data AD_Column_ID="551" Column="Updated">2014-12-26 13:45:39.116</Data>
-        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
-        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
-        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
         <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
         <Data AD_Column_ID="110" Column="Version">1</Data>
       </PO>
@@ -21340,12 +21340,12 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="4910" StepType="AD">
       <PO AD_Table_ID="101" Action="I" Record_ID="75271" Table="AD_Column">
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
         <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
         <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="109" Column="AD_Column_ID">75271</Data>
         <Data AD_Column_ID="2608" Column="AD_Element_ID">187</Data>
-        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
         <Data AD_Column_ID="226" Column="AD_Reference_ID">30</Data>
         <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="114" Column="AD_Table_ID">53904</Data>
@@ -23620,6 +23620,7 @@ If you leave the search key empty, the system automatically creates a numeric nu
     </Step>
     <Step SeqNo="5610" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75045" Table="AD_Field">
+        <Data AD_Column_ID="579" Column="Created">2014-12-26 13:56:46.033</Data>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">75276</Data>
         <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
@@ -23629,7 +23630,6 @@ If you leave the search key empty, the system automatically creates a numeric nu
         <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
         <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
-        <Data AD_Column_ID="579" Column="Created">2014-12-26 13:56:46.033</Data>
         <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
         <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
         <Data AD_Column_ID="169" Column="Description">Document sequence number of the document</Data>
@@ -24380,7 +24380,6 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
         <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
         <Data AD_Column_ID="110" Column="Version">0</Data>
-        <Data AD_Column_ID="59702" Column="AD_Chart_ID">true</Data>
       </PO>
     </Step>
     <Step SeqNo="5980" StepType="AD">
@@ -24419,11 +24418,11 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="168" Column="Name">Print Format</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-08 16:00:18.17</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" isNewNull="true"/>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="5990" StepType="AD">
@@ -24541,21 +24540,6 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
       </PO>
     </Step>
     <Step SeqNo="6050" StepType="AD">
-      <PO AD_Table_ID="452" Action="I" Record_ID="10" Table="AD_TreeNodeMM">
-        <Data AD_Column_ID="6162" Column="AD_Client_ID">0</Data>
-        <Data AD_Column_ID="6149" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="6160" Column="AD_Tree_ID">10</Data>
-        <Data AD_Column_ID="6151" Column="Created">2015-01-09 18:02:53.71</Data>
-        <Data AD_Column_ID="6152" Column="CreatedBy">100</Data>
-        <Data AD_Column_ID="6150" Column="IsActive">true</Data>
-        <Data AD_Column_ID="6161" Column="Node_ID">53915</Data>
-        <Data AD_Column_ID="6155" Column="Parent_ID">0</Data>
-        <Data AD_Column_ID="6157" Column="SeqNo">999</Data>
-        <Data AD_Column_ID="6153" Column="Updated">2015-01-09 18:02:53.71</Data>
-        <Data AD_Column_ID="6154" Column="UpdatedBy">100</Data>
-      </PO>
-    </Step>
-    <Step SeqNo="6050" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75063" Table="AD_Field">
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">3497</Data>
@@ -24592,18 +24576,25 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:00.793</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
-    <Step SeqNo="6060" StepType="AD">
-      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
-        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
-        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="53915">53915</Data>
-        <Data AD_Column_ID="6155" Column="Parent_ID" oldValue="0">458</Data>
-        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="999">5</Data>
+    <Step SeqNo="6050" StepType="AD">
+      <PO AD_Table_ID="452" Action="I" Record_ID="10" Table="AD_TreeNodeMM">
+        <Data AD_Column_ID="6162" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="6149" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="6160" Column="AD_Tree_ID">10</Data>
+        <Data AD_Column_ID="6151" Column="Created">2015-01-09 18:02:53.71</Data>
+        <Data AD_Column_ID="6152" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="6150" Column="IsActive">true</Data>
+        <Data AD_Column_ID="6161" Column="Node_ID">53915</Data>
+        <Data AD_Column_ID="6155" Column="Parent_ID">0</Data>
+        <Data AD_Column_ID="6157" Column="SeqNo">999</Data>
+        <Data AD_Column_ID="6153" Column="Updated">2015-01-09 18:02:53.71</Data>
+        <Data AD_Column_ID="6154" Column="UpdatedBy">100</Data>
       </PO>
     </Step>
     <Step SeqNo="6060" StepType="AD">
@@ -24643,10 +24634,18 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:01.607</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
+      </PO>
+    </Step>
+    <Step SeqNo="6060" StepType="AD">
+      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
+        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
+        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="53915">53915</Data>
+        <Data AD_Column_ID="6155" Column="Parent_ID" oldValue="0">458</Data>
+        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="999">5</Data>
       </PO>
     </Step>
     <Step SeqNo="6070" StepType="AD">
@@ -24686,10 +24685,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:02.376</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6070" StepType="AD">
@@ -24697,6 +24696,13 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
         <Data AD_Column_ID="6161" Column="Node_ID" oldValue="377">377</Data>
         <Data AD_Column_ID="6157" Column="SeqNo" oldValue="5">6</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="6080" StepType="AD">
+      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
+        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
+        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="347">347</Data>
+        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="6">7</Data>
       </PO>
     </Step>
     <Step SeqNo="6080" StepType="AD">
@@ -24736,17 +24742,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:03.156</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
-      </PO>
-    </Step>
-    <Step SeqNo="6080" StepType="AD">
-      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
-        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
-        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="347">347</Data>
-        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="6">7</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6090" StepType="AD">
@@ -24786,10 +24785,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:03.939</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6100" StepType="AD">
@@ -24829,10 +24828,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:04.707</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6110" StepType="AD">
@@ -24872,10 +24871,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:05.652</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6120" StepType="AD">
@@ -24915,10 +24914,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:06.416</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6130" StepType="AD">
@@ -24958,10 +24957,10 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:07.158</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6140" StepType="AD">
@@ -25004,10 +25003,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:07.904</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6150" StepType="AD">
@@ -25047,10 +25046,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:08.682</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6160" StepType="AD">
@@ -25090,10 +25089,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:09.447</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6170" StepType="AD">
@@ -25133,10 +25132,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:10.219</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6180" StepType="AD">
@@ -25176,10 +25175,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:10.97</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
     <Step SeqNo="6190" StepType="AD">
@@ -25219,10 +25218,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:11.719</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6200" StepType="AD">
@@ -25262,10 +25261,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:12.489</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6210" StepType="AD">
@@ -25305,10 +25304,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">10</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:13.269</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6220" StepType="AD">
@@ -25348,10 +25347,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">20</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:14.051</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6230" StepType="AD">
@@ -25391,10 +25390,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">30</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:14.838</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6240" StepType="AD">
@@ -25434,10 +25433,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">40</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:15.584</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6250" StepType="AD">
@@ -25479,10 +25478,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">50</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo">-1</Data>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:16.329</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6260" StepType="AD">
@@ -25522,10 +25521,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">60</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:17.078</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6270" StepType="AD">
@@ -25565,21 +25564,21 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">70</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:17.843</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6280" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75086" Table="AD_Field">
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">3781</Data>
         <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
         <Data AD_Column_ID="167" Column="AD_Field_ID">75086</Data>
         <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
-        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="172" Column="AD_Tab_ID">54030</Data>
         <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="579" Column="Created">2015-01-09 18:02:18.588</Data>
@@ -25608,10 +25607,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">80</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:18.588</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6290" StepType="AD">
@@ -25651,10 +25650,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">90</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:19.342</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6300" StepType="AD">
@@ -25694,10 +25693,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">100</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:20.089</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6310" StepType="AD">
@@ -25737,10 +25736,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">110</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:20.877</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6320" StepType="AD">
@@ -25780,10 +25779,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">120</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:21.632</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6330" StepType="AD">
@@ -25823,10 +25822,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">130</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:22.396</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6340" StepType="AD">
@@ -25866,10 +25865,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">140</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:23.15</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6350" StepType="AD">
@@ -25909,10 +25908,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">150</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:23.909</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6360" StepType="AD">
@@ -25952,10 +25951,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">160</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:24.663</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6370" StepType="AD">
@@ -25995,10 +25994,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">170</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:25.407</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6380" StepType="AD">
@@ -26038,10 +26037,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">180</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:26.154</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6390" StepType="AD">
@@ -26081,10 +26080,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">190</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:26.934</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6400" StepType="AD">
@@ -26124,10 +26123,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">200</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:27.719</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6410" StepType="AD">
@@ -26167,10 +26166,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">210</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:28.505</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6420" StepType="AD">
@@ -26210,10 +26209,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">220</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:29.258</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6430" StepType="AD">
@@ -26253,10 +26252,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">230</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:30.001</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6440" StepType="AD">
@@ -26296,10 +26295,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">240</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:30.758</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6450" StepType="AD">
@@ -26339,10 +26338,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">250</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:31.542</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6460" StepType="AD">
@@ -26382,10 +26381,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">260</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:32.318</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6470" StepType="AD">
@@ -26425,10 +26424,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">270</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:33.088</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6480" StepType="AD">
@@ -26468,10 +26467,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">280</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:33.866</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6490" StepType="AD">
@@ -26511,10 +26510,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">290</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:34.635</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6500" StepType="AD">
@@ -26554,10 +26553,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">300</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:35.394</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6510" StepType="AD">
@@ -26597,10 +26596,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">310</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:36.187</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6520" StepType="AD">
@@ -26640,10 +26639,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">320</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:36.951</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6530" StepType="AD">
@@ -26683,10 +26682,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">330</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:37.718</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6540" StepType="AD">
@@ -26726,10 +26725,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">340</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:38.504</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6550" StepType="AD">
@@ -26769,10 +26768,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">350</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:39.281</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6560" StepType="AD">
@@ -26812,10 +26811,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">360</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:40.071</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6570" StepType="AD">
@@ -26855,10 +26854,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">370</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:40.844</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6580" StepType="AD">
@@ -26898,10 +26897,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">380</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:41.622</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6590" StepType="AD">
@@ -26941,14 +26940,15 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">390</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:42.398</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6600" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75118" Table="AD_Field">
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">15927</Data>
         <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID">101</Data>
@@ -26957,7 +26957,6 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
         <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="172" Column="AD_Tab_ID">54030</Data>
-        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="579" Column="Created">2015-01-09 18:02:43.172</Data>
         <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
         <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
@@ -26984,10 +26983,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">400</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:43.172</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6610" StepType="AD">
@@ -27027,10 +27026,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">410</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:43.944</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6620" StepType="AD">
@@ -27070,10 +27069,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">420</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:44.702</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6630" StepType="AD">
@@ -27112,11 +27111,11 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="168" Column="Name">IsFixedAssetInvoice</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:45.478</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6640" StepType="AD">
@@ -27198,10 +27197,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:47.037</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6660" StepType="AD">
@@ -27241,10 +27240,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:47.827</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6670" StepType="AD">
@@ -27284,10 +27283,10 @@ If the document type of your document has no automatic document sequence defined
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:48.604</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6680" StepType="AD">
@@ -27330,10 +27329,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:49.365</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6690" StepType="AD">
@@ -27373,10 +27372,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:50.141</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6700" StepType="AD">
@@ -27416,10 +27415,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:50.936</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6710" StepType="AD">
@@ -27459,10 +27458,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:51.701</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6720" StepType="AD">
@@ -27502,10 +27501,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:52.474</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6730" StepType="AD">
@@ -27545,10 +27544,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:53.256</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6740" StepType="AD">
@@ -27588,10 +27587,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:54.179</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6750" StepType="AD">
@@ -27631,10 +27630,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:54.961</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6760" StepType="AD">
@@ -27674,10 +27673,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:55.739</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6770" StepType="AD">
@@ -27717,10 +27716,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:56.512</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6780" StepType="AD">
@@ -27760,10 +27759,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">10</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:57.285</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6790" StepType="AD">
@@ -27803,10 +27802,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">20</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:58.108</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6800" StepType="AD">
@@ -27846,10 +27845,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">30</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:58.909</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6810" StepType="AD">
@@ -27889,10 +27888,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">40</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo">1</Data>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:59.708</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6820" StepType="AD">
@@ -27932,10 +27931,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">50</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:00.559</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6830" StepType="AD">
@@ -27975,10 +27974,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">60</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:01.357</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6840" StepType="AD">
@@ -28018,10 +28017,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">70</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:02.15</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6850" StepType="AD">
@@ -28061,10 +28060,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">80</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:02.945</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6860" StepType="AD">
@@ -28104,10 +28103,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">90</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:03.785</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6870" StepType="AD">
@@ -28147,10 +28146,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">100</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:04.578</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6880" StepType="AD">
@@ -28190,10 +28189,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">110</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:05.388</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6890" StepType="AD">
@@ -28233,10 +28232,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">120</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:06.183</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6900" StepType="AD">
@@ -28276,10 +28275,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">130</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:06.989</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6910" StepType="AD">
@@ -28319,10 +28318,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">140</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:07.776</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6920" StepType="AD">
@@ -28362,10 +28361,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">150</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:08.615</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6930" StepType="AD">
@@ -28405,10 +28404,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">160</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:09.391</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6940" StepType="AD">
@@ -28448,10 +28447,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">170</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:10.185</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6950" StepType="AD">
@@ -28491,10 +28490,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">180</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:10.976</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6960" StepType="AD">
@@ -28534,10 +28533,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">190</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:11.772</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6970" StepType="AD">
@@ -28577,10 +28576,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">200</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:12.577</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6980" StepType="AD">
@@ -28620,10 +28619,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">210</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:13.38</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="6990" StepType="AD">
@@ -28663,10 +28662,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">220</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:14.187</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7000" StepType="AD">
@@ -28706,10 +28705,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">230</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:15.003</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7010" StepType="AD">
@@ -28749,10 +28748,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">240</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:15.816</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7020" StepType="AD">
@@ -28792,10 +28791,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">250</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:16.614</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7030" StepType="AD">
@@ -28835,10 +28834,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">260</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:17.423</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7040" StepType="AD">
@@ -28878,10 +28877,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">260</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:18.45</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7050" StepType="AD">
@@ -28966,10 +28965,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:20.073</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7070" StepType="AD">
@@ -29009,10 +29008,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:20.887</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7080" StepType="AD">
@@ -29052,10 +29051,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">10</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:21.702</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7090" StepType="AD">
@@ -29095,10 +29094,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">20</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:22.525</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7100" StepType="AD">
@@ -29138,10 +29137,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">30</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:23.347</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7110" StepType="AD">
@@ -29181,10 +29180,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">40</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo">1</Data>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:24.167</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7120" StepType="AD">
@@ -29224,10 +29223,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">50</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:24.974</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7130" StepType="AD">
@@ -29267,10 +29266,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">60</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:25.789</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7140" StepType="AD">
@@ -29310,10 +29309,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">70</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:26.601</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7150" StepType="AD">
@@ -29395,10 +29394,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">10</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:28.205</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7170" StepType="AD">
@@ -29438,10 +29437,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">20</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:29.034</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7180" StepType="AD">
@@ -29481,10 +29480,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">30</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:29.874</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7190" StepType="AD">
@@ -29524,10 +29523,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">40</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:30.689</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7200" StepType="AD">
@@ -29567,10 +29566,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">50</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:31.532</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7210" StepType="AD">
@@ -29610,10 +29609,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">60</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:32.354</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7220" StepType="AD">
@@ -29656,10 +29655,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">70</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:33.169</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7230" StepType="AD">
@@ -29699,10 +29698,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">80</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo">1</Data>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:34.004</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7240" StepType="AD">
@@ -29742,10 +29741,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">90</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:34.824</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7250" StepType="AD">
@@ -29785,10 +29784,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">100</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:35.646</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7260" StepType="AD">
@@ -29828,10 +29827,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">110</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:36.466</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7270" StepType="AD">
@@ -29871,10 +29870,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">120</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:37.298</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7280" StepType="AD">
@@ -29914,10 +29913,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">130</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:38.125</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7290" StepType="AD">
@@ -29999,10 +29998,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:39.778</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7310" StepType="AD">
@@ -30042,10 +30041,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:40.623</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7320" StepType="AD">
@@ -30088,10 +30087,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:41.462</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7330" StepType="AD">
@@ -30131,10 +30130,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:42.308</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7340" StepType="AD">
@@ -30174,10 +30173,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">0</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:43.171</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7350" StepType="AD">
@@ -30217,10 +30216,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">10</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:43.993</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7360" StepType="AD">
@@ -30260,10 +30259,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">20</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:44.818</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7370" StepType="AD">
@@ -30303,10 +30302,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">30</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:45.653</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7380" StepType="AD">
@@ -30346,10 +30345,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">40</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:46.47</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7390" StepType="AD">
@@ -30389,10 +30388,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">50</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo">1</Data>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:47.297</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7400" StepType="AD">
@@ -30432,10 +30431,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">60</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:48.121</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7410" StepType="AD">
@@ -30475,10 +30474,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">70</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:48.973</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7420" StepType="AD">
@@ -30518,10 +30517,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">80</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:49.808</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7430" StepType="AD">
@@ -30561,10 +30560,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">100</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:50.639</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7440" StepType="AD">
@@ -30604,10 +30603,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">110</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:51.53</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7450" StepType="AD">
@@ -30648,10 +30647,10 @@ Underpayments (positive) is a partial payment for the invoice. You do not write 
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
         <Data AD_Column_ID="181" Column="SeqNo">120</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:03:52.512</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7460" StepType="AD">
@@ -30735,11 +30734,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Active</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:03.716</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7480" StepType="AD">
@@ -30778,11 +30777,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI QR Id</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:04.444</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7490" StepType="AD">
@@ -30821,11 +30820,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI SAT Seal</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:05.169</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7500" StepType="AD">
@@ -30864,11 +30863,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI Seal</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:05.888</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7510" StepType="AD">
@@ -30907,11 +30906,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI Sealing Date</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:06.587</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7520" StepType="AD">
@@ -30950,11 +30949,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI Token</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:07.311</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7530" StepType="AD">
@@ -30993,11 +30992,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Client</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:08.045</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7540" StepType="AD">
@@ -31036,11 +31035,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Invoice</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:08.761</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7550" StepType="AD">
@@ -31079,11 +31078,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">LMX Invoice Information ID</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:09.497</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7560" StepType="AD">
@@ -31122,11 +31121,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Number of certificate of SAT</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:10.208</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7570" StepType="AD">
@@ -31165,11 +31164,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Organization</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:10.92</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7580" StepType="AD">
@@ -31208,11 +31207,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Tax ID</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:11.648</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7590" StepType="AD">
@@ -31251,11 +31250,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">UUID of CFDI</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:12.364</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7600" StepType="AD">
@@ -31294,11 +31293,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">XML of CFDI</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:05:13.074</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="7610" StepType="AD">
@@ -31630,11 +31629,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">CFDI String</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 19:36:43.028</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="8060" StepType="AD">
@@ -31764,11 +31763,11 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="168" Column="Name">Cancelled</Data>
         <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
         <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
-        <Data AD_Column_ID="181" Column="SeqNo">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
-        <Data AD_Column_ID="62479" Column="SeqNoGrid">@SQL=SELECT NVL(MAX(SeqNo),0)+10 AS DefaultValue FROM AD_Field WHERE AD_Tab_ID=@AD_Tab_ID@</Data>
         <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 22:23:05.744</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
       </PO>
     </Step>
     <Step SeqNo="8160" StepType="AD">
