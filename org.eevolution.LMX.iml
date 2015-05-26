@@ -3,9 +3,12 @@
   <component name="DBNavigator.Module.ConnectionManager">
     <connections />
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/out/production/org.eevolution.LMX" />
     <exclude-output />
+    <annotation-paths>
+      <root url="file://$MODULE_DIR$/../adempiere" />
+    </annotation-paths>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/LMX" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/base/src" isTestSource="false" />
@@ -15,75 +18,41 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/db/ddlutils/lib/commons-lang-2.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/tools/lib/postgresql.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/packages/FixedAsset.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/packages/liberoHR.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/packages/liberoMFG.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/packages/liberoWM.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/adempiere/Adempiere/lib/Adempiere.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/adempiere/Adempiere/lib/CCTools.jar!/" />
+          <root url="jar://$MODULE_DIR$/../adempiere/lib/CCTools.jar!/" />
+          <root url="jar://$MODULE_DIR$/../adempiere/lib/CSTools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../adempiereDevelop/adempiere/Adempiere/lib/CCTools.jar!/Lib" />
+          <root url="jar://$MODULE_DIR$/../adempiere/lib/CCTools.jar!/Lib" />
+          <root url="jar://$MODULE_DIR$/../adempiere/lib/CSTools.jar!/Lib" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../adempiere/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../adempiere/tools/lib/postgresql.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../adempiere/db/ddlutils/lib/commons-lang-2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
