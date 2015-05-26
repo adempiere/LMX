@@ -121,7 +121,6 @@ public class LMXModelValidator implements ModelValidator
 		if (timing == this.TIMING_AFTER_COMPLETE) {
 			if (MInvoice.Table_Name.equals(po.get_TableName()))
 			{
-				
 				/**	Order Discount Example	**/
 				MInvoice invoice = (MInvoice)po;
 				if(invoice.isSOTrx())
@@ -139,31 +138,19 @@ public class LMXModelValidator implements ModelValidator
 				MInvoice invoice = (MInvoice)po;
 				if(invoice.isSOTrx())
 				{	
-				MInvoice reversal = new MInvoice(invoice.getCtx(), invoice.getReversal_ID(), po.get_TrxName()); 
-				// Begin e-Evolution ogi-cd -> Cancela Documento, coloca el mismo DocumentNo + "'"
+				MInvoice reversal = new MInvoice(invoice.getCtx(), invoice.getReversal_ID(), po.get_TrxName());
 				reversal.setDocumentNo(invoice.getDocumentNo() + "-" + reversal.getC_Invoice_ID());
 				invoice.setDocumentNo(invoice.getDocumentNo()+"+"+invoice.getC_Invoice_ID());				
 				invoice.setDescription("(" + invoice.getDocumentNo() + ") <- (" + reversal.getDocumentNo() + ")");
 				invoice.saveEx();
 				reversal.setDescription("(" +reversal.getDocumentNo() + ") -> ("+invoice.getDocumentNo()+")");
 				reversal.saveEx();
-				MAttachment attach = new MAttachment(po.getCtx(), reversal.get_Table_ID() , reversal.get_ID(), reversal.get_TrxName());
-                List<MAttachmentNote> lists = new Query(po.getCtx(),MAttachmentNote.Table_Name, MAttachmentNote.COLUMNNAME_AD_Attachment_ID+"=?", po.get_TrxName())
-                        .setParameters(new Object[]{attach.get_ID()})
-                        .list();
-                for (MAttachmentNote attchnote :lists)
-                {
-                    attchnote.deleteEx(true);
-                }
 
-                attach.deleteEx(true);
-				// Begin e-Evolution ogi-cd -> CancelaciÃ³n de Facturas, no consuma secuencia(folio fiscal)
 				MDocType  eDocType = MDocType.get(invoice.getCtx(),invoice.getC_DocType_ID());
 				MSequence eSeq     = new MSequence(invoice.getCtx(),eDocType.getDocNoSequence_ID(),invoice.get_TrxName());
 
 				eSeq.setCurrentNext(eSeq.getCurrentNext() -1);
 				eSeq.save();
-				// End e-Evolution ogi-cd
 				/** Order Discount Example */
 				log.info(po.toString());
 				}

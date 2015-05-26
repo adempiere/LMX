@@ -489,7 +489,6 @@ public final class LMXCFDI {
 		try {
 			String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI
 					.indexOf("\" xsi:schemaLocation="));
-			invoice.set_ValueOfColumn("CFDIFechaTimbrado", fecha);
 			fecha = fecha.replace("T", " ");
 			DateFormat formatter;
 			formatter = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
