@@ -78,6 +78,32 @@ public interface I_LMX_Addenda
 
 	public org.compiere.model.I_AD_PrintFormat getAD_PrintFormat() throws RuntimeException;
 
+    /** Column name CFDISchema_ID */
+    public static final String COLUMNNAME_CFDISchema_ID = "CFDISchema_ID";
+
+	/** Set CFDI Schema XML.
+	  * CFDI Schema XML
+	  */
+	public void setCFDISchema_ID (int CFDISchema_ID);
+
+	/** Get CFDI Schema XML.
+	  * CFDI Schema XML
+	  */
+	public int getCFDISchema_ID();
+
+    /** Column name CFDITransformerString_ID */
+    public static final String COLUMNNAME_CFDITransformerString_ID = "CFDITransformerString_ID";
+
+	/** Set CFDI Transformer String XSLT.
+	  * CFDI Transformer String XSLT
+	  */
+	public void setCFDITransformerString_ID (int CFDITransformerString_ID);
+
+	/** Get CFDI Transformer String XSLT.
+	  * CFDI Transformer String XSLT
+	  */
+	public int getCFDITransformerString_ID();
+
     /** Column name CFDITransformer_ID */
     public static final String COLUMNNAME_CFDITransformer_ID = "CFDITransformer_ID";
 

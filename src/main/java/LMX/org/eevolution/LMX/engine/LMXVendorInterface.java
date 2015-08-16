@@ -18,7 +18,7 @@
 
 package org.eevolution.LMX.engine;
 
-import org.eevolution.LMX.model.MLMXInvoice;
+import org.eevolution.LMX.model.MLMXDocument;
 
 import javax.xml.transform.Source;
 
@@ -26,5 +26,5 @@ import javax.xml.transform.Source;
  * Created by e-Evolution on 26/12/13.
  */
 public interface LMXVendorInterface {
-   public Source execute(MLMXInvoice invoice , String typeService) throws Exception;
+   public Source execute(MLMXDocument document , String typeService) throws Exception;
 }

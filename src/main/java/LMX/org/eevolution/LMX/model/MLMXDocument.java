@@ -19,6 +19,7 @@
 package org.eevolution.LMX.model;
 
 import org.compiere.model.MInvoice;
+import org.compiere.model.PO;
 import org.compiere.model.Query;
 
 import java.sql.ResultSet;
@@ -27,26 +28,26 @@ import java.util.Properties;
 /**
  * Created by e-Evolution on 24/12/14.
  */
-public class MLMXInvoice extends X_LMX_Invoice {
+public class MLMXDocument extends X_LMX_Document {
 
-    public static MLMXInvoice getInvoice(MInvoice invoice)
+    public static MLMXDocument get(PO po)
     {
-        return new Query(invoice.getCtx() , Table_Name , I_LMX_Invoice.COLUMNNAME_C_Invoice_ID + "=?" ,  invoice.get_TrxName())
+        return new Query(po.getCtx() , Table_Name , "AD_Table_ID=? AND " + I_LMX_Document.COLUMNNAME_Record_ID + "=?" ,  po.get_TrxName())
                 .setClient_ID()
-                .setParameters(invoice.getC_Invoice_ID())
+                .setParameters(po.get_Table_ID() , po.get_ID())
                 .first();
     }
-    public MLMXInvoice(Properties ctx, int LMX_Invoice_ID, String trxName) {
-        super(ctx, LMX_Invoice_ID, trxName);
+    public MLMXDocument(Properties ctx, int id, String trxName) {
+        super(ctx, id, trxName);
     }
 
-    public MLMXInvoice(Properties ctx, ResultSet rs, String trxName) {
+    public MLMXDocument(Properties ctx, ResultSet rs, String trxName) {
         super(ctx, rs, trxName);
     }
 
-    public MLMXInvoice(MInvoice invoice)
+    public MLMXDocument(PO po)
     {
-        super(invoice.getCtx() , 0 , invoice.get_TrxName());
-        setC_Invoice_ID(invoice.getC_Invoice_ID());
+        super(po.getCtx() , 0 , po.get_TrxName());
+        setC_Invoice_ID(po.get_ID());
     }
 }

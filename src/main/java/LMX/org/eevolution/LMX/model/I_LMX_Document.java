@@ -21,15 +21,15 @@ import java.sql.Timestamp;
 import org.compiere.model.*;
 import org.compiere.util.KeyNamePair;
 
-/** Generated Interface for LMX_Invoice
+/** Generated Interface for LMX_Document
  *  @author Adempiere (generated) 
  *  @version Release 3.8.0
  */
-public interface I_LMX_Invoice 
+public interface I_LMX_Document 
 {
 
-    /** TableName=LMX_Invoice */
-    public static final String Table_Name = "LMX_Invoice";
+    /** TableName=LMX_Document */
+    public static final String Table_Name = "LMX_Document";
 
     /** AD_Table_ID=53910 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
@@ -62,6 +62,21 @@ public interface I_LMX_Invoice
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
+
+    /** Column name AD_Table_ID */
+    public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
+
+	/** Set Table.
+	  * Database Table information
+	  */
+	public void setAD_Table_ID (int AD_Table_ID);
+
+	/** Get Table.
+	  * Database Table information
+	  */
+	public int getAD_Table_ID();
+
+	public org.compiere.model.I_AD_Table getAD_Table() throws RuntimeException;
 
     /** Column name CFDIQR_ID */
     public static final String COLUMNNAME_CFDIQR_ID = "CFDIQR_ID";
@@ -205,14 +220,27 @@ public interface I_LMX_Invoice
 	  */
 	public boolean isCancelled();
 
-    /** Column name LMX_Invoice_ID */
-    public static final String COLUMNNAME_LMX_Invoice_ID = "LMX_Invoice_ID";
+    /** Column name LMX_Document_ID */
+    public static final String COLUMNNAME_LMX_Document_ID = "LMX_Document_ID";
 
-	/** Set LMX Invoice Information ID	  */
-	public void setLMX_Invoice_ID (int LMX_Invoice_ID);
+	/** Set LMX Document Information ID	  */
+	public void setLMX_Document_ID (int LMX_Document_ID);
 
-	/** Get LMX Invoice Information ID	  */
-	public int getLMX_Invoice_ID();
+	/** Get LMX Document Information ID	  */
+	public int getLMX_Document_ID();
+
+    /** Column name Record_ID */
+    public static final String COLUMNNAME_Record_ID = "Record_ID";
+
+	/** Set Record ID.
+	  * Direct internal record ID
+	  */
+	public void setRecord_ID (int Record_ID);
+
+	/** Get Record ID.
+	  * Direct internal record ID
+	  */
+	public int getRecord_ID();
 
     /** Column name TaxID */
     public static final String COLUMNNAME_TaxID = "TaxID";

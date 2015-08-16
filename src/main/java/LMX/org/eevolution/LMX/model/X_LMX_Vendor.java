@@ -31,7 +31,7 @@ public class X_LMX_Vendor extends PO implements I_LMX_Vendor, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150109L;
+	private static final long serialVersionUID = 20150816L;
 
     /** Standard Constructor */
     public X_LMX_Vendor (Properties ctx, int LMX_Vendor_ID, String trxName)

@@ -65,12 +65,7 @@ import org.compiere.print.ReportEngine;
 import org.compiere.util.Env;
 import org.compiere.util.Language;
 import org.compiere.util.Login;
-import org.eevolution.LMX.model.I_LMX_Vendor;
-import org.eevolution.LMX.model.MLMXAddenda;
-import org.eevolution.LMX.model.MLMXCertificate;
-import org.eevolution.LMX.model.MLMXInvoice;
-import org.eevolution.LMX.model.MLMXTax;
-import org.eevolution.LMX.model.MLMXVendorService;
+import org.eevolution.LMX.model.*;
 import org.eevolution.LMX.util.SHA1;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -94,7 +89,7 @@ public final class LMXCFDI {
 	private static InputStream CFDI_SCHEMA = null;
 
 	private static MInvoice invoice = null;
-	private static MLMXInvoice invoiceCFDI = null;
+	private static MLMXDocument invoiceCFDI = null;
 
 	/**
 	 * get WMRule Engine like singleton instance
@@ -188,13 +183,13 @@ public final class LMXCFDI {
 
 	public String reverseInvoiceStamp(MInvoice reverseInvoice)
 			throws Exception {
-		invoiceCFDI = MLMXInvoice.getInvoice(reverseInvoice);
+		invoiceCFDI = MLMXDocument.get(reverseInvoice);
 		getToken();
 		final Source response = service.execute(invoiceCFDI,
 				MLMXVendorService.SOAPSERVICETYPE_CancelStamp);
 		String cancelXML = parse(response);
 		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
-				.get_Table_ID(), invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI
+				.get_Table_ID(), invoiceCFDI.getLMX_Document_ID(), invoiceCFDI
 				.get_TrxName());
 		attachment.setTitle("Acuse de Recibo CFDI");
 		attachment.addEntry("Acuse de Recibo CFDI" + invoice.getDocumentNo() + ".xml", cancelXML
@@ -269,7 +264,7 @@ public final class LMXCFDI {
 	private void createInvoiceStamp() throws TransformerException, IOException,
 			SAXException, URISyntaxException {
 
-		invoiceCFDI = new MLMXInvoice(invoice);
+		invoiceCFDI = new MLMXDocument(invoice);
 		invoiceCFDI.setTaxID(getRFC());
 		invoiceCFDI.saveEx();
 
@@ -307,7 +302,7 @@ public final class LMXCFDI {
 		generateQR();
 
 		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
-				.get_Table_ID(), invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI
+				.get_Table_ID(), invoiceCFDI.getLMX_Document_ID(), invoiceCFDI
 				.get_TrxName());
 		attachment.setTitle("CFD");
 		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", getCFDI()
@@ -392,7 +387,7 @@ public final class LMXCFDI {
 		if (CFDI == null)
 			return;
 
-		invoiceCFDI = MLMXInvoice.getInvoice(invoice);
+		invoiceCFDI = MLMXDocument.get(invoice);
 		invoiceCFDI.setCFDIXML(CFDI);
 		invoiceCFDI.saveEx();
 
@@ -412,14 +407,14 @@ public final class LMXCFDI {
 		MAttachment attachment = new Query(invoiceCFDI.getCtx(), MAttachment.Table_Name,
 				"AD_Table_ID=? AND Record_ID=?", null).setClient_ID()
 				.setParameters(invoiceCFDI.get_Table_ID(),
-						invoiceCFDI.getLMX_Invoice_ID()).first();
+						invoiceCFDI.getLMX_Document_ID()).first();
 		if (attachment != null) {
 			for (int i = 0; i <= attachment.getEntries().length; i = i + 1) {
 				attachment.deleteEntry(i);
 			}
 		} else
 			attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI.get_Table_ID(),
-					invoiceCFDI.getLMX_Invoice_ID(), invoiceCFDI.get_TrxName());
+					invoiceCFDI.getLMX_Document_ID(), invoiceCFDI.get_TrxName());
 
 		attachment.setTitle("CFD");
 		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", cdfdi

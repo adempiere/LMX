@@ -31,7 +31,7 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150109L;
+	private static final long serialVersionUID = 20150816L;
 
     /** Standard Constructor */
     public X_LMX_Addenda (Properties ctx, int LMX_Addenda_ID, String trxName)
@@ -39,8 +39,6 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
       super (ctx, LMX_Addenda_ID, trxName);
       /** if (LMX_Addenda_ID == 0)
         {
-			setAD_PrintFormat_ID (0);
-			setC_BPartner_ID (0);
 			setLMX_Addenda_ID (0);
 			setName (null);
         } */
@@ -97,6 +95,52 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	public int getAD_PrintFormat_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintFormat_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set CFDI Schema XML.
+		@param CFDISchema_ID 
+		CFDI Schema XML
+	  */
+	public void setCFDISchema_ID (int CFDISchema_ID)
+	{
+		if (CFDISchema_ID < 1) 
+			set_Value (COLUMNNAME_CFDISchema_ID, null);
+		else 
+			set_Value (COLUMNNAME_CFDISchema_ID, Integer.valueOf(CFDISchema_ID));
+	}
+
+	/** Get CFDI Schema XML.
+		@return CFDI Schema XML
+	  */
+	public int getCFDISchema_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_CFDISchema_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set CFDI Transformer String XSLT.
+		@param CFDITransformerString_ID 
+		CFDI Transformer String XSLT
+	  */
+	public void setCFDITransformerString_ID (int CFDITransformerString_ID)
+	{
+		if (CFDITransformerString_ID < 1) 
+			set_Value (COLUMNNAME_CFDITransformerString_ID, null);
+		else 
+			set_Value (COLUMNNAME_CFDITransformerString_ID, Integer.valueOf(CFDITransformerString_ID));
+	}
+
+	/** Get CFDI Transformer String XSLT.
+		@return CFDI Transformer String XSLT
+	  */
+	public int getCFDITransformerString_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_CFDITransformerString_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

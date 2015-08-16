@@ -21,29 +21,29 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import org.compiere.model.*;
 
-/** Generated Model for LMX_Invoice
+/** Generated Model for LMX_Document
  *  @author Adempiere (generated) 
  *  @version Release 3.8.0 - $Id$ */
-public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent 
+public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150109L;
+	private static final long serialVersionUID = 20150816L;
 
     /** Standard Constructor */
-    public X_LMX_Invoice (Properties ctx, int LMX_Invoice_ID, String trxName)
+    public X_LMX_Document (Properties ctx, int LMX_Document_ID, String trxName)
     {
-      super (ctx, LMX_Invoice_ID, trxName);
-      /** if (LMX_Invoice_ID == 0)
+      super (ctx, LMX_Document_ID, trxName);
+      /** if (LMX_Document_ID == 0)
         {
-			setLMX_Invoice_ID (0);
+			setLMX_Document_ID (0);
         } */
     }
 
     /** Load Constructor */
-    public X_LMX_Invoice (Properties ctx, ResultSet rs, String trxName)
+    public X_LMX_Document (Properties ctx, ResultSet rs, String trxName)
     {
       super (ctx, rs, trxName);
     }
@@ -65,10 +65,38 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 
     public String toString()
     {
-      StringBuffer sb = new StringBuffer ("X_LMX_Invoice[")
+      StringBuffer sb = new StringBuffer ("X_LMX_Document[")
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	public org.compiere.model.I_AD_Table getAD_Table() throws RuntimeException
+    {
+		return (org.compiere.model.I_AD_Table)MTable.get(getCtx(), org.compiere.model.I_AD_Table.Table_Name)
+			.getPO(getAD_Table_ID(), get_TrxName());	}
+
+	/** Set Table.
+		@param AD_Table_ID 
+		Database Table information
+	  */
+	public void setAD_Table_ID (int AD_Table_ID)
+	{
+		if (AD_Table_ID < 1) 
+			set_Value (COLUMNNAME_AD_Table_ID, null);
+		else 
+			set_Value (COLUMNNAME_AD_Table_ID, Integer.valueOf(AD_Table_ID));
+	}
+
+	/** Get Table.
+		@return Database Table information
+	  */
+	public int getAD_Table_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Table_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	/** Set CFDI QR ID.
 		@param CFDIQR_ID CFDI QR ID	  */
@@ -257,21 +285,44 @@ public class X_LMX_Invoice extends PO implements I_LMX_Invoice, I_Persistent
 		return false;
 	}
 
-	/** Set LMX Invoice Information ID.
-		@param LMX_Invoice_ID LMX Invoice Information ID	  */
-	public void setLMX_Invoice_ID (int LMX_Invoice_ID)
+	/** Set LMX Document Information ID.
+		@param LMX_Document_ID LMX Document Information ID	  */
+	public void setLMX_Document_ID (int LMX_Document_ID)
 	{
-		if (LMX_Invoice_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_LMX_Invoice_ID, null);
+		if (LMX_Document_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_LMX_Document_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_LMX_Invoice_ID, Integer.valueOf(LMX_Invoice_ID));
+			set_ValueNoCheck (COLUMNNAME_LMX_Document_ID, Integer.valueOf(LMX_Document_ID));
 	}
 
-	/** Get LMX Invoice Information ID.
-		@return LMX Invoice Information ID	  */
-	public int getLMX_Invoice_ID () 
+	/** Get LMX Document Information ID.
+		@return LMX Document Information ID	  */
+	public int getLMX_Document_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Invoice_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Document_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Record ID.
+		@param Record_ID 
+		Direct internal record ID
+	  */
+	public void setRecord_ID (int Record_ID)
+	{
+		if (Record_ID < 0) 
+			set_Value (COLUMNNAME_Record_ID, null);
+		else 
+			set_Value (COLUMNNAME_Record_ID, Integer.valueOf(Record_ID));
+	}
+
+	/** Get Record ID.
+		@return Direct internal record ID
+	  */
+	public int getRecord_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Record_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

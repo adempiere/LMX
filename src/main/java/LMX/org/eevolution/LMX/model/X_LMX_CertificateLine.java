@@ -30,7 +30,7 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150109L;
+	private static final long serialVersionUID = 20150816L;
 
     /** Standard Constructor */
     public X_LMX_CertificateLine (Properties ctx, int LMX_CertificateLine_ID, String trxName)

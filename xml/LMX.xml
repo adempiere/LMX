@@ -1261,6 +1261,10 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="320" StepType="AD">
       <PO AD_Table_ID="101" Action="I" Record_ID="75088" Table="AD_Column">
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="111" Column="Name">Created</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="127" Column="SeqNo" isNewNull="true"/>
         <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
         <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
         <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
@@ -1300,10 +1304,6 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6483" Column="IsSyncDatabase" isNewNull="true"/>
         <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
         <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
-        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
-        <Data AD_Column_ID="111" Column="Name">Created</Data>
-        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
-        <Data AD_Column_ID="127" Column="SeqNo" isNewNull="true"/>
         <Data AD_Column_ID="551" Column="Updated">2014-12-26 13:45:39.116</Data>
         <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
         <Data AD_Column_ID="110" Column="Version">1</Data>
@@ -7613,7 +7613,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="102" Column="Name">Información de la Factura para CFDI</Data>
         <Data AD_Column_ID="9342" Column="PO_Window_ID" isNewNull="true"/>
         <Data AD_Column_ID="9341" Column="ReplicationType">L</Data>
-        <Data AD_Column_ID="107" Column="TableName">LMX_Invoice</Data>
+        <Data AD_Column_ID="107" Column="TableName">LMX_Document</Data>
         <Data AD_Column_ID="546" Column="Updated">2014-12-26 13:49:17.285</Data>
         <Data AD_Column_ID="547" Column="UpdatedBy">100</Data>
       </PO>
@@ -7978,7 +7978,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="2596" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="58588" Column="AD_Reference_ID" isNewNull="true"/>
         <Data AD_Column_ID="58590" Column="AD_Reference_Value_ID" isNewNull="true"/>
-        <Data AD_Column_ID="2602" Column="ColumnName">LMX_Invoice_ID</Data>
+        <Data AD_Column_ID="2602" Column="ColumnName">LMX_Document_ID</Data>
         <Data AD_Column_ID="2598" Column="Created">2014-12-26 13:49:29.0</Data>
         <Data AD_Column_ID="2599" Column="CreatedBy">100</Data>
         <Data AD_Column_ID="2604" Column="Description" isNewNull="true"/>
@@ -8009,7 +8009,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="114" Column="AD_Table_ID">53910</Data>
         <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
-        <Data AD_Column_ID="116" Column="ColumnName">LMX_Invoice_ID</Data>
+        <Data AD_Column_ID="116" Column="ColumnName">LMX_Document_ID</Data>
         <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
         <Data AD_Column_ID="549" Column="Created">2014-12-26 13:49:31.852</Data>
         <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
@@ -8057,13 +8057,13 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="3887" Column="CurrentNextSys">50000</Data>
         <Data AD_Column_ID="54272" Column="DateColumn" isNewNull="true"/>
         <Data AD_Column_ID="54309" Column="DecimalPattern" isNewNull="true"/>
-        <Data AD_Column_ID="347" Column="Description">Table LMX_Invoice</Data>
+        <Data AD_Column_ID="347" Column="Description">Table LMX_Document</Data>
         <Data AD_Column_ID="2747" Column="IncrementNo">1</Data>
         <Data AD_Column_ID="349" Column="IsActive">true</Data>
         <Data AD_Column_ID="222" Column="IsAudited">false</Data>
         <Data AD_Column_ID="1188" Column="IsAutoSequence">true</Data>
         <Data AD_Column_ID="350" Column="IsTableID">true</Data>
-        <Data AD_Column_ID="216" Column="Name">LMX_Invoice</Data>
+        <Data AD_Column_ID="216" Column="Name">LMX_Document</Data>
         <Data AD_Column_ID="223" Column="Prefix" isNewNull="true"/>
         <Data AD_Column_ID="225" Column="StartNewYear">false</Data>
         <Data AD_Column_ID="2746" Column="StartNo">1000000</Data>
@@ -21340,12 +21340,12 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="4910" StepType="AD">
       <PO AD_Table_ID="101" Action="I" Record_ID="75271" Table="AD_Column">
-        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
         <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
         <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="109" Column="AD_Column_ID">75271</Data>
         <Data AD_Column_ID="2608" Column="AD_Element_ID">187</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
         <Data AD_Column_ID="226" Column="AD_Reference_ID">30</Data>
         <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="114" Column="AD_Table_ID">53904</Data>
@@ -23620,6 +23620,8 @@ If you leave the search key empty, the system automatically creates a numeric nu
     </Step>
     <Step SeqNo="5610" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75045" Table="AD_Field">
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="579" Column="Created">2014-12-26 13:56:46.033</Data>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">75276</Data>
@@ -23628,8 +23630,6 @@ If you leave the search key empty, the system automatically creates a numeric nu
         <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
         <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
-        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
-        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
         <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
         <Data AD_Column_ID="169" Column="Description">Document sequence number of the document</Data>
@@ -24598,6 +24598,14 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
       </PO>
     </Step>
     <Step SeqNo="6060" StepType="AD">
+      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
+        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
+        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="53915">53915</Data>
+        <Data AD_Column_ID="6155" Column="Parent_ID" oldValue="0">458</Data>
+        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="999">5</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="6060" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75064" Table="AD_Field">
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">3780</Data>
@@ -24640,12 +24648,11 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
       </PO>
     </Step>
-    <Step SeqNo="6060" StepType="AD">
+    <Step SeqNo="6070" StepType="AD">
       <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
         <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
-        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="53915">53915</Data>
-        <Data AD_Column_ID="6155" Column="Parent_ID" oldValue="0">458</Data>
-        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="999">5</Data>
+        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="377">377</Data>
+        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="5">6</Data>
       </PO>
     </Step>
     <Step SeqNo="6070" StepType="AD">
@@ -24689,13 +24696,6 @@ SELECT 'es_MX' AS AD_Language, i.AD_Client_ID ,
         <Data AD_Column_ID="581" Column="Updated">2015-01-09 18:02:02.376</Data>
         <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
         <Data AD_Column_ID="62479" Column="SeqNoGrid" isNewNull="true"/>
-      </PO>
-    </Step>
-    <Step SeqNo="6070" StepType="AD">
-      <PO AD_Table_ID="452" Action="U" Record_ID="10" Table="AD_TreeNodeMM">
-        <Data AD_Column_ID="6160" Column="AD_Tree_ID" oldValue="10">10</Data>
-        <Data AD_Column_ID="6161" Column="Node_ID" oldValue="377">377</Data>
-        <Data AD_Column_ID="6157" Column="SeqNo" oldValue="5">6</Data>
       </PO>
     </Step>
     <Step SeqNo="6080" StepType="AD">
@@ -25441,6 +25441,7 @@ There are two reasons for de-activating and not deleting records:
     </Step>
     <Step SeqNo="6250" StepType="AD">
       <PO AD_Table_ID="107" Action="I" Record_ID="75083" Table="AD_Field">
+        <Data AD_Column_ID="579" Column="Created">2015-01-09 18:02:16.329</Data>
         <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
         <Data AD_Column_ID="174" Column="AD_Column_ID">3492</Data>
         <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
@@ -25450,7 +25451,6 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="172" Column="AD_Tab_ID">54030</Data>
         <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
-        <Data AD_Column_ID="579" Column="Created">2015-01-09 18:02:16.329</Data>
         <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
         <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
         <Data AD_Column_ID="169" Column="Description">Document sequence number of the document</Data>
@@ -31774,6 +31774,672 @@ There are two reasons for de-activating and not deleting records:
       <PO AD_Table_ID="106" Action="U" Record_ID="54035" Table="AD_Tab">
         <Data AD_Column_ID="13994" Column="IsInsertRecord" oldValue="true">false</Data>
         <Data AD_Column_ID="2044" Column="IsReadOnly" oldValue="false">true</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8170" StepType="AD">
+      <PO AD_Table_ID="101" Action="I" Record_ID="77733" Table="AD_Column">
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="6482" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="127" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="112" Column="Description">Database Table information</Data>
+        <Data AD_Column_ID="109" Column="AD_Column_ID">77733</Data>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
+        <Data AD_Column_ID="548" Column="IsActive">true</Data>
+        <Data AD_Column_ID="114" Column="AD_Table_ID">53910</Data>
+        <Data AD_Column_ID="111" Column="Name">Table</Data>
+        <Data AD_Column_ID="124" Column="IsMandatory">false</Data>
+        <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="116" Column="ColumnName">AD_Table_ID</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="549" Column="Created">2015-08-13 14:05:45.7</Data>
+        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="120" Column="IsParent">false</Data>
+        <Data AD_Column_ID="113" Column="Help">The Database Table provides the information of the table definition</Data>
+        <Data AD_Column_ID="551" Column="Updated">2015-08-13 14:05:45.7</Data>
+        <Data AD_Column_ID="118" Column="FieldLength">22</Data>
+        <Data AD_Column_ID="126" Column="IsIdentifier">false</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">19</Data>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
+        <Data AD_Column_ID="6244" Column="IsSelectionColumn">false</Data>
+        <Data AD_Column_ID="6483" Column="IsSyncDatabase">N</Data>
+        <Data AD_Column_ID="119" Column="IsKey">false</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
+        <Data AD_Column_ID="11617" Column="IsAlwaysUpdateable">false</Data>
+        <Data AD_Column_ID="128" Column="IsEncrypted">N</Data>
+        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="56187" Column="IsAllowLogging">true</Data>
+        <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
+        <Data AD_Column_ID="56149" Column="IsAutocomplete">false</Data>
+        <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2608" Column="AD_Element_ID">126</Data>
+        <Data AD_Column_ID="68024" Column="IsRange">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8180" StepType="AD">
+      <PO AD_Table_ID="101" Action="I" Record_ID="77734" Table="AD_Column">
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="6482" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="127" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="112" Column="Description">Direct internal record ID</Data>
+        <Data AD_Column_ID="109" Column="AD_Column_ID">77734</Data>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
+        <Data AD_Column_ID="548" Column="IsActive">true</Data>
+        <Data AD_Column_ID="114" Column="AD_Table_ID">53910</Data>
+        <Data AD_Column_ID="111" Column="Name">Record ID</Data>
+        <Data AD_Column_ID="124" Column="IsMandatory">false</Data>
+        <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="116" Column="ColumnName">Record_ID</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="549" Column="Created">2015-08-13 14:29:59.635</Data>
+        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="120" Column="IsParent">false</Data>
+        <Data AD_Column_ID="113" Column="Help">The Record ID is the internal unique identifier of a record. Please note that zooming to the record may not be successful for Orders, Invoices and Shipment/Receipts as sometimes the Sales Order type is not known.</Data>
+        <Data AD_Column_ID="551" Column="Updated">2015-08-13 14:29:59.635</Data>
+        <Data AD_Column_ID="118" Column="FieldLength">22</Data>
+        <Data AD_Column_ID="126" Column="IsIdentifier">false</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">22</Data>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
+        <Data AD_Column_ID="6244" Column="IsSelectionColumn">false</Data>
+        <Data AD_Column_ID="6483" Column="IsSyncDatabase">N</Data>
+        <Data AD_Column_ID="119" Column="IsKey">false</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
+        <Data AD_Column_ID="11617" Column="IsAlwaysUpdateable">false</Data>
+        <Data AD_Column_ID="128" Column="IsEncrypted">N</Data>
+        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="56187" Column="IsAllowLogging">true</Data>
+        <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
+        <Data AD_Column_ID="56149" Column="IsAutocomplete">false</Data>
+        <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2608" Column="AD_Element_ID">538</Data>
+        <Data AD_Column_ID="68024" Column="IsRange">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8190" StepType="AD">
+      <PO AD_Table_ID="101" Action="U" Record_ID="77734" Table="AD_Column">
+        <Data AD_Column_ID="226" Column="AD_Reference_ID" oldValue="22">28</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8200" StepType="AD">
+      <PO AD_Table_ID="101" Action="U" Record_ID="77734" Table="AD_Column">
+        <Data AD_Column_ID="124" Column="IsMandatory" oldValue="false">true</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8210" StepType="AD">
+      <PO AD_Table_ID="106" Action="U" Record_ID="54035" Table="AD_Tab">
+        <Data AD_Column_ID="2740" Column="AD_Column_ID" oldValue="75188">77734</Data>
+        <Data AD_Column_ID="2741" Column="WhereClause" isOldNull="true">AD_Table_ID=318</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8220" StepType="AD">
+      <PO AD_Table_ID="106" Action="U" Record_ID="54035" Table="AD_Tab">
+        <Data AD_Column_ID="57842" Column="Parent_Column_ID" isOldNull="true">3484</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8230" StepType="AD">
+      <PO AD_Table_ID="101" Action="I" Record_ID="77735" Table="AD_Column">
+        <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="6482" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="127" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="112" Column="Description">CFDI Transformer String XSLT</Data>
+        <Data AD_Column_ID="109" Column="AD_Column_ID">77735</Data>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
+        <Data AD_Column_ID="548" Column="IsActive">true</Data>
+        <Data AD_Column_ID="114" Column="AD_Table_ID">53904</Data>
+        <Data AD_Column_ID="111" Column="Name">CFDI Transformer String XSLT</Data>
+        <Data AD_Column_ID="124" Column="IsMandatory">false</Data>
+        <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="116" Column="ColumnName">CFDITransformerString_ID</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="549" Column="Created">2015-08-13 14:44:05.991</Data>
+        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="120" Column="IsParent">false</Data>
+        <Data AD_Column_ID="113" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="551" Column="Updated">2015-08-13 14:44:05.991</Data>
+        <Data AD_Column_ID="118" Column="FieldLength">10</Data>
+        <Data AD_Column_ID="126" Column="IsIdentifier">false</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">32</Data>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
+        <Data AD_Column_ID="6244" Column="IsSelectionColumn">false</Data>
+        <Data AD_Column_ID="6483" Column="IsSyncDatabase">N</Data>
+        <Data AD_Column_ID="119" Column="IsKey">false</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
+        <Data AD_Column_ID="11617" Column="IsAlwaysUpdateable">false</Data>
+        <Data AD_Column_ID="128" Column="IsEncrypted">N</Data>
+        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="56187" Column="IsAllowLogging">true</Data>
+        <Data AD_Column_ID="56149" Column="IsAutocomplete">false</Data>
+        <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2608" Column="AD_Element_ID">57720</Data>
+        <Data AD_Column_ID="68024" Column="IsRange">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8240" StepType="AD">
+      <PO AD_Table_ID="101" Action="I" Record_ID="77736" Table="AD_Column">
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="6482" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="127" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="112" Column="Description">CFDI Schema XML</Data>
+        <Data AD_Column_ID="109" Column="AD_Column_ID">77736</Data>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
+        <Data AD_Column_ID="548" Column="IsActive">true</Data>
+        <Data AD_Column_ID="114" Column="AD_Table_ID">53904</Data>
+        <Data AD_Column_ID="111" Column="Name">CFDI Schema XML</Data>
+        <Data AD_Column_ID="124" Column="IsMandatory">false</Data>
+        <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="116" Column="ColumnName">CFDISchema_ID</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="549" Column="Created">2015-08-13 14:45:01.703</Data>
+        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="120" Column="IsParent">false</Data>
+        <Data AD_Column_ID="113" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="551" Column="Updated">2015-08-13 14:45:01.703</Data>
+        <Data AD_Column_ID="118" Column="FieldLength">10</Data>
+        <Data AD_Column_ID="126" Column="IsIdentifier">false</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">32</Data>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
+        <Data AD_Column_ID="6244" Column="IsSelectionColumn">false</Data>
+        <Data AD_Column_ID="6483" Column="IsSyncDatabase">N</Data>
+        <Data AD_Column_ID="119" Column="IsKey">false</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
+        <Data AD_Column_ID="11617" Column="IsAlwaysUpdateable">false</Data>
+        <Data AD_Column_ID="128" Column="IsEncrypted">N</Data>
+        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="56187" Column="IsAllowLogging">true</Data>
+        <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
+        <Data AD_Column_ID="56149" Column="IsAutocomplete">false</Data>
+        <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2608" Column="AD_Element_ID">57721</Data>
+        <Data AD_Column_ID="68024" Column="IsRange">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8250" StepType="AD">
+      <PO AD_Table_ID="101" Action="U" Record_ID="75271" Table="AD_Column">
+        <Data AD_Column_ID="124" Column="IsMandatory" oldValue="true">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8260" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76917" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">77736</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76917</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54023</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-13 14:45:36.205</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description">CFDI Schema XML</Data>
+        <Data AD_Column_ID="180" Column="DisplayLength">10</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">CFDI Schema XML</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-13 14:45:36.205</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8270" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76918" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">77735</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76918</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54023</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-13 14:45:37.645</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description">CFDI Transformer String XSLT</Data>
+        <Data AD_Column_ID="180" Column="DisplayLength">10</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">CFDI Transformer String XSLT</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-13 14:45:37.645</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8280" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76917" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">80</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8290" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76918" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">90</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8300" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75042" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="80">100</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8310" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="74976" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="90">110</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8320" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76918" Table="AD_Field">
+        <Data AD_Column_ID="183" Column="IsSameLine" oldValue="false">true</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8330" StepType="AD">
+      <PO AD_Table_ID="276" Action="I" Record_ID="58262" Table="AD_Element">
+        <Data AD_Column_ID="2595" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="2594" Column="AD_Element_ID">58262</Data>
+        <Data AD_Column_ID="2596" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="58588" Column="AD_Reference_ID">32</Data>
+        <Data AD_Column_ID="58590" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2602" Column="ColumnName">PKCS12_ID</Data>
+        <Data AD_Column_ID="2598" Column="Created">2015-08-14 09:24:34.901</Data>
+        <Data AD_Column_ID="2599" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="2604" Column="Description" isNewNull="true"/>
+        <Data AD_Column_ID="6484" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="58589" Column="FieldLength">22</Data>
+        <Data AD_Column_ID="2605" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="2597" Column="IsActive">true</Data>
+        <Data AD_Column_ID="2603" Column="Name">Public-Key Cryptography Standards File</Data>
+        <Data AD_Column_ID="6283" Column="PO_Description" isNewNull="true"/>
+        <Data AD_Column_ID="6284" Column="PO_Help" isNewNull="true"/>
+        <Data AD_Column_ID="6285" Column="PO_Name" isNewNull="true"/>
+        <Data AD_Column_ID="6286" Column="PO_PrintName" isNewNull="true"/>
+        <Data AD_Column_ID="4299" Column="PrintName">Public-Key Cryptography Standards File</Data>
+        <Data AD_Column_ID="2600" Column="Updated">2015-08-14 09:24:34.902</Data>
+        <Data AD_Column_ID="2601" Column="UpdatedBy">100</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8360" StepType="AD">
+      <PO AD_Table_ID="101" Action="I" Record_ID="77738" Table="AD_Column">
+        <Data AD_Column_ID="3389" Column="ValueMax" isNewNull="true"/>
+        <Data AD_Column_ID="6482" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="127" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="112" Column="Description" isNewNull="true"/>
+        <Data AD_Column_ID="109" Column="AD_Column_ID">77738</Data>
+        <Data AD_Column_ID="110" Column="Version">0</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
+        <Data AD_Column_ID="548" Column="IsActive">true</Data>
+        <Data AD_Column_ID="114" Column="AD_Table_ID">53905</Data>
+        <Data AD_Column_ID="111" Column="Name">Public-Key Cryptography Standards File</Data>
+        <Data AD_Column_ID="124" Column="IsMandatory">false</Data>
+        <Data AD_Column_ID="125" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="116" Column="ColumnName">PKCS12_ID</Data>
+        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true"/>
+        <Data AD_Column_ID="549" Column="Created">2015-08-14 09:25:47.028</Data>
+        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="550" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="120" Column="IsParent">false</Data>
+        <Data AD_Column_ID="113" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="551" Column="Updated">2015-08-14 09:25:47.028</Data>
+        <Data AD_Column_ID="118" Column="FieldLength">22</Data>
+        <Data AD_Column_ID="126" Column="IsIdentifier">false</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">32</Data>
+        <Data AD_Column_ID="3388" Column="ValueMin" isNewNull="true"/>
+        <Data AD_Column_ID="359" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="360" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
+        <Data AD_Column_ID="6244" Column="IsSelectionColumn">false</Data>
+        <Data AD_Column_ID="6483" Column="IsSyncDatabase">N</Data>
+        <Data AD_Column_ID="119" Column="IsKey">false</Data>
+        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true"/>
+        <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
+        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
+        <Data AD_Column_ID="11617" Column="IsAlwaysUpdateable">false</Data>
+        <Data AD_Column_ID="128" Column="IsEncrypted">N</Data>
+        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
+        <Data AD_Column_ID="56187" Column="IsAllowLogging">true</Data>
+        <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
+        <Data AD_Column_ID="56149" Column="IsAutocomplete">false</Data>
+        <Data AD_Column_ID="59702" Column="AD_Chart_ID" isNewNull="true"/>
+        <Data AD_Column_ID="2608" Column="AD_Element_ID">58262</Data>
+        <Data AD_Column_ID="68024" Column="IsRange">false</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8370" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76981" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">75281</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76981</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-14 09:26:54.531</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description">Location or Address</Data>
+        <Data AD_Column_ID="180" Column="DisplayLength">22</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help">The Location / Address field defines the location of an entity.</Data>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">Address</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-14 09:26:54.531</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8380" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76982" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">75280</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76982</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-14 09:26:55.343</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description" isNewNull="true"/>
+        <Data AD_Column_ID="180" Column="DisplayLength">272</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">Certificate Password</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-14 09:26:55.343</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8390" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76983" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">77738</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76983</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-14 09:26:56.063</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description" isNewNull="true"/>
+        <Data AD_Column_ID="180" Column="DisplayLength">22</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">Public-Key Cryptography Standards File</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-14 09:26:56.063</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8400" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76984" Table="AD_Field">
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">75279</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76984</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-14 09:26:56.763</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description">Document Sequence</Data>
+        <Data AD_Column_ID="180" Column="DisplayLength">22</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help">The Sequence defines the numbering sequence to be used for documents.</Data>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">Sequence</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-14 09:26:56.763</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8410" StepType="AD">
+      <PO AD_Table_ID="107" Action="I" Record_ID="76985" Table="AD_Field">
+        <Data AD_Column_ID="383" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="174" Column="AD_Column_ID">75278</Data>
+        <Data AD_Column_ID="5375" Column="AD_FieldGroup_ID" isNewNull="true"/>
+        <Data AD_Column_ID="167" Column="AD_Field_ID">76985</Data>
+        <Data AD_Column_ID="384" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15011" Column="AD_Reference_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54356" Column="AD_Reference_Value_ID" isNewNull="true"/>
+        <Data AD_Column_ID="172" Column="AD_Tab_ID">54026</Data>
+        <Data AD_Column_ID="54357" Column="AD_Val_Rule_ID" isNewNull="true"/>
+        <Data AD_Column_ID="579" Column="Created">2015-08-14 09:26:57.468</Data>
+        <Data AD_Column_ID="580" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="53265" Column="DefaultValue" isNewNull="true"/>
+        <Data AD_Column_ID="169" Column="Description">Performing or initiating organization</Data>
+        <Data AD_Column_ID="180" Column="DisplayLength">22</Data>
+        <Data AD_Column_ID="177" Column="DisplayLogic" isNewNull="true"/>
+        <Data AD_Column_ID="7714" Column="EntityType">LMX</Data>
+        <Data AD_Column_ID="170" Column="Help">The organization which performs or initiates this transaction (for another organization).  The owning Organization may not be the transaction organization in a service bureau environment, with centralized services, and inter-organization transactions.</Data>
+        <Data AD_Column_ID="57957" Column="Included_Tab_ID" isNewNull="true"/>
+        <Data AD_Column_ID="54359" Column="InfoFactoryClass" isNewNull="true"/>
+        <Data AD_Column_ID="578" Column="IsActive">true</Data>
+        <Data AD_Column_ID="74868" Column="IsAllowCopy">true</Data>
+        <Data AD_Column_ID="2745" Column="IsCentrallyMaintained">true</Data>
+        <Data AD_Column_ID="176" Column="IsDisplayed">true</Data>
+        <Data AD_Column_ID="62478" Column="IsDisplayedGrid">true</Data>
+        <Data AD_Column_ID="59703" Column="IsEmbedded">false</Data>
+        <Data AD_Column_ID="186" Column="IsEncrypted">false</Data>
+        <Data AD_Column_ID="185" Column="IsFieldOnly">false</Data>
+        <Data AD_Column_ID="184" Column="IsHeading">false</Data>
+        <Data AD_Column_ID="15013" Column="IsMandatory" isNewNull="true"/>
+        <Data AD_Column_ID="2007" Column="IsReadOnly">false</Data>
+        <Data AD_Column_ID="183" Column="IsSameLine">false</Data>
+        <Data AD_Column_ID="168" Column="Name">Trx Organization</Data>
+        <Data AD_Column_ID="9969" Column="ObscureType" isNewNull="true"/>
+        <Data AD_Column_ID="59704" Column="PreferredWidth" isNewNull="true"/>
+        <Data AD_Column_ID="182" Column="SortNo" isNewNull="true"/>
+        <Data AD_Column_ID="581" Column="Updated">2015-08-14 09:26:57.468</Data>
+        <Data AD_Column_ID="582" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="181" Column="SeqNo">0</Data>
+        <Data AD_Column_ID="62479" Column="SeqNoGrid">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8420" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76981" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="true">false</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8430" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76982" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="true">false</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8440" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76984" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="true">false</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8450" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76985" Table="AD_Field">
+        <Data AD_Column_ID="176" Column="IsDisplayed" oldValue="true">false</Data>
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">0</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8460" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="76983" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" isOldNull="true">70</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8470" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75001" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="70">80</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="8480" StepType="AD">
+      <PO AD_Table_ID="107" Action="U" Record_ID="75002" Table="AD_Field">
+        <Data AD_Column_ID="181" Column="SeqNo" oldValue="80">90</Data>
       </PO>
     </Step>
   </Migration>

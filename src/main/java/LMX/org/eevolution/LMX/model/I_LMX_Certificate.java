@@ -196,6 +196,15 @@ public interface I_LMX_Certificate
 	  */
 	public String getName();
 
+    /** Column name PKCS12_ID */
+    public static final String COLUMNNAME_PKCS12_ID = "PKCS12_ID";
+
+	/** Set Public-Key Cryptography Standards File	  */
+	public void setPKCS12_ID (int PKCS12_ID);
+
+	/** Get Public-Key Cryptography Standards File	  */
+	public int getPKCS12_ID();
+
     /** Column name Password */
     public static final String COLUMNNAME_Password = "Password";
 

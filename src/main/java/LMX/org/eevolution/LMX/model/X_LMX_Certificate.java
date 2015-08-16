@@ -30,7 +30,7 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150109L;
+	private static final long serialVersionUID = 20150816L;
 
     /** Standard Constructor */
     public X_LMX_Certificate (Properties ctx, int LMX_Certificate_ID, String trxName)
@@ -237,6 +237,26 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);
+	}
+
+	/** Set Public-Key Cryptography Standards File.
+		@param PKCS12_ID Public-Key Cryptography Standards File	  */
+	public void setPKCS12_ID (int PKCS12_ID)
+	{
+		if (PKCS12_ID < 1) 
+			set_Value (COLUMNNAME_PKCS12_ID, null);
+		else 
+			set_Value (COLUMNNAME_PKCS12_ID, Integer.valueOf(PKCS12_ID));
+	}
+
+	/** Get Public-Key Cryptography Standards File.
+		@return Public-Key Cryptography Standards File	  */
+	public int getPKCS12_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_PKCS12_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Password.
