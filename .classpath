@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src/main/java/LMX"/>
 	<classpathentry kind="src" path="base/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/adempiereTrunk"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/adempiere"/>
 	<classpathentry kind="output" path="out/production/org.eevolution.LMX"/>
 </classpath>
