@@ -19,16 +19,35 @@
 package org.eevolution.LMX.engine.vendor;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.security.NoSuchAlgorithmException;
+
 import org.adempiere.exceptions.AdempiereException;
+import org.compiere.model.MImage;
 import org.compiere.model.MInvoice;
 import org.compiere.util.Env;
 import org.eevolution.LMX.engine.LMXVendorInterface;
 import org.eevolution.LMX.engine.LMXVendorServiceInterface;
 import org.eevolution.LMX.model.MLMXDocument;
 import org.eevolution.LMX.model.MLMXVendor;
+import org.eevolution.LMX.model.MLMXVendorService;
+import org.eevolution.LMX.util.SHA1;
 import org.eevolution.LMX.util.WebServiceConnector;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import sun.misc.BASE64Decoder;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import  javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
 /**
  * Created by e-Evolution on 26/12/13.
@@ -63,4 +82,83 @@ public class LMXEcodexService implements LMXVendorInterface {
         }
 
     }
+
+	@Override
+	public String parse(Source response)
+			throws TransformerFactoryConfigurationError, TransformerException {
+		return "";
+	}
+	
+	
+	public void generateQR(MLMXDocument documentCFDI) {
+		try {
+			final Source response = execute(documentCFDI,
+					MLMXVendorService.SOAPSERVICETYPE_QR);
+			String res = parse(response);
+			String qrString = res.substring(res.indexOf("<Imagen>") + 8, res
+					.indexOf("</Imagen>"));
+			InputStream qrInput = new ByteArrayInputStream(qrString.getBytes());
+			BASE64Decoder decoder = new BASE64Decoder();
+			byte[] qrImage = decoder.decodeBuffer(qrInput);
+
+			MImage image = new MImage(documentCFDI.getCtx(), 0, documentCFDI
+					.get_TrxName());
+			image.setName(String.valueOf(documentCFDI.get_ID()));
+			image.setDescription(String.valueOf(documentCFDI.getC_Invoice_ID()));
+			image.setBinaryData(qrImage);
+			image.saveEx();
+
+			documentCFDI.setCFDIQR_ID(image.getAD_Image_ID());
+			documentCFDI.saveEx();
+
+		} catch (Exception e) {
+			throw new AdempiereException(e);
+		}
+
+	}
+	
+	public String getToken(MLMXDocument documentCFDI, String partnetID) {
+
+		try {
+			Source response = execute(documentCFDI,
+					MLMXVendorService.SOAPSERVICETYPE_Token);
+			final String xml = parse(response);
+			String token = getElement(xml, "Token");
+			String toHash = String.format("%s|%s", partnetID,
+					token);
+			byte[] as = toHash.getBytes("UTF-8");
+			String toHash2 = new String(as, "UTF-8");
+			SHA1 sha1 = new SHA1();
+			token = sha1.getHash(toHash2);
+			documentCFDI.setCFDIToken(token);
+			documentCFDI.saveEx();
+			return token;
+		} catch (NoSuchAlgorithmException ex) {
+			throw new AdempiereException(ex.getMessage());
+		} catch (Exception e) {
+			throw new AdempiereException(e.getMessage());
+		}
+	}
+	
+	private String getElement(String xml, String key) {
+		Document document = getDocument(xml);
+		return document.getElementsByTagName(key).item(0).getTextContent();
+	}
+	
+	private Document getDocument(String xml) {
+		DocumentBuilderFactory docfactory = DocumentBuilderFactory
+				.newInstance();
+		DocumentBuilder builder = null;
+		try {
+			builder = docfactory.newDocumentBuilder();
+			return builder.parse(new InputSource(new StringReader(xml)));
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

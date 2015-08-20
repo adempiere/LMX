@@ -29,7 +29,13 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Vector;
+import java.io.*;
+import java.security.*;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.X509Certificate;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,12 +54,15 @@ import javax.xml.validation.Validator;
 
 import org.adempiere.exceptions.AdempiereException;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.compiere.model.MAttachment;
 import org.compiere.model.MAttachmentNote;
 import org.compiere.model.MClient;
 import org.compiere.model.MImage;
 import org.compiere.model.MInvoice;
+import org.compiere.model.MPaySelectionCheck;
 import org.compiere.model.MQuery;
+import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.util.Ini;
 import org.eevolution.LMX.engine.LMXVendorEngine;
@@ -67,11 +76,16 @@ import org.compiere.util.Language;
 import org.compiere.util.Login;
 import org.eevolution.LMX.model.*;
 import org.eevolution.LMX.util.SHA1;
+import org.eevolution.model.MHRPaySelectionCheck;
+import org.eevolution.model.MHRProcess;
+import org.eevolution.model.X_HR_PaySelectionCheck;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 
 public final class LMXCFDI {
 
@@ -87,9 +101,16 @@ public final class LMXCFDI {
 	private static InputStream CFDI_STRING_XSLT = null;
 	private static InputStream CFDI_ADDENDA_XSLT = null;
 	private static InputStream CFDI_SCHEMA = null;
+	private static InputStream PKCS12_CER = null;
 
 	private static MInvoice invoice = null;
-	private static MLMXDocument invoiceCFDI = null;
+	private static MHRPaySelectionCheck psck = null; 
+	private static MHRProcess hrProcess = null;
+	private static PO po = null;
+	private static MLMXDocument documentCFDI = null;
+    private static KeyStore m_Key_Store = null;
+    private static String stringCFDI = "";
+
 
 	/**
 	 * get WMRule Engine like singleton instance
@@ -105,10 +126,80 @@ public final class LMXCFDI {
 	public LMXCFDI() {
 		certificate = MLMXCertificate.get();
 	}
+	
+	public void setPaySelection(MHRPaySelectionCheck po)
+	{
+		try
+		{
+			this.po = po;
+			psck = po;
+			
+			taxInfo = MLMXTax.getTax(psck.getCtx(), psck.getAD_Org_ID(),
+					psck.get_TrxName());
+			if (taxInfo == null)
+				throw new AdempiereException(
+						"No existe infomración de la compañia");
+			
+			if (addendaInfo == null)
+				addendaInfo = MLMXAddenda.getByBPartnerId(psck.getCtx(), taxInfo
+						.getC_BPartner_ID(), psck.get_TrxName());
+			
+			if (addendaInfo == null)
+				throw new AdempiereException(
+						"No hay esquema para comprobante Fiscal Digital");
+			
+			LMXVendorEngine engine = LMXVendorEngine.get();
+
+			hrProcess = (MHRProcess)psck.getHR_PaySelection().getHR_Process();
+			
+			I_LMX_Vendor vendor = certificate.getVendorService(hrProcess);
+			if (vendor == null)
+				return;
+			
+			service = engine.getLMXVendorFactory(vendor.getClassname());
+			if (service == null)
+				throw new AdempiereException("No existe ningun integrador");
+			
+			certificate = MLMXCertificate.get();
+			
+			PKCS12_CER = new ByteArrayInputStream(MImage.get(Env.getCtx(),
+					certificate.getPKCS12_ID()).getData());
+			
+	        setKeyStore(PKCS12_CER, certificate.getPassword());
+
+	        if (m_Key_Store == null) {
+	            throw new AdempiereException("La Llave PKCS12 no corresponde a la Clave del Certificado");
+	        }
+			
+			
+			CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(),
+					addendaInfo.getCFDISchema_ID()).getData());
+
+			CFDI_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(),
+					addendaInfo.getCFDITransformer_ID()).getData());
+			
+			CFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(
+					Env.getCtx(), addendaInfo.getCFDITransformerString_ID())
+					.getData());
+			CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(
+					Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
+
+			if (CFDI_ADDENDA_XSLT == null)
+				throw new AdempiereException(
+						"No hay esquema para Comprobante Fiscal Digital");
+			
+			
+		}
+		catch(Exception e)
+		{
+			throw new AdempiereException(e.getMessage());
+		}
+	}
 
 	public void setInvoice(MInvoice po) {
 
 		try {
+			this.po = po;
 			invoice = po;
 
 			taxInfo = MLMXTax.getTax(invoice.getCtx(), invoice.getAD_Org_ID(),
@@ -164,17 +255,19 @@ public final class LMXCFDI {
 	public void generate() {
 
 		try {
-			if (invoice.isReversal()) {
+			
+			if (invoice != null && invoice.isReversal()) {
 				reverseInvoiceStamp((MInvoice) getReversal(invoice));
 
 			} else
-				createInvoiceStamp();
+				createDocumentStamp();
 
 		} catch (Exception e) {
 			throw new AdempiereException(e.getMessage());
 		}
 
 	}
+
 
 	private MInvoice getReversal(MInvoice invoice) {
 		return new MInvoice(invoice.getCtx(), invoice.getReversal_ID(), invoice
@@ -183,13 +276,13 @@ public final class LMXCFDI {
 
 	public String reverseInvoiceStamp(MInvoice reverseInvoice)
 			throws Exception {
-		invoiceCFDI = MLMXDocument.get(reverseInvoice);
-		getToken();
-		final Source response = service.execute(invoiceCFDI,
+		documentCFDI = MLMXDocument.get(reverseInvoice);
+		service.getToken(documentCFDI, taxInfo.getPartnerID());
+		final Source response = service.execute(documentCFDI,
 				MLMXVendorService.SOAPSERVICETYPE_CancelStamp);
-		String cancelXML = parse(response);
-		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
-				.get_Table_ID(), invoiceCFDI.getLMX_Document_ID(), invoiceCFDI
+		String cancelXML = service.parse(response);
+		MAttachment attachment = new MAttachment(documentCFDI.getCtx(), documentCFDI
+				.get_Table_ID(), documentCFDI.getLMX_Document_ID(), documentCFDI
 				.get_TrxName());
 		attachment.setTitle("Acuse de Recibo CFDI");
 		attachment.addEntry("Acuse de Recibo CFDI" + invoice.getDocumentNo() + ".xml", cancelXML
@@ -197,16 +290,16 @@ public final class LMXCFDI {
 		attachment.addTextMsg(cancelXML);
 		attachment.saveEx();
 
-		MAttachmentNote attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0,
-				invoiceCFDI.get_TrxName());
+		MAttachmentNote attachmentNote = new MAttachmentNote(documentCFDI.getCtx(), 0,
+				documentCFDI.get_TrxName());
 		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
 		attachmentNote.setAD_User_ID(100);
 		attachmentNote.setTextMsg(cancelXML);
 		attachmentNote.setTitle(invoice.getDocumentNo());
 		attachmentNote.saveEx();
 
-		invoiceCFDI.setIsCancelled(true);
-		invoiceCFDI.saveEx();
+		documentCFDI.setIsCancelled(true);
+		documentCFDI.saveEx();
 		
 		return cancelXML;
 
@@ -242,12 +335,57 @@ public final class LMXCFDI {
 		reportEngine.createXML(stringWriter);
 		return stringWriter;
 	}
+	
+	public static StringWriter getXMLFromReportEngine(MHRPaySelectionCheck psck , int printFormatId) {
+		MClient client = MClient.get(psck.getCtx());
+		Language language = client.getLanguage();
+		// Get Format & Data
+		MPrintFormat format = MPrintFormat.get(psck.getCtx(), printFormatId , false);
+		format.setLanguage(language);
+		format.setTranslationLanguage(language);
+		// query
+		MQuery query = new MQuery(X_HR_PaySelectionCheck.Table_Name);
+		
+		query.addRestriction(X_HR_PaySelectionCheck.COLUMNNAME_HR_PaySelectionCheck_ID, MQuery.EQUAL,
+				psck.getHR_PaySelectionCheck_ID());
+		
+		PrintInfo printInfo = new PrintInfo(hrProcess.getDocumentNo(),
+				X_HR_PaySelectionCheck.Table_ID, psck.getHR_PaySelectionCheck_ID(), psck
+						.getC_BPartner_ID());
+		printInfo.setCopies(1);
+		printInfo.setDocumentCopy(false); // true prints "Copy" on second
+		printInfo.setPrinterName(format.getPrinterName());
+
+		// Engine
+		ReportEngine reportEngine = new ReportEngine(psck.getCtx(), format,
+				query, printInfo, psck.get_TrxName());
+		if (reportEngine == null)
+			throw new AdempiereException("@NotFound@ @M_PrintFormat_ID@");
+
+		reportEngine.getLayout();
+
+		final StringWriter stringWriter = new StringWriter();
+		reportEngine.createXML(stringWriter);
+		return stringWriter;
+	}
 
 	public String getCFDI(MInvoice invoice) throws TransformerException {
 		// get XML from ADempiere format
 		StringWriter xmlReport = getXMLFromReportEngine(invoice, addendaInfo.getAD_PrintFormat_ID());
 		StringWriter transformedCFDI = new StringWriter();
 		// Generate CFDI using transformer
+		transform(new StreamSource(CFDI_XSLT), new StreamSource(
+				new StringReader(xmlReport.getBuffer().toString())),
+				new StreamResult(transformedCFDI));
+		return setAddenda(transformedCFDI.getBuffer().toString());
+	}
+	
+	public String getCFDI(MHRPaySelectionCheck psck) throws TransformerException {
+		// get XML from ADempiere format
+		StringWriter xmlReport = getXMLFromReportEngine(psck, addendaInfo.getAD_PrintFormat_ID());
+		StringWriter transformedCFDI = new StringWriter();
+		// Generate CFDI using transformer
+
 		transform(new StreamSource(CFDI_XSLT), new StreamSource(
 				new StringReader(xmlReport.getBuffer().toString())),
 				new StreamResult(transformedCFDI));
@@ -261,60 +399,82 @@ public final class LMXCFDI {
 		return transformedCFDI.getBuffer().toString();
 	}
 
-	private void createInvoiceStamp() throws TransformerException, IOException,
+	private void createDocumentStamp() throws TransformerException, IOException,
 			SAXException, URISyntaxException {
+		
 
-		invoiceCFDI = new MLMXDocument(invoice);
-		invoiceCFDI.setTaxID(getRFC());
-		invoiceCFDI.saveEx();
+		documentCFDI = new MLMXDocument(po.getCtx(),0, po.get_TrxName());
+		documentCFDI.setAD_Table_ID(po.get_Table_ID());
+		documentCFDI.setRecord_ID(po.get_ID());
+		documentCFDI.setTaxID(getRFC());
+		documentCFDI.saveEx();
 
 		// String tmpDir = System.getProperty("user.home");
 		// if (!tmpDir.endsWith(File.separator))
 		// tmpDir = tmpDir + File.separator;
 
-		String CFDName = "CFD" + invoice.getDocumentNo() + ".xml";
-		String xmlCFDI = generateCFDIWithStamp(getCFDI(invoice));
-		// Schema Validation
-		String schemaLang = "http://www.w3.org/2001/XMLSchema";
-		// get validation driver:
-		SchemaFactory schema_factory = SchemaFactory.newInstance(schemaLang);
-		// create schema by reading it from an XSD file:
-		Schema schema = schema_factory.newSchema(new StreamSource(CFDI_SCHEMA));
-		Validator validator = schema.newValidator();
-		validator.validate(new StreamSource(new StringReader(xmlCFDI)));
+		String CFDName = "CFD" +   
+				(invoice!= null ? 
+						(invoice.getDocumentNo() + ".xml") : (  psck.getC_BPartner().getTaxID() + hrProcess.getDocumentNo() +  ".xml"));
+		
+		String xmlCFDI = "";
+		
+		if(invoice!= null)
+			xmlCFDI = generateCFDIWithStamp(getCFDI(invoice));
+		else
+			xmlCFDI = generateCFDIWithStamp(getCFDI(psck));
+		
+		
+		if(invoice!=null)
+		{
+			// Schema Validation
+			String schemaLang = "http://www.w3.org/2001/XMLSchema";
+			// get validation driver:
+			SchemaFactory schema_factory = SchemaFactory.newInstance(schemaLang);
+			// create schema by reading it from an XSD file:
+			Schema schema = schema_factory.newSchema(new StreamSource(CFDI_SCHEMA));
+			Validator validator = schema.newValidator();
+			validator.validate(new StreamSource(new StringReader(xmlCFDI)));
+		}
 
 		if ("".equals(xmlCFDI) || xmlCFDI == null)
 			throw new AdempiereException("El CFDI no es Válido");
 
-		String stringCFDI = getOriginalString(xmlCFDI);
+		stringCFDI = getOriginalString(xmlCFDI);
 
 		stampXML(xmlCFDI);
 
-		updateDateInvoice();
+		if(invoice!=null) updateDateInvoice();
 
-		invoiceCFDI.setCFDISeal(getSeal());
-		invoiceCFDI.setCFDISATSeal(getSealSAT());
-		invoiceCFDI.setCFDISATCertificate(getNoCertificateSAT());
-		invoiceCFDI.setCFDIString(stringCFDI);
-		invoiceCFDI.setCFDIXML(getCFDI());
-		invoiceCFDI.saveEx();
+		
+		documentCFDI.setCFDISeal(getSeal());
+		documentCFDI.setCFDISATSeal(getSealSAT());
+		documentCFDI.setCFDISATCertificate(getNoCertificateSAT());
+		documentCFDI.setCFDIString(stringCFDI);
+		documentCFDI.setCFDIXML(getCFDI());
+		documentCFDI.setCFDISealingDate(getDate());
+		
+		documentCFDI.saveEx();
 
-		generateQR();
+		service.generateQR(documentCFDI);
 
-		MAttachment attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI
-				.get_Table_ID(), invoiceCFDI.getLMX_Document_ID(), invoiceCFDI
+		MAttachment attachment = new MAttachment(documentCFDI.getCtx(), documentCFDI
+				.get_Table_ID(), documentCFDI.getLMX_Document_ID(), documentCFDI
 				.get_TrxName());
 		attachment.setTitle("CFD");
-		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", getCFDI()
+		attachment.addEntry("CFD" + (invoice!= null ? 
+				(invoice.getDocumentNo() + ".xml") : (  psck.getC_BPartner().getTaxID() + hrProcess.getDocumentNo() +  ".xml")), getCFDI()
 				.getBytes("UTF-8"));
 		attachment.addTextMsg(stringCFDI);
 		attachment.saveEx();
 
-		MAttachmentNote attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0,
-				invoiceCFDI.get_TrxName());
+		MAttachmentNote attachmentNote = new MAttachmentNote(documentCFDI.getCtx(), 0,
+				documentCFDI.get_TrxName());
 		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
 		attachmentNote.setAD_User_ID(100);
-		attachmentNote.setTitle(invoice.getDocumentNo());
+		attachmentNote.setTitle("CFD" +   
+				(invoice!= null ? 
+						(invoice.getDocumentNo() + ".xml") : (  psck.getC_BPartner().getTaxID() + hrProcess.getDocumentNo() +  ".xml")));
 		attachmentNote.setTextMsg(getCFDI());
 		attachmentNote.saveEx();
 	}
@@ -387,34 +547,34 @@ public final class LMXCFDI {
 		if (CFDI == null)
 			return;
 
-		invoiceCFDI = MLMXDocument.get(invoice);
-		invoiceCFDI.setCFDIXML(CFDI);
-		invoiceCFDI.saveEx();
+		documentCFDI = MLMXDocument.get(invoice);
+		documentCFDI.setCFDIXML(CFDI);
+		documentCFDI.saveEx();
 
 		cdfdi.updateDateInvoice();
-		invoiceCFDI.setCFDISeal(cdfdi.getSeal());
-		invoiceCFDI.setCFDISATSeal(cdfdi.getSealSAT());
-		invoiceCFDI.setCFDIString(cdfdi.getOriginalString(cdfdi.getCFDI()));
-		invoiceCFDI.setCFDISATCertificate(cdfdi.getNoCertificateSAT());
-		invoiceCFDI.saveEx();
+		documentCFDI.setCFDISeal(cdfdi.getSeal());
+		documentCFDI.setCFDISATSeal(cdfdi.getSealSAT());
+		documentCFDI.setCFDIString(cdfdi.getOriginalString(cdfdi.getCFDI()));
+		documentCFDI.setCFDISATCertificate(cdfdi.getNoCertificateSAT());
+		documentCFDI.saveEx();
 
-		MImage image = new MImage(invoiceCFDI.getCtx(), invoiceCFDI.getCFDIQR_ID(), null);
+		MImage image = new MImage(documentCFDI.getCtx(), documentCFDI.getCFDIQR_ID(), null);
 		if (image != null)
 			image.deleteEx(true);
 
-		cdfdi.generateQR();
+		//service.generateQR(documentCFDI);
 
-		MAttachment attachment = new Query(invoiceCFDI.getCtx(), MAttachment.Table_Name,
+		MAttachment attachment = new Query(documentCFDI.getCtx(), MAttachment.Table_Name,
 				"AD_Table_ID=? AND Record_ID=?", null).setClient_ID()
-				.setParameters(invoiceCFDI.get_Table_ID(),
-						invoiceCFDI.getLMX_Document_ID()).first();
+				.setParameters(documentCFDI.get_Table_ID(),
+						documentCFDI.getLMX_Document_ID()).first();
 		if (attachment != null) {
 			for (int i = 0; i <= attachment.getEntries().length; i = i + 1) {
 				attachment.deleteEntry(i);
 			}
 		} else
-			attachment = new MAttachment(invoiceCFDI.getCtx(), invoiceCFDI.get_Table_ID(),
-					invoiceCFDI.getLMX_Document_ID(), invoiceCFDI.get_TrxName());
+			attachment = new MAttachment(documentCFDI.getCtx(), documentCFDI.get_Table_ID(),
+					documentCFDI.getLMX_Document_ID(), documentCFDI.get_TrxName());
 
 		attachment.setTitle("CFD");
 		attachment.addEntry("CFD" + invoice.getDocumentNo() + ".xml", cdfdi
@@ -422,13 +582,13 @@ public final class LMXCFDI {
 		attachment.addTextMsg(cdfdi.getOriginalString(cdfdi.getCFDI()));
 		attachment.saveEx();
 
-		MAttachmentNote attachmentNote = new Query(invoiceCFDI.getCtx(),
+		MAttachmentNote attachmentNote = new Query(documentCFDI.getCtx(),
 				MAttachmentNote.Table_Name, "AD_Attachment_ID=?", null)
 				.setClient_ID().setParameters(attachment.getAD_Attachment_ID())
 				.first();
 
 		if (attachmentNote == null)
-			attachmentNote = new MAttachmentNote(invoiceCFDI.getCtx(), 0, invoiceCFDI
+			attachmentNote = new MAttachmentNote(documentCFDI.getCtx(), 0, documentCFDI
 					.get_TrxName());
 
 		attachmentNote.setAD_Attachment_ID(attachment.get_ID());
@@ -437,39 +597,14 @@ public final class LMXCFDI {
 		attachmentNote.saveEx();
 	}
 
-	private void generateQR() {
-		try {
-			final Source response = service.execute(invoiceCFDI,
-					MLMXVendorService.SOAPSERVICETYPE_QR);
-			String res = parse(response);
-			String qrString = res.substring(res.indexOf("<Imagen>") + 8, res
-					.indexOf("</Imagen>"));
-			InputStream qrInput = new ByteArrayInputStream(qrString.getBytes());
-			BASE64Decoder decoder = new BASE64Decoder();
-			byte[] qrImage = decoder.decodeBuffer(qrInput);
-
-			MImage image = new MImage(invoice.getCtx(), 0, invoice
-					.get_TrxName());
-			image.setName(invoice.getDocumentNo());
-			image.setDescription(String.valueOf(invoice.getC_Invoice_ID()));
-			image.setBinaryData(qrImage);
-			image.saveEx();
-
-			invoiceCFDI.setCFDIQR_ID(image.getAD_Image_ID());
-			invoiceCFDI.saveEx();
-
-		} catch (Exception e) {
-			throw new AdempiereException(e);
-		}
-
-	}
+	
 
 	private String getCFDIXML() {
 		try {
-			getToken();
-			final Source response = service.execute(invoiceCFDI,
+			service.getToken(documentCFDI, taxInfo.getPartnerID());
+			final Source response = service.execute(documentCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_QueryDocument);
-			String result = parse(response);
+			String result = service.parse(response);
 			String xml = result.substring(result.indexOf("<DatosXML>") + 10,
 					result.indexOf("</DatosXML>"));
 			CFDI = xml;
@@ -492,8 +627,8 @@ public final class LMXCFDI {
 			invoice.setDateInvoiced(invoiceDate);
 			invoice.setDateAcct(invoiceDate);
 			invoice.saveEx();
-			invoiceCFDI.setCFDISealingDate(fecha);
-			invoiceCFDI.saveEx();
+			documentCFDI.setCFDISealingDate(fecha);
+			documentCFDI.saveEx();
 		} catch (Exception e) {
 			throw new AdempiereException(e);
 		}
@@ -522,13 +657,21 @@ public final class LMXCFDI {
 	}
 
 	private String getUUID() {
-		return CFDI.substring(CFDI.indexOf("UUID=") + 6, CFDI
-				.indexOf("\" FechaTimbrado="));
+		
+		/*return CFDI.substring(CFDI.indexOf("UUID=") + 6, CFDI
+		.indexOf("\" FechaTimbrado="));*/
+		
+		String tmpString = CFDI.substring(CFDI.indexOf("UUID=") + 6);
+		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
 	private String getSeal() {
-		return CFDI.substring(CFDI.indexOf("sello=") + 7, CFDI
-				.indexOf("\" certificado="));
+		
+		/*return CFDI.substring(CFDI.indexOf("sello=") + 7, CFDI
+				.indexOf("\" certificado="));*/
+		
+		String tmpString = CFDI.substring(CFDI.indexOf("sello=") + 7);
+		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
 	private String getCFDI() {
@@ -538,25 +681,32 @@ public final class LMXCFDI {
 	private String getSealSAT() {
 
 		String tmpSeal = CFDI.substring(CFDI.indexOf("selloSAT=") + 10);
-		return tmpSeal.substring(0, tmpSeal.indexOf("\" xsi:schemaLocation="));
+		return tmpSeal.substring(0, tmpSeal.indexOf("\""));
 
 	}
 
 	private String getNoCertificateSAT() {
-		return CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18, CFDI
-				.indexOf("\" selloSAT="));
+		/*return CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18, CFDI
+				.indexOf("\" selloSAT="));*/
+		
+		String tmpString = CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18);
+		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
 	private String getDate() {
-		String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI
-				.indexOf("\" version="));
+		
+		/*String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI
+				.indexOf("\" version="));*/
+		
+		String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7);
+		fecha = fecha.substring(0, fecha.indexOf("\""));
 		fecha = fecha.replace("T", " ");
 		return fecha;
 	}
 
 	private String stampXML(String xml) {
 
-		getToken();
+		service.getToken(documentCFDI, taxInfo.getPartnerID());
 
 		String xmlF = "";
 		xml = cutAddenda(xml);
@@ -564,14 +714,18 @@ public final class LMXCFDI {
 
 		// xml = xml.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
 
-		invoiceCFDI.setCFDIXML(xml);
-		invoiceCFDI.saveEx();
+		documentCFDI.setCFDIXML(xml);
+		documentCFDI.saveEx();
 
 		try {
+			
+	        generateStamp(documentCFDI);            
 
-			final Source response = service.execute(invoiceCFDI,
+
+			final Source response = service.execute(documentCFDI,
 					MLMXVendorService.SOAPSERVICETYPE_GenerateStamp);
-			String stampXML = parse(response);
+			String stampXML = service.parse(response);
+			
 			if (stampXML.contains("![CDATA["))
 			{	
 				CFDI = stampXML.substring(stampXML.indexOf("![CDATA[") + 8,
@@ -582,13 +736,17 @@ public final class LMXCFDI {
 				CFDI = stampXML.substring(stampXML.indexOf("<DatosXML>") + 10,
 					stampXML.indexOf("</DatosXML>"));
 			}
+			else
+			{
+				CFDI = stampXML;
+			}
 
-			invoiceCFDI.setCFDIXML(CFDI);
-			invoiceCFDI.saveEx();
+			documentCFDI.setCFDIXML(CFDI);
+			documentCFDI.saveEx();
 
 			xmlF = pasteAddenda(stampXML);
 
-			invoiceCFDI.setCFDIUUID(getUUID());
+			documentCFDI.setCFDIUUID(getUUID());
 
 		} catch (Exception e) {
 			throw new AdempiereException(e.toString());
@@ -596,6 +754,8 @@ public final class LMXCFDI {
 
 		return xmlF;
 	}
+
+
 
 	private static String cleanResponse(String xml) {
 		if (xml.contains("![CDATA["))
@@ -685,43 +845,7 @@ public final class LMXCFDI {
 		return xml;
 	}
 
-	public String getToken() {
-
-		try {
-			Source response = service.execute(invoiceCFDI,
-					MLMXVendorService.SOAPSERVICETYPE_Token);
-			final String xml = parse(response);
-			String token = getElement(xml, "Token");
-			String toHash = String.format("%s|%s", taxInfo.getPartnerID(),
-					token);
-			byte[] as = toHash.getBytes("UTF-8");
-			String toHash2 = new String(as, "UTF-8");
-			SHA1 sha1 = new SHA1();
-			token = sha1.getHash(toHash2);
-			invoiceCFDI.setCFDIToken(token);
-			invoiceCFDI.saveEx();
-			return token;
-		} catch (NoSuchAlgorithmException ex) {
-			throw new AdempiereException(ex.getMessage());
-		} catch (Exception e) {
-			throw new AdempiereException(e.getMessage());
-		}
-	}
-
-	private static String parse(final Source response)
-			throws TransformerFactoryConfigurationError, TransformerException {
-		assert response != null;
-		final Transformer transformer = TransformerFactory.newInstance()
-				.newTransformer();
-
-		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF8");
-		final StringWriter writer = new StringWriter();
-		final StreamResult result = new StreamResult(writer);
-		transformer.transform(response, result);
-
-		String respxml = StringEscapeUtils.unescapeXml(writer.toString());
-		return respxml;
-	}
+	
 
 	private static void printResponse(final String response) {
 		System.out.println("reponse=\n" + response);
@@ -773,5 +897,116 @@ public final class LMXCFDI {
 	private String getRFC() {
 		return getTax().getC_BPartner().getTaxID();
 	}
+	
+	
+	
+	
+	private void generateStamp(MLMXDocument documentCFD) {
+		try {
+
+			String xml = documentCFD.getCFDIXML();
+
+            int ind = xml.indexOf("sello=\"") + 7;
+            String fp = xml.substring(0, ind);
+            String sp = xml.substring(ind, xml.length());
+
+            String sello = getSignedChain(m_Key_Store, stringCFDI, certificate.getPassword());
+            xml = fp + sello.replaceAll("\n", "").replaceAll("\r", "") + sp;
+
+            ind = xml.indexOf("certificado=\"") + 13;
+            fp = xml.substring(0, ind);
+            sp = xml.substring(ind, xml.length());
+            xml = fp + getCertificateBASE64Encoder(m_Key_Store).replaceAll("\n", "").replaceAll("\r", "") + sp;
+
+	        documentCFD.setCFDIXML(xml);
+	        documentCFD.saveEx();
+	        
+        } catch (Exception e) {
+            throw new AdempiereException("No se pudo generar sellado en este momento");
+        }
+	}
+	
+	
+    private static void setKeyStore(InputStream stream, String password) {
+        Security.addProvider(new BouncyCastleProvider());
+        KeyStore ks;
+        try {
+            ks = KeyStore.getInstance("PKCS12");
+            ks.load(stream, password.toCharArray()); 
+            m_Key_Store = ks;
+
+        } catch (Exception e) {
+        }
+    }
+    
+    private static String getSignedChain(KeyStore keystore, String original, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchProviderException {
+        String[] aliases = getAliasArray(keystore);
+        String alias = null;
+        for (int i = 0; i < aliases.length; i++) {
+            alias = aliases[i];
+        }
+
+        try {
+            PrivateKey priv = (PrivateKey) keystore.getKey(alias, password.toCharArray());
+
+
+            byte[] binary_chain = original.getBytes("UTF8");
+
+            Signature signature = Signature.getInstance("SHA1withRSA", "BC");
+            signature.initSign(priv);
+            signature.update(binary_chain);
+
+            byte[] binary_signature = signature.sign();
+
+            String signatureB64 = new BASE64Encoder().encode(binary_signature);
+            return signatureB64;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public static String getCertificateBASE64Encoder(KeyStore ks) throws CertificateEncodingException {
+        X509Certificate certificate = getCertificate(ks);
+
+        byte[] binary_certificate = certificate.getEncoded();
+        String signatureB64 = new BASE64Encoder().encode(binary_certificate);
+        return signatureB64;
+    }
+    
+    public static String[] getAliasArray(KeyStore keystore) {
+        Enumeration e = null;
+        try {
+            // List the aliases 
+            e = keystore.aliases();
+        } catch (KeyStoreException err) {
+        }
+        Vector v = new Vector();
+        while (e.hasMoreElements()) {
+            String alias = (String) e.nextElement();
+            v.addElement(alias);
+        }
+        String s[] = new String[v.size()];
+        v.copyInto(s);
+        return s;
+    }
+    
+    public static X509Certificate getCertificate(KeyStore ks) {
+        try {
+            String alias = getKeyStoreAlias(ks);
+            return (X509Certificate) ks.getCertificate(alias);
+        } catch (KeyStoreException e) {
+        }
+        return null;
+    }
+    
+    public static String getKeyStoreAlias(KeyStore s) {
+        String[] aliases = getAliasArray(s);
+        String alias = null;
+        for (int i = 0; i < aliases.length; i++) {
+            alias = aliases[i];
+            //System.out.print("Alias:"+ alias);
+        }
+        return alias;
+    }
 
 }

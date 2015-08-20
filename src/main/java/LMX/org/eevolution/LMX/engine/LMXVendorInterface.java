@@ -21,10 +21,18 @@ package org.eevolution.LMX.engine;
 import org.eevolution.LMX.model.MLMXDocument;
 
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
 /**
  * Created by e-Evolution on 26/12/13.
  */
 public interface LMXVendorInterface {
    public Source execute(MLMXDocument document , String typeService) throws Exception;
+   public String parse(final Source response)
+			throws TransformerFactoryConfigurationError, TransformerException;
+   
+   public void generateQR(MLMXDocument documentCFDI);
+   
+   public String getToken(MLMXDocument documentCFDI, String partnerID);
 }

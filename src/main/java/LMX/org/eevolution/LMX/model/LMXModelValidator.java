@@ -31,6 +31,7 @@ import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.util.CLogger;
 import org.eevolution.LMX.process.LMXCFDI;
+import org.eevolution.model.MHRPaySelectionCheck;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -81,6 +82,7 @@ public class LMXModelValidator implements ModelValidator
 		engine.addDocValidate(MInvoice.Table_Name, this);
 		//engine.addDocValidate(MInOut.Table_Name, this);
 		engine.addModelChange(MBPartner.Table_Name, this);
+		engine.addModelChange(MHRPaySelectionCheck.Table_Name, this);
 	}	//	initialize
 
     /**
@@ -89,6 +91,7 @@ public class LMXModelValidator implements ModelValidator
      *	when you called addModelChange for the table
      *	@param po persistent object
      *	@param type TYPE_
+     * @param MHRPaySelectionCheck 
      *	@return error message or null
      *	@exception Exception if the recipient wishes the change to be not accept.
      */
@@ -103,7 +106,20 @@ public class LMXModelValidator implements ModelValidator
 				invoice.setDateInvoiced(new Timestamp(System.currentTimeMillis()));
 			if(invoice.getDocAction() == "" && invoice.getDocStatus() == "")
 				invoice.setDateInvoiced(new Timestamp(System.currentTimeMillis()));
-		}	
+		}
+		else if(po.get_TableName().equals("HR_PaySelectionCheck") && (type == this.TYPE_AFTER_CHANGE || type == this.TYPE_AFTER_NEW))
+		{
+			
+			MHRPaySelectionCheck psck = (MHRPaySelectionCheck) po;
+			
+			if(psck.getC_Payment_ID()>0)
+			{
+				LMXCFDI cfdi = LMXCFDI.get();
+				cfdi.setPaySelection(psck);
+				cfdi.generate();
+			}
+		}
+		
 		return null;
 	}	//	modelChange
 	
@@ -131,6 +147,8 @@ public class LMXModelValidator implements ModelValidator
 				}
 			}
 		}
+		
+		
 		if (timing == this.TIMING_AFTER_REVERSECORRECT) {
 			if (po.get_TableName().equals(MInvoice.Table_Name))
 			{

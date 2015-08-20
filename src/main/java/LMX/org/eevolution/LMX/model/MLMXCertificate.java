@@ -23,6 +23,7 @@ import org.compiere.model.I_C_DocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
+import org.eevolution.model.MHRProcess;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -71,6 +72,17 @@ public class MLMXCertificate extends X_LMX_Certificate {
     public I_LMX_Vendor getVendorService(MInvoice invoice)
     {
         I_C_DocType docType = invoice.getC_DocType();
+
+        for (MLMXCertificateLine line : getLines())
+            if (line.getAD_Sequence_ID() == docType.getDocNoSequence_ID())
+                return line.getLMX_Vendor();
+
+        return null;
+    }
+    
+    public I_LMX_Vendor getVendorService(MHRProcess payrollprocess)
+    {
+        I_C_DocType docType = payrollprocess.getC_DocType();
 
         for (MLMXCertificateLine line : getLines())
             if (line.getAD_Sequence_ID() == docType.getDocNoSequence_ID())
