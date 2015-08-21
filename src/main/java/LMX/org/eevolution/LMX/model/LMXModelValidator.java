@@ -111,8 +111,18 @@ public class LMXModelValidator implements ModelValidator
 		{
 			
 			MHRPaySelectionCheck psck = (MHRPaySelectionCheck) po;
+			String whereClause = MLMXDocument.COLUMNNAME_AD_Table_ID + "=? AND " +
+								 MLMXDocument.COLUMNNAME_Record_ID + "=? AND " + 
+								 MLMXDocument.COLUMNNAME_IsCancelled + "<>?";
 			
-			if(psck.getC_Payment_ID()>0)
+			
+			int stampCount = new Query(po.getCtx(), MLMXDocument.Table_Name, whereClause, po.get_TrxName())
+			.setOnlyActiveRecords(true)
+			.setParameters(MHRPaySelectionCheck.Table_ID, po.get_ID(), 'Y')
+			.count();
+								
+			
+			if(psck.getC_Payment_ID()>0 && stampCount==0)
 			{
 				LMXCFDI cfdi = LMXCFDI.get();
 				cfdi.setPaySelection(psck);
