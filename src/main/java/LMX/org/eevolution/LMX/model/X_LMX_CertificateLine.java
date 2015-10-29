@@ -30,7 +30,7 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150816L;
+	private static final long serialVersionUID = 20151026L;
 
     /** Standard Constructor */
     public X_LMX_CertificateLine (Properties ctx, int LMX_CertificateLine_ID, String trxName)
@@ -39,8 +39,8 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
       /** if (LMX_CertificateLine_ID == 0)
         {
 			setAD_Sequence_ID (0);
-			setLMX_CertificateLine_ID (0);
 			setLMX_Certificate_ID (0);
+			setLMX_CertificateLine_ID (0);
 			setLMX_Vendor_ID (0);
         } */
     }
@@ -101,29 +101,6 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 		return ii.intValue();
 	}
 
-	/** Set MX Certificate Lines.
-		@param LMX_CertificateLine_ID 
-		MX Certificate Lines
-	  */
-	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID)
-	{
-		if (LMX_CertificateLine_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, Integer.valueOf(LMX_CertificateLine_ID));
-	}
-
-	/** Get MX Certificate Lines.
-		@return MX Certificate Lines
-	  */
-	public int getLMX_CertificateLine_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_CertificateLine_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public org.eevolution.LMX.model.I_LMX_Certificate getLMX_Certificate() throws RuntimeException
     {
 		return (org.eevolution.LMX.model.I_LMX_Certificate)MTable.get(getCtx(), org.eevolution.LMX.model.I_LMX_Certificate.Table_Name)
@@ -147,6 +124,29 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 	public int getLMX_Certificate_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Certificate_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set MX Certificate Lines.
+		@param LMX_CertificateLine_ID 
+		MX Certificate Lines
+	  */
+	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID)
+	{
+		if (LMX_CertificateLine_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, Integer.valueOf(LMX_CertificateLine_ID));
+	}
+
+	/** Get MX Certificate Lines.
+		@return MX Certificate Lines
+	  */
+	public int getLMX_CertificateLine_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_CertificateLine_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

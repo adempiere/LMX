@@ -21,6 +21,7 @@ package org.eevolution.LMX.model;
 
 import org.compiere.model.I_C_DocType;
 import org.compiere.model.MInvoice;
+import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
 import org.eevolution.model.MHRProcess;
@@ -69,10 +70,8 @@ public class MLMXCertificate extends X_LMX_Certificate {
         return certificateLines;
     }
 
-    public I_LMX_Vendor getVendorService(MInvoice invoice)
+    public I_LMX_Vendor getVendorService(I_C_DocType docType)
     {
-        I_C_DocType docType = invoice.getC_DocType();
-
         for (MLMXCertificateLine line : getLines())
             if (line.getAD_Sequence_ID() == docType.getDocNoSequence_ID())
                 return line.getLMX_Vendor();

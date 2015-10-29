@@ -30,7 +30,7 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150816L;
+	private static final long serialVersionUID = 20151026L;
 
     /** Standard Constructor */
     public X_LMX_Certificate (Properties ctx, int LMX_Certificate_ID, String trxName)
@@ -123,6 +123,20 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		return ii.intValue();
 	}
 
+	/** Set Certificate Password.
+		@param CertificatePass Certificate Password	  */
+	public void setCertificatePass (String CertificatePass)
+	{
+		set_Value (COLUMNNAME_CertificatePass, CertificatePass);
+	}
+
+	/** Get Certificate Password.
+		@return Certificate Password	  */
+	public String getCertificatePass () 
+	{
+		return (String)get_Value(COLUMNNAME_CertificatePass);
+	}
+
 	public org.compiere.model.I_C_Location getC_Location() throws RuntimeException
     {
 		return (org.compiere.model.I_C_Location)MTable.get(getCtx(), org.compiere.model.I_C_Location.Table_Name)
@@ -149,20 +163,6 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	/** Set Certificate Password.
-		@param CertificatePass Certificate Password	  */
-	public void setCertificatePass (String CertificatePass)
-	{
-		set_Value (COLUMNNAME_CertificatePass, CertificatePass);
-	}
-
-	/** Get Certificate Password.
-		@return Certificate Password	  */
-	public String getCertificatePass () 
-	{
-		return (String)get_Value(COLUMNNAME_CertificatePass);
 	}
 
 	/** Set Description.
@@ -239,6 +239,23 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		return (String)get_Value(COLUMNNAME_Name);
 	}
 
+	/** Set Password.
+		@param Password 
+		Password of any length (case sensitive)
+	  */
+	public void setPassword (String Password)
+	{
+		set_Value (COLUMNNAME_Password, Password);
+	}
+
+	/** Get Password.
+		@return Password of any length (case sensitive)
+	  */
+	public String getPassword () 
+	{
+		return (String)get_Value(COLUMNNAME_Password);
+	}
+
 	/** Set Public-Key Cryptography Standards File.
 		@param PKCS12_ID Public-Key Cryptography Standards File	  */
 	public void setPKCS12_ID (int PKCS12_ID)
@@ -257,22 +274,5 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	/** Set Password.
-		@param Password 
-		Password of any length (case sensitive)
-	  */
-	public void setPassword (String Password)
-	{
-		set_Value (COLUMNNAME_Password, Password);
-	}
-
-	/** Get Password.
-		@return Password of any length (case sensitive)
-	  */
-	public String getPassword () 
-	{
-		return (String)get_Value(COLUMNNAME_Password);
 	}
 }

@@ -30,7 +30,7 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150816L;
+	private static final long serialVersionUID = 20151026L;
 
     /** Standard Constructor */
     public X_LMX_Document (Properties ctx, int LMX_Document_ID, String trxName)

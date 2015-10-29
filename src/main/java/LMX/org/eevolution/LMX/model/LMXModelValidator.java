@@ -34,6 +34,7 @@ import org.eevolution.LMX.process.LMXCFDI;
 import org.eevolution.model.MHRPaySelectionCheck;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -111,21 +112,22 @@ public class LMXModelValidator implements ModelValidator
 		{
 			
 			MHRPaySelectionCheck psck = (MHRPaySelectionCheck) po;
-			String whereClause = MLMXDocument.COLUMNNAME_AD_Table_ID + "=? AND " +
-								 MLMXDocument.COLUMNNAME_Record_ID + "=? AND " + 
-								 MLMXDocument.COLUMNNAME_IsCancelled + "<>?";
+			/*List<Object> parameters = new ArrayList<Object>();
+			StringBuilder whereClause = new StringBuilder(MLMXDocument.COLUMNNAME_AD_Table_ID)
+					.append("=? AND ")
+					.append(MLMXDocument.COLUMNNAME_Record_ID).append("=?");
+
+			parameters.add(MHRPaySelectionCheck.Table_ID);
+			parameters.add(psck.get_ID());
 			
-			
-			int stampCount = new Query(po.getCtx(), MLMXDocument.Table_Name, whereClause, po.get_TrxName())
+			int paymentRecords = new Query(po.getCtx(), MLMXDocument.Table_Name, whereClause.toString(), po.get_TrxName())
 			.setOnlyActiveRecords(true)
-			.setParameters(MHRPaySelectionCheck.Table_ID, po.get_ID(), 'Y')
-			.count();
-								
-			
-			if(psck.getC_Payment_ID()>0 && stampCount==0)
+			.setParameters(parameters).*/
+
+			if(psck.getC_Payment_ID()>0)
 			{
 				LMXCFDI cfdi = LMXCFDI.get();
-				cfdi.setPaySelection(psck);
+				cfdi.setDocument(psck);
 				cfdi.generate();
 			}
 		}
@@ -152,7 +154,7 @@ public class LMXModelValidator implements ModelValidator
 				if(invoice.isSOTrx())
 				{	
 					LMXCFDI cdfdi = LMXCFDI.get();
-					cdfdi.setInvoice(invoice);
+					cdfdi.setDocument(invoice);
 					cdfdi.generate();
 				}
 			}

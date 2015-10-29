@@ -30,7 +30,7 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150816L;
+	private static final long serialVersionUID = 20151026L;
 
     /** Standard Constructor */
     public X_LMX_VendorService (Properties ctx, int LMX_VendorService_ID, String trxName)
@@ -70,29 +70,6 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
       return sb.toString();
     }
 
-	/** Set Vendor CFDI SOAP Service ID.
-		@param LMX_VendorService_ID 
-		Vendor CFDI SOAP Service ID
-	  */
-	public void setLMX_VendorService_ID (int LMX_VendorService_ID)
-	{
-		if (LMX_VendorService_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_LMX_VendorService_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_LMX_VendorService_ID, Integer.valueOf(LMX_VendorService_ID));
-	}
-
-	/** Get Vendor CFDI SOAP Service ID.
-		@return Vendor CFDI SOAP Service ID
-	  */
-	public int getLMX_VendorService_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_VendorService_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public org.eevolution.LMX.model.I_LMX_Vendor getLMX_Vendor() throws RuntimeException
     {
 		return (org.eevolution.LMX.model.I_LMX_Vendor)MTable.get(getCtx(), org.eevolution.LMX.model.I_LMX_Vendor.Table_Name)
@@ -116,6 +93,49 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
 	public int getLMX_Vendor_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Vendor_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Vendor CFDI SOAP Service ID.
+		@param LMX_VendorService_ID 
+		Vendor CFDI SOAP Service ID
+	  */
+	public void setLMX_VendorService_ID (int LMX_VendorService_ID)
+	{
+		if (LMX_VendorService_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_LMX_VendorService_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_LMX_VendorService_ID, Integer.valueOf(LMX_VendorService_ID));
+	}
+
+	/** Get Vendor CFDI SOAP Service ID.
+		@return Vendor CFDI SOAP Service ID
+	  */
+	public int getLMX_VendorService_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_VendorService_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Sequence.
+		@param SeqNo 
+		Method of ordering records; lowest number comes first
+	  */
+	public void setSeqNo (int SeqNo)
+	{
+		set_Value (COLUMNNAME_SeqNo, Integer.valueOf(SeqNo));
+	}
+
+	/** Get Sequence.
+		@return Method of ordering records; lowest number comes first
+	  */
+	public int getSeqNo () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_SeqNo);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -268,25 +288,5 @@ public class X_LMX_VendorService extends PO implements I_LMX_VendorService, I_Pe
 	public String getSOAPTargetNS () 
 	{
 		return (String)get_Value(COLUMNNAME_SOAPTargetNS);
-	}
-
-	/** Set Sequence.
-		@param SeqNo 
-		Method of ordering records; lowest number comes first
-	  */
-	public void setSeqNo (int SeqNo)
-	{
-		set_Value (COLUMNNAME_SeqNo, Integer.valueOf(SeqNo));
-	}
-
-	/** Get Sequence.
-		@return Method of ordering records; lowest number comes first
-	  */
-	public int getSeqNo () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_SeqNo);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
 	}
 }

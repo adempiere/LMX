@@ -31,7 +31,7 @@ public class X_LMX_Tax extends PO implements I_LMX_Tax, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150816L;
+	private static final long serialVersionUID = 20151026L;
 
     /** Standard Constructor */
     public X_LMX_Tax (Properties ctx, int LMX_Tax_ID, String trxName)
@@ -104,6 +104,34 @@ public class X_LMX_Tax extends PO implements I_LMX_Tax, I_Persistent
 		return ii.intValue();
 	}
 
+	public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException
+    {
+		return (org.compiere.model.I_C_BPartner)MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
+			.getPO(getC_BPartner_ID(), get_TrxName());	}
+
+	/** Set Business Partner .
+		@param C_BPartner_ID 
+		Identifies a Business Partner
+	  */
+	public void setC_BPartner_ID (int C_BPartner_ID)
+	{
+		if (C_BPartner_ID < 1) 
+			set_Value (COLUMNNAME_C_BPartner_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
+	}
+
+	/** Get Business Partner .
+		@return Identifies a Business Partner
+	  */
+	public int getC_BPartner_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_BPartner_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set CFDI Schema XML.
 		@param CFDISchema_ID 
 		CFDI Schema XML
@@ -122,29 +150,6 @@ public class X_LMX_Tax extends PO implements I_LMX_Tax, I_Persistent
 	public int getCFDISchema_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_CFDISchema_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set CFDI Transformer String XSLT.
-		@param CFDITransformerString_ID 
-		CFDI Transformer String XSLT
-	  */
-	public void setCFDITransformerString_ID (int CFDITransformerString_ID)
-	{
-		if (CFDITransformerString_ID < 1) 
-			set_Value (COLUMNNAME_CFDITransformerString_ID, null);
-		else 
-			set_Value (COLUMNNAME_CFDITransformerString_ID, Integer.valueOf(CFDITransformerString_ID));
-	}
-
-	/** Get CFDI Transformer String XSLT.
-		@return CFDI Transformer String XSLT
-	  */
-	public int getCFDITransformerString_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_CFDITransformerString_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -173,29 +178,24 @@ public class X_LMX_Tax extends PO implements I_LMX_Tax, I_Persistent
 		return ii.intValue();
 	}
 
-	public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException
-    {
-		return (org.compiere.model.I_C_BPartner)MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
-			.getPO(getC_BPartner_ID(), get_TrxName());	}
-
-	/** Set Business Partner .
-		@param C_BPartner_ID 
-		Identifies a Business Partner
+	/** Set CFDI Transformer String XSLT.
+		@param CFDITransformerString_ID 
+		CFDI Transformer String XSLT
 	  */
-	public void setC_BPartner_ID (int C_BPartner_ID)
+	public void setCFDITransformerString_ID (int CFDITransformerString_ID)
 	{
-		if (C_BPartner_ID < 1) 
-			set_Value (COLUMNNAME_C_BPartner_ID, null);
+		if (CFDITransformerString_ID < 1) 
+			set_Value (COLUMNNAME_CFDITransformerString_ID, null);
 		else 
-			set_Value (COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
+			set_Value (COLUMNNAME_CFDITransformerString_ID, Integer.valueOf(CFDITransformerString_ID));
 	}
 
-	/** Get Business Partner .
-		@return Identifies a Business Partner
+	/** Get CFDI Transformer String XSLT.
+		@return CFDI Transformer String XSLT
 	  */
-	public int getC_BPartner_ID () 
+	public int getCFDITransformerString_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_BPartner_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_CFDITransformerString_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.compiere.model.I_C_Invoice;
 import org.compiere.model.MInvoice;
+import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
@@ -69,18 +70,18 @@ public class RegenerateCFDI extends SvrProcess {
 		return "@OK@";
 	}
 
-	private void generateCFDI(MInvoice invoice) {
-		if (invoice.isSOTrx()) {
+	private void generateCFDI(PO po) {
+		if (po.get_ValueAsBoolean("IsSOTrx")) {
 			LMXCFDI cdfdi = LMXCFDI.get();
-			cdfdi.setInvoice(invoice);
+			cdfdi.setDocument(po);
 			cdfdi.generate();
 		}
 	}
 
-	private void cancelCFDI(MInvoice invoice) {
+	private void cancelCFDI(PO po) {
 		LMXCFDI cdfdi = LMXCFDI.get();
-		cdfdi.setInvoice(invoice);
-		cdfdi.cancel(invoice);
+		cdfdi.setDocument(po);
+		cdfdi.cancel(po);
 
 	}
 

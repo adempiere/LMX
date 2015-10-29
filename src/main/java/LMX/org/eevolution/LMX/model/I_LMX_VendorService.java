@@ -92,19 +92,6 @@ public interface I_LMX_VendorService
 	  */
 	public boolean isActive();
 
-    /** Column name LMX_VendorService_ID */
-    public static final String COLUMNNAME_LMX_VendorService_ID = "LMX_VendorService_ID";
-
-	/** Set Vendor CFDI SOAP Service ID.
-	  * Vendor CFDI SOAP Service ID
-	  */
-	public void setLMX_VendorService_ID (int LMX_VendorService_ID);
-
-	/** Get Vendor CFDI SOAP Service ID.
-	  * Vendor CFDI SOAP Service ID
-	  */
-	public int getLMX_VendorService_ID();
-
     /** Column name LMX_Vendor_ID */
     public static final String COLUMNNAME_LMX_Vendor_ID = "LMX_Vendor_ID";
 
@@ -119,6 +106,34 @@ public interface I_LMX_VendorService
 	public int getLMX_Vendor_ID();
 
 	public org.eevolution.LMX.model.I_LMX_Vendor getLMX_Vendor() throws RuntimeException;
+
+    /** Column name LMX_VendorService_ID */
+    public static final String COLUMNNAME_LMX_VendorService_ID = "LMX_VendorService_ID";
+
+	/** Set Vendor CFDI SOAP Service ID.
+	  * Vendor CFDI SOAP Service ID
+	  */
+	public void setLMX_VendorService_ID (int LMX_VendorService_ID);
+
+	/** Get Vendor CFDI SOAP Service ID.
+	  * Vendor CFDI SOAP Service ID
+	  */
+	public int getLMX_VendorService_ID();
+
+    /** Column name SeqNo */
+    public static final String COLUMNNAME_SeqNo = "SeqNo";
+
+	/** Set Sequence.
+	  * Method of ordering records;
+ lowest number comes first
+	  */
+	public void setSeqNo (int SeqNo);
+
+	/** Get Sequence.
+	  * Method of ordering records;
+ lowest number comes first
+	  */
+	public int getSeqNo();
 
     /** Column name SOAPAction */
     public static final String COLUMNNAME_SOAPAction = "SOAPAction";
@@ -223,21 +238,6 @@ public interface I_LMX_VendorService
 	  * SOAP TargetNS
 	  */
 	public String getSOAPTargetNS();
-
-    /** Column name SeqNo */
-    public static final String COLUMNNAME_SeqNo = "SeqNo";
-
-	/** Set Sequence.
-	  * Method of ordering records;
- lowest number comes first
-	  */
-	public void setSeqNo (int SeqNo);
-
-	/** Get Sequence.
-	  * Method of ordering records;
- lowest number comes first
-	  */
-	public int getSeqNo();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
