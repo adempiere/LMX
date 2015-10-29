@@ -8,9 +8,9 @@
   <!-- set global properties for this build -->
   <property file="build.properties"/>
   <!--import file="${adempiere.trunk}/utils_dev/properties.xml"/-->	
-  <property name="src" location="base/src:src/main/java/LMX"/>
+  <property name="src" location="base/src"/>
   <property name="srcZK" location="zkwebui/WEB-INF/classes"/>
-  <property name="srcSwing" location="${src}:client/src"/>
+  <property name="srcSwing" location="client/src"/>
   <property name="build" location="build"/>
   <property name="buildZK" location="buildZK"/>
   <property name="buildSwing" location="buildSwing"/>
@@ -37,6 +37,9 @@
   	<fileset dir="${adempiere.trunk}/zkwebui/WEB-INF/lib">
   	       <include name="*.jar"/>
    </fileset>
+   <fileset dir="lib">
+          <include name="*.jar"/>
+   </fileset>
   </path>
 
   <target name="init" depends="clean">
@@ -52,7 +55,7 @@
   <target name="compile" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.7" encoding="UTF-8" srcdir="${src}" destdir="${build}">
+    <javac  target="1.8" encoding="UTF-8" srcdir="${src}" destdir="${build}">
       <classpath refid="lib.class.path"/>
     </javac>
 
@@ -61,7 +64,7 @@
   <target name="compileZK" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.7" encoding="UTF-8" srcdir="${srcZK}" destdir="${buildZK}/WEB-INF/classes">
+    <javac  target="1.8" encoding="UTF-8" srcdir="${srcZK}" destdir="${buildZK}/WEB-INF/classes">
       <include name="**/org/adempiere/webui/**/*.java"/>
     	 <include name="**/org/adempiere/webui/apps/from/**/*.java"/>
       <include name="**/org/eevolution/form/**/*.java"/>
@@ -73,7 +76,7 @@
   <target name="compileSwing" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac  target="1.7" encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">
+    <javac  target="1.8"  encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">
        <classpath refid="lib.class.path"/>
     </javac>
 
@@ -103,12 +106,12 @@
  	 <jar jarfile="${dist}/lib/LMXzk.jar" basedir="${buildZK}"/>
 
     <!-- Create target Libero deployment -->
-    <mkdir dir="${env.ADEMPIERE_HOME}/lib/"/>
+    <mkdir dir="${adempiere.home}/lib/"/>
 
     <!-- Transfer customization.jar -->
-    <copy file="${dist}/lib/LMX.jar" todir="${env.ADEMPIERE_HOME}/lib"/>
+    <copy file="${dist}/lib/LMX.jar" todir="${adempiere.home}/lib"/>
     <copy file="${dist}/lib/LMX.jar" todir="${adempiere.trunk}/lib/"/>
- 	<copy file="${dist}/lib/LMXzk.jar" todir="${env.ADEMPIERE_HOME}/lib"/>
+ 	<copy file="${dist}/lib/LMXzk.jar" todir="${adempiere.home}/lib"/>
  	<copy file="${dist}/lib/LMXzk.jar" todir="${adempiere.trunk}/lib/"/>
 
   </target>
