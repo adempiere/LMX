@@ -408,7 +408,10 @@ public final class LMXCFDI {
 
 	private void createDocumentStamp() throws TransformerException, IOException,
 			SAXException, URISyntaxException {
-		
+
+		documentCFDI = MLMXDocument.get(document);
+		if (documentCFDI != null && !documentCFDI.getCFDIUUID().isEmpty())
+			return;
 
 		documentCFDI = new MLMXDocument(document.getCtx(),0, document.get_TrxName());
 		documentCFDI.setAD_Table_ID(document.get_Table_ID());
