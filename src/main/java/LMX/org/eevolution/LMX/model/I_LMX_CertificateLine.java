@@ -78,6 +78,21 @@ public interface I_LMX_CertificateLine
 
 	public org.compiere.model.I_AD_Sequence getAD_Sequence() throws RuntimeException;
 
+    /** Column name C_DocType_ID */
+    public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
+
+	/** Set Document Type.
+	  * Document type or rules
+	  */
+	public void setC_DocType_ID (int C_DocType_ID);
+
+	/** Get Document Type.
+	  * Document type or rules
+	  */
+	public int getC_DocType_ID();
+
+	public org.compiere.model.I_C_DocType getC_DocType() throws RuntimeException;
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -107,6 +122,19 @@ public interface I_LMX_CertificateLine
 	  */
 	public boolean isActive();
 
+    /** Column name LMX_CertificateLine_ID */
+    public static final String COLUMNNAME_LMX_CertificateLine_ID = "LMX_CertificateLine_ID";
+
+	/** Set MX Certificate Lines.
+	  * MX Certificate Lines
+	  */
+	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID);
+
+	/** Get MX Certificate Lines.
+	  * MX Certificate Lines
+	  */
+	public int getLMX_CertificateLine_ID();
+
     /** Column name LMX_Certificate_ID */
     public static final String COLUMNNAME_LMX_Certificate_ID = "LMX_Certificate_ID";
 
@@ -121,19 +149,6 @@ public interface I_LMX_CertificateLine
 	public int getLMX_Certificate_ID();
 
 	public org.eevolution.LMX.model.I_LMX_Certificate getLMX_Certificate() throws RuntimeException;
-
-    /** Column name LMX_CertificateLine_ID */
-    public static final String COLUMNNAME_LMX_CertificateLine_ID = "LMX_CertificateLine_ID";
-
-	/** Set MX Certificate Lines.
-	  * MX Certificate Lines
-	  */
-	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID);
-
-	/** Get MX Certificate Lines.
-	  * MX Certificate Lines
-	  */
-	public int getLMX_CertificateLine_ID();
 
     /** Column name LMX_Vendor_ID */
     public static final String COLUMNNAME_LMX_Vendor_ID = "LMX_Vendor_ID";

@@ -73,7 +73,7 @@ public class MLMXCertificate extends X_LMX_Certificate {
     public I_LMX_Vendor getVendorService(I_C_DocType docType)
     {
         for (MLMXCertificateLine line : getLines())
-            if (line.getAD_Sequence_ID() == docType.getDocNoSequence_ID())
+            if (line.getC_DocType_ID() == docType.getC_DocType_ID())
                 return line.getLMX_Vendor();
 
         return null;

@@ -61,8 +61,6 @@ import org.eevolution.LMX.engine.LMXVendorInterface;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportEngine;
 import org.eevolution.LMX.model.*;
-import org.eevolution.model.I_HR_PaySelectionCheck;
-import org.eevolution.model.X_HR_PaySelectionCheck;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -106,85 +104,6 @@ public final class LMXCFDI {
 	public LMXCFDI() {
 		certificate = MLMXCertificate.get();
 	}
-	
-	/*public void setDocument(MPaySelectionCheck document)
-	{
-		try
-		{
-			I_C_DocType docType = null;
-
-			if (document instanceof MPaySelectionCheck)
-			{
-				String sql = "SELECT p.C_DocType_ID FROM HR_PaySelectionCheck psc "
-						   + "INNER JOIN HR_PaySelection ps ON (psc.HR_PaySelection_ID=ps.HR_PaySelection_ID) "
-						   + "INNER JOIN HR_Process p ON (ps.HR_Process_ID=p.HR_Process_ID) WHERE psc.HR_PaySelectionCheck = ?";
-				int docTypeId = DB.getSQLValue(document.get_TrxName() , sql , document.get_ID());
-				docType = MDocType.get(document.getCtx() , docTypeId);
-			}
-			else
-			 	throw  new AdempiereException("El documento no es una selección de pago");
-
-			this.document = document;
-			taxInfo = MLMXTax.getTax(document.getCtx(), document.getAD_Org_ID(),
-					document.get_TrxName());
-			if (taxInfo == null)
-				throw new AdempiereException(
-						"No existe infomración de la compañia");
-			
-			if (addendaInfo == null)
-				addendaInfo = MLMXAddenda.getByBPartnerId(document.getCtx(), taxInfo
-						.getC_BPartner_ID(), document.get_TrxName());
-			
-			if (addendaInfo == null)
-				throw new AdempiereException(
-						"No hay esquema para comprobante Fiscal Digital");
-			
-			LMXVendorEngine engine = LMXVendorEngine.get();
-
-			
-			I_LMX_Vendor vendor = certificate.getVendorService(docType);
-			if (vendor == null)
-				return;
-			
-			service = engine.getLMXVendorFactory(vendor.getClassname());
-			if (service == null)
-				throw new AdempiereException("No existe ningun integrador");
-			
-			certificate = MLMXCertificate.get();
-			
-			PKCS12_CER = new ByteArrayInputStream(MImage.get(Env.getCtx(),
-					certificate.getPKCS12_ID()).getData());
-			
-	        setKeyStore(PKCS12_CER, certificate.getPassword());
-
-	        if (m_Key_Store == null) {
-	            throw new AdempiereException("La Llave PKCS12 no corresponde a la Clave del Certificado");
-	        }
-			
-			
-			CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(),
-					addendaInfo.getCFDISchema_ID()).getData());
-
-			CFDI_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(),
-					addendaInfo.getCFDITransformer_ID()).getData());
-			
-			CFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(
-					Env.getCtx(), addendaInfo.getCFDITransformerString_ID())
-					.getData());
-			CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(
-					Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
-
-			if (CFDI_ADDENDA_XSLT == null)
-				throw new AdempiereException(
-						"No hay esquema para Comprobante Fiscal Digital");
-			
-			
-		}
-		catch(Exception e)
-		{
-			throw new AdempiereException(e.getMessage());
-		}
-	}*/
 
 	public void setDocument(PO po) {
 
@@ -192,20 +111,9 @@ public final class LMXCFDI {
 			this.document = po;
 			I_C_DocType docType = null;
 
-			if (MInvoice.Table_Name.equals(document.get_TableName()))
-			{
-				int docTypeId = document.get_ValueAsInt(I_C_DocType.COLUMNNAME_C_DocType_ID);
-				docType = MDocType.get(document.getCtx() , docTypeId);
-			}
-			else if (X_HR_PaySelectionCheck.Table_Name.equals(document.get_TableName()))
-			{
-				String sql = "SELECT p.C_DocType_ID FROM HR_PaySelectionCheck psc "
-						+ "INNER JOIN HR_PaySelection ps ON (psc.HR_PaySelection_ID=ps.HR_PaySelection_ID) "
-						+ "INNER JOIN HR_Process p ON (ps.HR_Process_ID=p.HR_Process_ID) WHERE psc.HR_PaySelectionCheck_ID = ?";
-				int docTypeId = DB.getSQLValue(document.get_TrxName(), sql, document.get_ID());
-				docType = MDocType.get(document.getCtx() , docTypeId);
-			}
-			else
+			int docTypeId = document.get_ValueAsInt(I_C_DocType.COLUMNNAME_C_DocType_ID);
+			docType = MDocType.get(document.getCtx() , docTypeId);
+			if (docType == null)
 				throw  new AdempiereException("El documento no valido");
 
 			taxInfo = MLMXTax.getTax(document.getCtx(), document.getAD_Org_ID(),
@@ -232,7 +140,8 @@ public final class LMXCFDI {
 
 			I_LMX_Vendor vendor = certificate.getVendorService(docType);
 			if (vendor == null)
-				return;
+				throw new AdempiereException("No existe una implemetnación para el tipo de documento " + docType.getName());
+
 			service = engine.getLMXVendorFactory(vendor.getClassname());
 			if (service == null)
 				throw new AdempiereException("No existe ningun integrador");
@@ -268,16 +177,16 @@ public final class LMXCFDI {
 
 	}
 
-	public void generate() {
+	public MLMXDocument generate() {
 
 		try {
 			
 			if (document != null && document.get_ColumnIndex(I_C_Invoice.COLUMNNAME_DocStatus) > 0 &&
 				DocAction.STATUS_Reversed.equals(document.get_ValueAsString(I_C_Invoice.COLUMNNAME_DocStatus))) {
-				reverseInvoiceStamp(getReversal(document));
+				return reverseInvoiceStamp(getReversal(document));
 
 			} else
-				createDocumentStamp();
+				return createDocumentStamp();
 
 		} catch (Exception e) {
 			throw new AdempiereException(e.getMessage());
@@ -291,7 +200,7 @@ public final class LMXCFDI {
 				.get_TrxName());
 	}
 
-	public String reverseInvoiceStamp(PO reverseInvoice)
+	public MLMXDocument reverseInvoiceStamp(PO reverseInvoice)
 			throws Exception {
 		documentCFDI = MLMXDocument.get(reverseInvoice);
 		service.getToken(documentCFDI, taxInfo.getPartnerID());
@@ -318,7 +227,7 @@ public final class LMXCFDI {
 		documentCFDI.setIsCancelled(true);
 		documentCFDI.saveEx();
 		
-		return cancelXML;
+		return documentCFDI;
 
 	}
 
@@ -376,48 +285,21 @@ public final class LMXCFDI {
 		transform(new StreamSource(CFDI_ADDENDA_XSLT), new StreamSource(
 				new StringReader(CFDI)), new StreamResult(transformedCFDI));
 		return transformedCFDI.getBuffer().toString();
-
-		/*String doc = transformedCFDI.getBuffer().toString();
-		String nomina = "<nomina:Nomina xmlns:nomina=\"http://www.sat.gob.mx/nomina\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sat.gob.mx/nomina http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina11.xsd\" ";
-
-		if (doc.contains("nomina:Nomina"))
-		{
-			nomina = nomina + doc.substring(doc.indexOf("<nomina:Nomina") + 14 ,
-					doc.indexOf("</nomina:Nomina>") + 16);
-		}
-
-		// Schema Validation
-		/*String schemaLang = "http://www.w3.org/2001/XMLSchema";
-		// get validation driver:
-		SchemaFactory schema_factory = SchemaFactory.newInstance(schemaLang);
-		// create schema by reading it from an XSD file:
-		try {
-			Schema schema = schema_factory.newSchema(new StreamSource(CFDI_SCHEMA));
-			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(new StringReader(nomina)));
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
-
-		return doc.substring(0 , doc.indexOf("<nomina:Nomina")) + nomina + doc.substring(doc.indexOf("</nomina:Nomina>") + 16);
-		*/
-
 	}
 
-	private void createDocumentStamp() throws TransformerException, IOException,
+	private MLMXDocument createDocumentStamp() throws TransformerException, IOException,
 			SAXException, URISyntaxException {
 
 		documentCFDI = MLMXDocument.get(document);
-		if (documentCFDI != null && !documentCFDI.getCFDIUUID().isEmpty())
-			return;
-
-		documentCFDI = new MLMXDocument(document.getCtx(),0, document.get_TrxName());
-		documentCFDI.setAD_Table_ID(document.get_Table_ID());
-		documentCFDI.setRecord_ID(document.get_ID());
-		documentCFDI.setTaxID(getRFC());
-		documentCFDI.saveEx();
+		if (documentCFDI != null && documentCFDI.getCFDIUUID() != null && !documentCFDI.getCFDIUUID().isEmpty())
+			return documentCFDI;
+		else if (documentCFDI == null) {
+			documentCFDI = new MLMXDocument(document.getCtx(), 0, document.get_TrxName());
+			documentCFDI.setAD_Table_ID(document.get_Table_ID());
+			documentCFDI.setRecord_ID(document.get_ID());
+			documentCFDI.setTaxID(getRFC());
+			documentCFDI.saveEx();
+		}
 
 		// String tmpDir = System.getProperty("user.home");
 		// if (!tmpDir.endsWith(File.separator))
@@ -426,7 +308,7 @@ public final class LMXCFDI {
 
 		if (I_C_Invoice.Table_Name.equals(document.get_TableName()))
 			fileName = document.get_ValueAsString("DocumentNo");
-		if (I_HR_PaySelectionCheck.Table_Name.equals(document.get_TableName())) {
+		if (I_C_Payment.Table_Name.equals(document.get_TableName())) {
 			String taxId = DB.getSQLValueString(document.get_TrxName(),
 					"SELECT TaxID  FROM C_BPartner bp WHERE C_BPartner_ID=?", document.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID));
 			String documentNo = DB.getSQLValueString(document.get_TrxName(),
@@ -491,6 +373,7 @@ public final class LMXCFDI {
 		attachmentNote.setTitle(fileName);
 		attachmentNote.setTextMsg(getCFDI());
 		attachmentNote.saveEx();
+		return documentCFDI;
 	}
 
 	public static void main(String[] args) throws Exception {

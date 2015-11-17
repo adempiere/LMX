@@ -108,29 +108,6 @@ public class LMXModelValidator implements ModelValidator
 			if(invoice.getDocAction() == "" && invoice.getDocStatus() == "")
 				invoice.setDateInvoiced(new Timestamp(System.currentTimeMillis()));
 		}
-		else if(po.get_TableName().equals("HR_PaySelectionCheck") && (type == this.TYPE_AFTER_CHANGE || type == this.TYPE_AFTER_NEW))
-		{
-			
-			MHRPaySelectionCheck psck = (MHRPaySelectionCheck) po;
-			/*List<Object> parameters = new ArrayList<Object>();
-			StringBuilder whereClause = new StringBuilder(MLMXDocument.COLUMNNAME_AD_Table_ID)
-					.append("=? AND ")
-					.append(MLMXDocument.COLUMNNAME_Record_ID).append("=?");
-
-			parameters.add(MHRPaySelectionCheck.Table_ID);
-			parameters.add(psck.get_ID());
-			
-			int paymentRecords = new Query(po.getCtx(), MLMXDocument.Table_Name, whereClause.toString(), po.get_TrxName())
-			.setOnlyActiveRecords(true)
-			.setParameters(parameters).*/
-
-			if(psck.getC_Payment_ID()>0)
-			{
-				LMXCFDI cfdi = LMXCFDI.get();
-				cfdi.setDocument(psck);
-				cfdi.generate();
-			}
-		}
 		
 		return null;
 	}	//	modelChange

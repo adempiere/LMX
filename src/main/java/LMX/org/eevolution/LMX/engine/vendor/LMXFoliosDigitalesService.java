@@ -115,20 +115,22 @@ public String getXMLSealed(final String respxml) {
             NodeList returnList = body.getElementsByTagName("TimbrarPruebaCFDIResult");
             NodeList innerRes = returnList.item(0).getChildNodes();
             
-            boolean banderror = false;
+            boolean failed = false;
             
             respuesta = new String[innerRes.getLength()];
+			String messageError = null;
             
             for(int i = 0; i < innerRes.getLength(); i++) {
                 respuesta[i] = innerRes.item(i).getTextContent();
                 
-                if(i < 3 && !respuesta[i].equals("")) { // Entonces hubo un error
-                    banderror = true;
-                    System.out.println(respuesta[i]);
+                if(i < 3 && !respuesta[i].equals("")) {
+                    failed = true;
+					messageError = respuesta[i];
+					System.out.println(messageError);
                 }
             }
             
-            if(banderror) throw new Exception();
+            if(failed) throw new AdempiereException(messageError);
             
             respuesta[3] = StringEscapeUtils.unescapeXml(respuesta[3]);
             

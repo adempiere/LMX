@@ -37,6 +37,16 @@ public class MLMXDocument extends X_LMX_Document {
                 .setParameters(po.get_Table_ID() , po.get_ID())
                 .first();
     }
+    public static boolean isProcessed(PO po)
+    {
+        return new Query(po.getCtx() , Table_Name ,
+                  "AD_Table_ID=? AND " + I_LMX_Document.COLUMNNAME_Record_ID
+                + "=? AND " + I_LMX_Document.COLUMNNAME_CFDIUUID + " IS NOT NULL" ,  po.get_TrxName())
+                .setClient_ID()
+                .setParameters(po.get_Table_ID() , po.get_ID())
+                .match();
+    }
+
     public MLMXDocument(Properties ctx, int id, String trxName) {
         super(ctx, id, trxName);
     }
