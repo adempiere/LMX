@@ -120,7 +120,7 @@ public final class LMXCFDI {
 					document.get_TrxName());
 			if (taxInfo == null)
 				throw new AdempiereException(
-						"No existe infomración de la compañia");
+						"No existe infomración de la compañia para el timbrado");
 
 			if (addendaInfo == null)
 				addendaInfo = MLMXAddenda.getByBPartnerId(document.getCtx(), taxInfo
@@ -140,7 +140,7 @@ public final class LMXCFDI {
 
 			I_LMX_Vendor vendor = certificate.getVendorService(docType);
 			if (vendor == null)
-				throw new AdempiereException("No existe una implemetnación para el tipo de documento " + docType.getName());
+				throw new AdempiereException("No existe una implemetnación un PAC para el tipo de documento " + docType.getName());
 
 			service = engine.getLMXVendorFactory(vendor.getClassname());
 			if (service == null)
@@ -534,7 +534,7 @@ public final class LMXCFDI {
 			Date newDate = (Date) formatter.parse(date);
 			Timestamp dateDocument = new Timestamp(newDate.getTime());
 			if (document instanceof MInvoice) {
-				document.set_ValueOfColumn(I_C_Invoice.COLUMNNAME_DateOrdered, dateDocument);
+				document.set_ValueOfColumn(I_C_Invoice.COLUMNNAME_DateInvoiced , dateDocument);
 				document.set_ValueOfColumn(I_C_Invoice.COLUMNNAME_DateAcct, dateDocument);
 				document.saveEx();
 			}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="D" Name="Localización para México" ReleaseNo="1" SeqNo="1">
+  <Migration EntityType="D" Name="Localización para México" ReleaseNo="LMX#1.0.0" SeqNo="0">
     <Comments>Localización para Mexico para generar CFDI</Comments>
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="882" Action="I" Record_ID="50024" Table="AD_EntityType">
@@ -32541,18 +32541,6 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true" isOldNull="true"/>
       </PO>
     </Step>
-    <Step SeqNo="8580" StepType="AD">
-      <PO AD_Table_ID="101" Action="U" Record_ID="58700" Table="AD_Column">
-        <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="117" Column="DefaultValue" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="1179" Column="VFormat" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="3369" Column="AD_Process_ID" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="1692" Column="Callout" isNewNull="true" isOldNull="true"/>
-        <Data AD_Column_ID="54358" Column="InfoFactoryClass" isNewNull="true" isOldNull="true"/>
-      </PO>
-    </Step>
     <Step SeqNo="8590" StepType="AD">
       <PO AD_Table_ID="101" Action="U" Record_ID="58701" Table="AD_Column">
         <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true" isOldNull="true"/>
@@ -42670,10 +42658,10 @@ If you leave the search key empty, the system automatically creates a numeric nu
         <Data AD_Column_ID="726" Column="IsSecurityEnabled">false</Data>
         <Data AD_Column_ID="6125" Column="IsView">true</Data>
         <Data AD_Column_ID="108" Column="LoadSeq" isNewNull="true"/>
-        <Data AD_Column_ID="102" Column="Name">LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="102" Column="Name">LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="9342" Column="PO_Window_ID" isNewNull="true"/>
         <Data AD_Column_ID="9341" Column="ReplicationType">L</Data>
-        <Data AD_Column_ID="107" Column="TableName">LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="107" Column="TableName">LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="546" Column="Updated">2015-08-15 13:50:55.905</Data>
         <Data AD_Column_ID="547" Column="UpdatedBy">100</Data>
       </PO>
@@ -43042,13 +43030,13 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="3887" Column="CurrentNextSys">50000</Data>
         <Data AD_Column_ID="54272" Column="DateColumn" isNewNull="true"/>
         <Data AD_Column_ID="54309" Column="DecimalPattern" isNewNull="true"/>
-        <Data AD_Column_ID="347" Column="Description">Table LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="347" Column="Description">Table LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="2747" Column="IncrementNo">1</Data>
         <Data AD_Column_ID="349" Column="IsActive">true</Data>
         <Data AD_Column_ID="222" Column="IsAudited">false</Data>
         <Data AD_Column_ID="1188" Column="IsAutoSequence">true</Data>
         <Data AD_Column_ID="350" Column="IsTableID">true</Data>
-        <Data AD_Column_ID="216" Column="Name">LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="216" Column="Name">LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="223" Column="Prefix" isNewNull="true"/>
         <Data AD_Column_ID="225" Column="StartNewYear">false</Data>
         <Data AD_Column_ID="2746" Column="StartNo">1000000</Data>
@@ -45869,10 +45857,10 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="726" Column="IsSecurityEnabled">false</Data>
         <Data AD_Column_ID="6125" Column="IsView">true</Data>
         <Data AD_Column_ID="108" Column="LoadSeq" isNewNull="true"/>
-        <Data AD_Column_ID="102" Column="Name">LMX_Persepciones</Data>
+        <Data AD_Column_ID="102" Column="Name">LMX_Percepciones</Data>
         <Data AD_Column_ID="9342" Column="PO_Window_ID" isNewNull="true"/>
         <Data AD_Column_ID="9341" Column="ReplicationType">L</Data>
-        <Data AD_Column_ID="107" Column="TableName">LMX_Persepciones</Data>
+        <Data AD_Column_ID="107" Column="TableName">LMX_Percepciones</Data>
         <Data AD_Column_ID="546" Column="Updated">2015-08-15 13:53:09.081</Data>
         <Data AD_Column_ID="547" Column="UpdatedBy">100</Data>
       </PO>
@@ -46241,13 +46229,13 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="3887" Column="CurrentNextSys">50000</Data>
         <Data AD_Column_ID="54272" Column="DateColumn" isNewNull="true"/>
         <Data AD_Column_ID="54309" Column="DecimalPattern" isNewNull="true"/>
-        <Data AD_Column_ID="347" Column="Description">Table LMX_Persepciones</Data>
+        <Data AD_Column_ID="347" Column="Description">Table LMX_Percepciones</Data>
         <Data AD_Column_ID="2747" Column="IncrementNo">1</Data>
         <Data AD_Column_ID="349" Column="IsActive">true</Data>
         <Data AD_Column_ID="222" Column="IsAudited">false</Data>
         <Data AD_Column_ID="1188" Column="IsAutoSequence">true</Data>
         <Data AD_Column_ID="350" Column="IsTableID">true</Data>
-        <Data AD_Column_ID="216" Column="Name">LMX_Persepciones</Data>
+        <Data AD_Column_ID="216" Column="Name">LMX_Percepciones</Data>
         <Data AD_Column_ID="223" Column="Prefix" isNewNull="true"/>
         <Data AD_Column_ID="225" Column="StartNewYear">false</Data>
         <Data AD_Column_ID="2746" Column="StartNo">1000000</Data>
@@ -54258,7 +54246,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="4393" Column="Description" isNewNull="true"/>
         <Data AD_Column_ID="10032" Column="EntityType">LMX</Data>
         <Data AD_Column_ID="4387" Column="IsActive">true</Data>
-        <Data AD_Column_ID="4392" Column="Name">LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="4392" Column="Name">LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="4396" Column="OrderByClause" isNewNull="true"/>
         <Data AD_Column_ID="4390" Column="Updated">2015-08-15 13:59:26.86</Data>
         <Data AD_Column_ID="4391" Column="UpdatedBy">100</Data>
@@ -54290,7 +54278,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="7011" Column="IsStandardHeaderFooter">true</Data>
         <Data AD_Column_ID="7009" Column="IsTableBased">true</Data>
         <Data AD_Column_ID="50209" Column="JasperProcess_ID" isNewNull="true"/>
-        <Data AD_Column_ID="7019" Column="Name">LMX_DetallePersepciones</Data>
+        <Data AD_Column_ID="7019" Column="Name">LMX_DetallePercepciones</Data>
         <Data AD_Column_ID="8562" Column="PrinterName" isNewNull="true"/>
         <Data AD_Column_ID="7007" Column="Updated">2015-08-15 13:59:28.073</Data>
         <Data AD_Column_ID="7016" Column="UpdatedBy">100</Data>
@@ -57769,7 +57757,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="4393" Column="Description" isNewNull="true"/>
         <Data AD_Column_ID="10032" Column="EntityType">LMX</Data>
         <Data AD_Column_ID="4387" Column="IsActive">true</Data>
-        <Data AD_Column_ID="4392" Column="Name">LMX_Persepciones</Data>
+        <Data AD_Column_ID="4392" Column="Name">LMX_Percepciones</Data>
         <Data AD_Column_ID="4396" Column="OrderByClause" isNewNull="true"/>
         <Data AD_Column_ID="4390" Column="Updated">2015-08-15 14:02:12.619</Data>
         <Data AD_Column_ID="4391" Column="UpdatedBy">100</Data>
@@ -57911,7 +57899,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="7011" Column="IsStandardHeaderFooter">true</Data>
         <Data AD_Column_ID="7009" Column="IsTableBased">true</Data>
         <Data AD_Column_ID="50209" Column="JasperProcess_ID" isNewNull="true"/>
-        <Data AD_Column_ID="7019" Column="Name">LMX_Persepciones</Data>
+        <Data AD_Column_ID="7019" Column="Name">LMX_Percepciones</Data>
         <Data AD_Column_ID="8562" Column="PrinterName" isNewNull="true"/>
         <Data AD_Column_ID="7007" Column="Updated">2015-08-15 14:02:25.263</Data>
         <Data AD_Column_ID="7016" Column="UpdatedBy">100</Data>
