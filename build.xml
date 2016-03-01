@@ -17,7 +17,7 @@
   <property name="dist"  location="dist"/>
 
   <path id="lib.class.path">
-  	
+     <pathelement location="build"/>
   	 <pathelement location="${adempiere.trunk}/zkwebui/WEB-INF/classes"/>
      <fileset dir="${adempiere.trunk}/lib">
         <include name="*.jar"/>
@@ -73,7 +73,7 @@
 
   </target>
 
-  <target name="compileSwing" depends="init"
+  <target name="compileSwing" depends="init,compile"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
     <javac  target="1.8"  encoding="UTF-8" srcdir="${srcSwing}" destdir="${buildSwing}">

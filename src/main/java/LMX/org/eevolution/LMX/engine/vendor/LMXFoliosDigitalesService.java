@@ -67,7 +67,7 @@ public class LMXFoliosDigitalesService implements LMXVendorInterface {
 		String request = Env.parseVariable(service.getSOAPRequest(), document, document.get_TrxName(), true);
 		request = Env.parseVariable(request, m_vendor, m_vendor.get_TrxName(), false);
 		//request = request.replaceAll("\n", "");
-		System.out.println("Llamada del servicio :" + request);
+		//System.out.println("Llamada del servicio :" + request);
 		wsc.setRequest(request);
 		wsc.setBinding(service.getSOAPBinding());
 		wsc.setEndpointAddress(service.getSOAPEndpointAddress());
@@ -126,7 +126,7 @@ public String getXMLSealed(final String respxml) {
                 if(i < 3 && !respuesta[i].equals("")) {
                     failed = true;
 					messageError = respuesta[i];
-					System.out.println(messageError);
+					//System.out.println(messageError);
                 }
             }
             
