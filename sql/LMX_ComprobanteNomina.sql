@@ -4,15 +4,18 @@ SELECT 'es_MX' AS ad_language,
   process.ad_org_id,
   process.hr_process_id,
   partner.c_bpartner_id,
-       payselectioncheck.hr_payselectioncheck_id AS folio,
-       COALESCE(( SELECT sum(_movement.amount) AS sum
-                                                  FROM hr_payselectioncheck _payselectioncheck
-                                                  JOIN hr_payselection _payselection ON _payselectioncheck.hr_payselection_id = _payselection.hr_payselection_id
-                                                                                        JOIN hr_movement _movement ON _payselection.hr_process_id = _movement.hr_process_id AND _payselectioncheck.c_bpartner_id = _movement.c_bpartner_id
-                                                                                                                                                                                                                    JOIN hr_concept _concept ON _movement.hr_concept_id = _concept.hr_concept_id
-                                                                                                                                                                                                                                                         LEFT JOIN hr_concept_category _category ON _concept.hr_concept_category_id = _category.hr_concept_category_id
-                                                                                                                                                                                                                                                                                                                                               LEFT JOIN hr_concept_type _type ON _concept.hr_concept_type_id = _type.hr_concept_type_id
-                                                                                                                                                                                                                                                                                                                                                                                          WHERE _payselectioncheck.hr_payselectioncheck_id = payselectioncheck.hr_payselectioncheck_id AND _category.value::text = btrim('D'::text) AND _type.description::text = '002'::text AND _type.name::text = 'D002'::text), 0.0) AS totalimpuestosretenidos,
+  payselectioncheck.hr_payselectioncheck_id AS folio,
+  COALESCE(( SELECT sum(_movement.amount) AS sum
+              FROM hr_payselectioncheck _payselectioncheck
+              JOIN hr_payselection _payselection ON _payselectioncheck.hr_payselection_id = _payselection.hr_payselection_id
+              JOIN hr_movement _movement ON _payselection.hr_process_id = _movement.hr_process_id AND _payselectioncheck.c_bpartner_id = _movement.c_bpartner_id
+              JOIN hr_concept _concept ON _movement.hr_concept_id = _concept.hr_concept_id
+              LEFT JOIN hr_concept_category _category ON _concept.hr_concept_category_id = _category.hr_concept_category_id
+              LEFT JOIN hr_concept_type _type ON _concept.hr_concept_type_id = _type.hr_concept_type_id
+              WHERE
+              _payselectioncheck.hr_payselectioncheck_id = payselectioncheck.hr_payselectioncheck_id AND
+              _category.value::text = btrim('D'::text) AND _type.name::text = 'D002'::text), 0.0)
+              AS totalimpuestosretenidos,
        movement.amount AS total,
        movement.amount AS subtotal,
        'PESOS' AS moneda,
@@ -70,10 +73,10 @@ location_ext.internalno AS receptornointerior,
 partner.value AS numeroempleado,
 replace(employee.nationalcode::text, '-'::text, ''::text) AS curp,
 contract.value AS tiporegimen,
-to_char(COALESCE(period.startdate, payselection.paydate), 'yyyy-mm-dd'::text) AS fechapago,
-to_char(COALESCE(period.enddate, payselection.paydate), 'yyyy-mm-dd'::text) AS fechainicialpago,
-to_char(payselection.paydate, 'yyyy-mm-dd'::text) AS fechafinalpago,
-7 AS numdiaspagados,
+to_char(payselection.paydate, 'yyyy-mm-dd'::text) AS fechapago,
+to_char(period.startdate, 'yyyy-mm-dd'::text) AS fechainicialpago,
+to_char(period.enddate , 'yyyy-mm-dd'::text) AS fechafinalpago,
+daysbetween(period.startdate, period.enddate) AS numdiaspagados,
 department.name AS departamento,
 payroll.name AS periodicidadpago,
 certificate.documentno,

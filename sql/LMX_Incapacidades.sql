@@ -26,7 +26,7 @@ CREATE OR REPLACE VIEW LMX_Incapacidades AS
           WHERE
           _movement.HR_Process_ID = movement.HR_Process_ID AND
           _movement.C_BPartner_ID = movement.C_BPartner_ID AND
-          _concept.value IN ('DDT1','DDT2','DDT3')) , 0.0) AS descuento, -- D 006
+          _concept.value IN ('DDI1','DDI2','DDI3')) , 0.0) AS descuento, -- D 006
     payselectioncheck.hr_payselectioncheck_id
    FROM HR_PaySelectionCheck payselectioncheck
    INNER JOIN HR_PaySelection payselection ON (payselectioncheck.HR_PaySelection_ID=payselection.HR_PaySelection_ID)
