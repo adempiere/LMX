@@ -10,14 +10,14 @@ CREATE OR REPLACE VIEW LMX_Incapacidades AS
           WHERE
           _movement.HR_Movement_ID = movement.HR_Movement_ID), 0.0) AS diasincapacidad,
         CASE
-            WHEN concept.value = 'DT1' THEN 1 -- DI1 --'DIN_RT'
+            WHEN concept.value = 'DI1' THEN 1 -- DI1 --'DIN_RT'
             WHEN concept.value = 'DI2' THEN 2 -- DI2 -- 'DIN'
             WHEN concept.value = 'DI3' THEN 3 -- DI3 -- 'DIN_M'
             ELSE NULL
         END AS tipoincapacidad,
     COALESCE((SELECT
             CASE
-            WHEN _concept.value = 'DT1' THEN _movement.amount  -- DI1 --'DIN_RT'
+            WHEN _concept.value = 'DI1' THEN _movement.amount  -- DI1 --'DIN_RT'
             WHEN _concept.value = 'DI2' THEN _movement.amount  -- DI2 -- 'DIN'
             WHEN _concept.value = 'DI3' THEN _movement.amount  -- DI3 -- 'DIN_M'
             END
@@ -37,7 +37,7 @@ CREATE OR REPLACE VIEW LMX_Incapacidades AS
    LEFT JOIN HR_Concept_Type type ON (concept.HR_Concept_Type_ID=type.HR_Concept_Type_ID)
    WHERE movement.C_BPartner_ID = payselectioncheck.C_BPartner_ID
    AND movement.HR_Process_ID=payselection.HR_Process_ID
-   AND category.value = 'D' AND type.Description='006';
+   AND category.value = 'D' AND type.Name='D006';
 
 --ALTER TABLE adempiere.lmx_incapacidades
 --  OWNER TO adempiere;

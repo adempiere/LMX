@@ -40,7 +40,7 @@ CREATE OR REPLACE VIEW LMX_HorasExtra AS
    LEFT JOIN HR_Concept_Type type ON (concept.HR_Concept_Type_ID=type.HR_Concept_Type_ID)
    WHERE movement.C_BPartner_ID = payselectioncheck.C_BPartner_ID
    AND movement.HR_Process_ID=payselection.HR_Process_ID
-   AND category.value = 'P' AND type.Description='019';
+   AND category.value = 'P' AND type.Name ='P019';
 
 --ALTER TABLE adempiere.lmx_horasextra
 --  OWNER TO adempiere;
