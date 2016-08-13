@@ -20,9 +20,11 @@ package org.eevolution.LMX.engine;
 
 import org.eevolution.LMX.model.MLMXDocument;
 
+import javax.xml.soap.SOAPException;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
+import java.io.IOException;
 
 /**
  * Created by e-Evolution on 26/12/13.
@@ -30,7 +32,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 public interface LMXVendorInterface {
    public Source execute(MLMXDocument document , String typeService) throws Exception;
    public String parse(final Source response)
-			throws TransformerFactoryConfigurationError, TransformerException;
+           throws TransformerFactoryConfigurationError, TransformerException, IOException, SOAPException;
    
    public void generateQR(MLMXDocument documentCFDI);
    

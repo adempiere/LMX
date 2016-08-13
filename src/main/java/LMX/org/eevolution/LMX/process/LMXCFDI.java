@@ -211,7 +211,9 @@ public final class LMXCFDI {
 				.get_Table_ID(), documentCFDI.getLMX_Document_ID(), documentCFDI
 				.get_TrxName());
 		attachment.setTitle("Acuse de Recibo CFDI");
-		attachment.addEntry("Acuse de Recibo CFDI" + reverseInvoice.get_ValueAsString(I_C_Invoice.COLUMNNAME_DocumentNo) + ".xml", cancelXML
+		String fileName = "Acuse de Recibo CFDI" + reverseInvoice.get_ValueAsString(I_C_Invoice.COLUMNNAME_DocumentNo);
+		String CFDName = "CFD" + fileName +  ".xml";
+		attachment.addEntry(CFDName, cancelXML
 				.getBytes("UTF-8"));
 		attachment.addTextMsg(cancelXML);
 		attachment.saveEx();
@@ -315,9 +317,6 @@ public final class LMXCFDI {
 					"SELECT DocumentNo FROM C_Payment p WHERE p.C_Payment_ID = ?" , document.get_ValueAsInt(I_C_Payment.COLUMNNAME_C_Payment_ID));
 			fileName = taxId + documentNo;
 		}
-
-		String CFDName = "CFD" + fileName +  ".xml";
-		
 		String xmlCFDI = "";
 		
 		if(document != null)
@@ -361,7 +360,8 @@ public final class LMXCFDI {
 				.get_Table_ID(), documentCFDI.getLMX_Document_ID(), documentCFDI
 				.get_TrxName());
 		attachment.setTitle("CFD");
-		attachment.addEntry(fileName, getCFDI()
+		String CFDName = "CFD" + fileName +  ".xml";
+		attachment.addEntry(CFDName, getCFDI()
 				.getBytes("UTF-8"));
 		attachment.addTextMsg(stringCFDI);
 		attachment.saveEx();
@@ -486,7 +486,8 @@ public final class LMXCFDI {
 					documentCFDI.getLMX_Document_ID(), documentCFDI.get_TrxName());
 
 		attachment.setTitle("CFD");
-		attachment.addEntry("CFD" + fileName + ".xml", cdfdi
+		String CFDName = "CFD" + fileName +  ".xml";
+		attachment.addEntry(CFDName, cdfdi
 				.getCFDI().getBytes("UTF-8"));
 		attachment.addTextMsg(cdfdi.getOriginalString(cdfdi.getCFDI()));
 		attachment.saveEx();

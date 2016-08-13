@@ -20,12 +20,14 @@ package org.eevolution.LMX.engine.vendor;
 
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -82,7 +84,7 @@ public class LMXFoliosDigitalesService implements LMXVendorInterface {
 	}
 
 	public String parse(final Source response)
-			throws TransformerFactoryConfigurationError, TransformerException {
+			throws TransformerFactoryConfigurationError, TransformerException, IOException, SOAPException {
 		assert response != null;
 		final Transformer transformer = TransformerFactory.newInstance()
 				.newTransformer();
@@ -101,11 +103,10 @@ public class LMXFoliosDigitalesService implements LMXVendorInterface {
 		return respxml;
 	}
 
-public String getXMLSealed(final String respxml) {
+public String getXMLSealed(final String respxml) throws AdempiereException, IOException, SOAPException {
         
         String[] respuesta = null;
-        
-        try {
+
             MessageFactory factory = MessageFactory.newInstance();
             SOAPMessage message = factory.createMessage(
                     new MimeHeaders(),
@@ -130,18 +131,10 @@ public String getXMLSealed(final String respxml) {
                 }
             }
             
-            if(failed) throw new AdempiereException(messageError);
+            if(failed)
+				throw new AdempiereException(messageError);
             
             respuesta[3] = StringEscapeUtils.unescapeXml(respuesta[3]);
-            
-        }
-        catch(Exception e) {
-            e.getMessage();
-            e.printStackTrace();
-            
-            return null;
-        }
-        
         return respuesta[3];
     }
 
