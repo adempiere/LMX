@@ -8,7 +8,7 @@ SELECT payselectioncheck.AD_Client_ID,
     type.value AS TipoDeduccion,
     concept.hr_concept_id  AS Clave,
     concept.name AS ConceptoDescription,
-    CASE WHEN concept.IsTaxExempt = 'N' THEN movement.amount ELSE 0.0 END AS ImporteGravado,
+    CASE WHEN concept.IsTaxExempt = 'N' OR concept.IsTaxExempt IS NULL THEN movement.amount ELSE 0.0 END AS ImporteGravado,
     CASE WHEN concept.IsTaxExempt = 'Y' THEN movement.amount ELSE 0.0 END AS ImporteExento,
     payselectioncheck.HR_PaySelectionCheck_ID
    FROM HR_PaySelectionCheck payselectioncheck
@@ -20,7 +20,7 @@ SELECT payselectioncheck.AD_Client_ID,
    INNER JOIN HR_Concept_Category category ON (concept.HR_Concept_Category_ID = category.HR_Concept_Category_ID)
    INNER JOIN HR_Concept_Type type ON (concept.HR_Concept_Type_ID=type.HR_Concept_Type_ID)
   WHERE
-  TRIM(category.Value) = 'D' AND (movement.amount <> 0 OR  movement.amount IS NOT NULL)
+  TRIM(category.Value) = 'D' AND movement.amount >= 0
   --AND  payselectioncheck.HR_PaySelectionCheck_ID=1000345
   ;
 
