@@ -1,8 +1,9 @@
 /******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Product: ADempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 2006-2017 ADempiere Foundation, All Rights Reserved.         *
  * This program is free software, you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
+ * or (at your option) any later version.										*
  * by the Free Software Foundation. This program is distributed in the hope   *
  * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
@@ -11,8 +12,7 @@
  * with this program, if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * or via info@adempiere.net or http://www.adempiere.net/license.html         *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package org.eevolution.LMX.model;
@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_Certificate
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0 - $Id$ */
+ *  @version Release 3.9.0 - $Id$ */
 public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20151026L;
+	private static final long serialVersionUID = 20170613L;
 
     /** Standard Constructor */
     public X_LMX_Certificate (Properties ctx, int LMX_Certificate_ID, String trxName)
@@ -199,10 +199,8 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 		return (String)get_Value(COLUMNNAME_DocumentNo);
 	}
 
-	/** Set Localization México Certificate.
-		@param LMX_Certificate_ID 
-		Localization México Certificate
-	  */
+	/** Set Certificado de la compañia ID.
+		@param LMX_Certificate_ID Certificado de la compañia ID	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID)
 	{
 		if (LMX_Certificate_ID < 1) 
@@ -211,9 +209,8 @@ public class X_LMX_Certificate extends PO implements I_LMX_Certificate, I_Persis
 			set_ValueNoCheck (COLUMNNAME_LMX_Certificate_ID, Integer.valueOf(LMX_Certificate_ID));
 	}
 
-	/** Get Localization México Certificate.
-		@return Localization México Certificate
-	  */
+	/** Get Certificado de la compañia ID.
+		@return Certificado de la compañia ID	  */
 	public int getLMX_Certificate_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Certificate_ID);

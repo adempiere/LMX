@@ -1,8 +1,9 @@
 /******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Product: ADempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 2006-2017 ADempiere Foundation, All Rights Reserved.         *
  * This program is free software, you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
+ * or (at your option) any later version.										*
  * by the Free Software Foundation. This program is distributed in the hope   *
  * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
@@ -11,8 +12,7 @@
  * with this program, if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * or via info@adempiere.net or http://www.adempiere.net/license.html         *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package org.eevolution.LMX.model;
@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for LMX_CertificateLine
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0 - $Id$ */
+ *  @version Release 3.9.0 - $Id$ */
 public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20151117L;
+	private static final long serialVersionUID = 20170613L;
 
     /** Standard Constructor */
     public X_LMX_CertificateLine (Properties ctx, int LMX_CertificateLine_ID, String trxName)
@@ -39,8 +39,8 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
       /** if (LMX_CertificateLine_ID == 0)
         {
 			setC_DocType_ID (0);
-			setLMX_CertificateLine_ID (0);
 			setLMX_Certificate_ID (0);
+			setLMX_CertificateLine_ID (0);
 			setLMX_Vendor_ID (0);
         } */
     }
@@ -129,37 +129,14 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 		return ii.intValue();
 	}
 
-	/** Set MX Certificate Lines.
-		@param LMX_CertificateLine_ID 
-		MX Certificate Lines
-	  */
-	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID)
-	{
-		if (LMX_CertificateLine_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, Integer.valueOf(LMX_CertificateLine_ID));
-	}
-
-	/** Get MX Certificate Lines.
-		@return MX Certificate Lines
-	  */
-	public int getLMX_CertificateLine_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_CertificateLine_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public org.eevolution.LMX.model.I_LMX_Certificate getLMX_Certificate() throws RuntimeException
     {
 		return (org.eevolution.LMX.model.I_LMX_Certificate)MTable.get(getCtx(), org.eevolution.LMX.model.I_LMX_Certificate.Table_Name)
 			.getPO(getLMX_Certificate_ID(), get_TrxName());	}
 
-	/** Set Localization México Certificate.
+	/** Set Localization MÃ©xico Certificate.
 		@param LMX_Certificate_ID 
-		Localization México Certificate
+		Localization MÃ©xico Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID)
 	{
@@ -169,12 +146,32 @@ public class X_LMX_CertificateLine extends PO implements I_LMX_CertificateLine, 
 			set_ValueNoCheck (COLUMNNAME_LMX_Certificate_ID, Integer.valueOf(LMX_Certificate_ID));
 	}
 
-	/** Get Localization México Certificate.
-		@return Localization México Certificate
+	/** Get Localization MÃ©xico Certificate.
+		@return Localization MÃ©xico Certificate
 	  */
 	public int getLMX_Certificate_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Certificate_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Línea del Certificado de la compañia ID.
+		@param LMX_CertificateLine_ID Línea del Certificado de la compañia ID	  */
+	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID)
+	{
+		if (LMX_CertificateLine_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_LMX_CertificateLine_ID, Integer.valueOf(LMX_CertificateLine_ID));
+	}
+
+	/** Get Línea del Certificado de la compañia ID.
+		@return Línea del Certificado de la compañia ID	  */
+	public int getLMX_CertificateLine_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_CertificateLine_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

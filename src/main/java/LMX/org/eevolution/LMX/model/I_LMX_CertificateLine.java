@@ -1,8 +1,9 @@
 /******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Product: ADempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 2006-2017 ADempiere Foundation, All Rights Reserved.         *
  * This program is free software, you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
+ * or (at your option) any later version.										*
  * by the Free Software Foundation. This program is distributed in the hope   *
  * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
@@ -11,8 +12,7 @@
  * with this program, if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * or via info@adempiere.net or http://www.adempiere.net/license.html         *
  *****************************************************************************/
 package org.eevolution.LMX.model;
 
@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_CertificateLine
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0
+ *  @version Release 3.9.0
  */
 public interface I_LMX_CertificateLine 
 {
@@ -122,33 +122,29 @@ public interface I_LMX_CertificateLine
 	  */
 	public boolean isActive();
 
-    /** Column name LMX_CertificateLine_ID */
-    public static final String COLUMNNAME_LMX_CertificateLine_ID = "LMX_CertificateLine_ID";
-
-	/** Set MX Certificate Lines.
-	  * MX Certificate Lines
-	  */
-	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID);
-
-	/** Get MX Certificate Lines.
-	  * MX Certificate Lines
-	  */
-	public int getLMX_CertificateLine_ID();
-
     /** Column name LMX_Certificate_ID */
     public static final String COLUMNNAME_LMX_Certificate_ID = "LMX_Certificate_ID";
 
-	/** Set Localization México Certificate.
-	  * Localization México Certificate
+	/** Set Localization MÃ©xico Certificate.
+	  * Localization MÃ©xico Certificate
 	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID);
 
-	/** Get Localization México Certificate.
-	  * Localization México Certificate
+	/** Get Localization MÃ©xico Certificate.
+	  * Localization MÃ©xico Certificate
 	  */
 	public int getLMX_Certificate_ID();
 
 	public org.eevolution.LMX.model.I_LMX_Certificate getLMX_Certificate() throws RuntimeException;
+
+    /** Column name LMX_CertificateLine_ID */
+    public static final String COLUMNNAME_LMX_CertificateLine_ID = "LMX_CertificateLine_ID";
+
+	/** Set Línea del Certificado de la compañia ID	  */
+	public void setLMX_CertificateLine_ID (int LMX_CertificateLine_ID);
+
+	/** Get Línea del Certificado de la compañia ID	  */
+	public int getLMX_CertificateLine_ID();
 
     /** Column name LMX_Vendor_ID */
     public static final String COLUMNNAME_LMX_Vendor_ID = "LMX_Vendor_ID";

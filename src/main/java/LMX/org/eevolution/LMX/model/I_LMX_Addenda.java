@@ -1,8 +1,9 @@
 /******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Product: ADempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 2006-2017 ADempiere Foundation, All Rights Reserved.         *
  * This program is free software, you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
+ * or (at your option) any later version.										*
  * by the Free Software Foundation. This program is distributed in the hope   *
  * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
@@ -11,8 +12,7 @@
  * with this program, if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * or via info@adempiere.net or http://www.adempiere.net/license.html         *
  *****************************************************************************/
 package org.eevolution.LMX.model;
 
@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LMX_Addenda
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0
+ *  @version Release 3.9.0
  */
 public interface I_LMX_Addenda 
 {
@@ -93,6 +93,19 @@ public interface I_LMX_Addenda
 
 	public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException;
 
+    /** Column name CFDIADTransformer_ID */
+    public static final String COLUMNNAME_CFDIADTransformer_ID = "CFDIADTransformer_ID";
+
+	/** Set CFDI ADempiere Transformer XSLT.
+	  * CFDI ADempiere Transformer XSLT
+	  */
+	public void setCFDIADTransformer_ID (int CFDIADTransformer_ID);
+
+	/** Get CFDI ADempiere Transformer XSLT.
+	  * CFDI ADempiere Transformer XSLT
+	  */
+	public int getCFDIADTransformer_ID();
+
     /** Column name CFDISchema_ID */
     public static final String COLUMNNAME_CFDISchema_ID = "CFDISchema_ID";
 
@@ -105,19 +118,6 @@ public interface I_LMX_Addenda
 	  * CFDI Schema XML
 	  */
 	public int getCFDISchema_ID();
-
-    /** Column name CFDITransformerAD_ID */
-    public static final String COLUMNNAME_CFDITransformerAD_ID = "CFDITransformerAD_ID";
-
-	/** Set CFDI ADempiere Transformer XSLT.
-	  * CFDI ADempiere Transformer XSLT
-	  */
-	public void setCFDITransformerAD_ID (int CFDITransformerAD_ID);
-
-	/** Get CFDI ADempiere Transformer XSLT.
-	  * CFDI ADempiere Transformer XSLT
-	  */
-	public int getCFDITransformerAD_ID();
 
     /** Column name CFDITransformer_ID */
     public static final String COLUMNNAME_CFDITransformer_ID = "CFDITransformer_ID";
@@ -190,14 +190,10 @@ public interface I_LMX_Addenda
     /** Column name LMX_Addenda_ID */
     public static final String COLUMNNAME_LMX_Addenda_ID = "LMX_Addenda_ID";
 
-	/** Set Localization MÃ©xico Addenda.
-	  * Localization MÃ©xico Addenda
-	  */
+	/** Set Información de la  addenda ID	  */
 	public void setLMX_Addenda_ID (int LMX_Addenda_ID);
 
-	/** Get Localization MÃ©xico Addenda.
-	  * Localization MÃ©xico Addenda
-	  */
+	/** Get Información de la  addenda ID	  */
 	public int getLMX_Addenda_ID();
 
     /** Column name Name */

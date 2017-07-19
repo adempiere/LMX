@@ -1,8 +1,9 @@
 /******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Product: ADempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 2006-2017 ADempiere Foundation, All Rights Reserved.         *
  * This program is free software, you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
+ * or (at your option) any later version.										*
  * by the Free Software Foundation. This program is distributed in the hope   *
  * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
@@ -11,8 +12,7 @@
  * with this program, if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * or via info@adempiere.net or http://www.adempiere.net/license.html         *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package org.eevolution.LMX.model;
@@ -24,14 +24,14 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for LMX_Addenda
  *  @author Adempiere (generated) 
- *  @version Release 3.8.0 - $Id$ */
+ *  @version Release 3.9.0 - $Id$ */
 public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20151026L;
+	private static final long serialVersionUID = 20170613L;
 
     /** Standard Constructor */
     public X_LMX_Addenda (Properties ctx, int LMX_Addenda_ID, String trxName)
@@ -128,6 +128,29 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 		return ii.intValue();
 	}
 
+	/** Set CFDI ADempiere Transformer XSLT.
+		@param CFDIADTransformer_ID 
+		CFDI ADempiere Transformer XSLT
+	  */
+	public void setCFDIADTransformer_ID (int CFDIADTransformer_ID)
+	{
+		if (CFDIADTransformer_ID < 1) 
+			set_Value (COLUMNNAME_CFDIADTransformer_ID, null);
+		else 
+			set_Value (COLUMNNAME_CFDIADTransformer_ID, Integer.valueOf(CFDIADTransformer_ID));
+	}
+
+	/** Get CFDI ADempiere Transformer XSLT.
+		@return CFDI ADempiere Transformer XSLT
+	  */
+	public int getCFDIADTransformer_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_CFDIADTransformer_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set CFDI Schema XML.
 		@param CFDISchema_ID 
 		CFDI Schema XML
@@ -146,29 +169,6 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	public int getCFDISchema_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_CFDISchema_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set CFDI ADempiere Transformer XSLT.
-		@param CFDITransformerAD_ID 
-		CFDI ADempiere Transformer XSLT
-	  */
-	public void setCFDITransformerAD_ID (int CFDITransformerAD_ID)
-	{
-		if (CFDITransformerAD_ID < 1) 
-			set_Value (COLUMNNAME_CFDITransformerAD_ID, null);
-		else 
-			set_Value (COLUMNNAME_CFDITransformerAD_ID, Integer.valueOf(CFDITransformerAD_ID));
-	}
-
-	/** Get CFDI ADempiere Transformer XSLT.
-		@return CFDI ADempiere Transformer XSLT
-	  */
-	public int getCFDITransformerAD_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_CFDITransformerAD_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -237,10 +237,8 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	/** Set Localization MÃ©xico Addenda.
-		@param LMX_Addenda_ID 
-		Localization MÃ©xico Addenda
-	  */
+	/** Set Información de la  addenda ID.
+		@param LMX_Addenda_ID Información de la  addenda ID	  */
 	public void setLMX_Addenda_ID (int LMX_Addenda_ID)
 	{
 		if (LMX_Addenda_ID < 1) 
@@ -249,9 +247,8 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 			set_ValueNoCheck (COLUMNNAME_LMX_Addenda_ID, Integer.valueOf(LMX_Addenda_ID));
 	}
 
-	/** Get Localization MÃ©xico Addenda.
-		@return Localization MÃ©xico Addenda
-	  */
+	/** Get Información de la  addenda ID.
+		@return Información de la  addenda ID	  */
 	public int getLMX_Addenda_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_LMX_Addenda_ID);

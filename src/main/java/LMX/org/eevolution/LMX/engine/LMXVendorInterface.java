@@ -18,6 +18,7 @@
 
 package org.eevolution.LMX.engine;
 
+import org.compiere.model.PO;
 import org.eevolution.LMX.model.MLMXDocument;
 
 import javax.xml.soap.SOAPException;
@@ -31,10 +32,9 @@ import java.io.IOException;
  */
 public interface LMXVendorInterface {
    public Source execute(MLMXDocument document , String typeService) throws Exception;
-   public String parse(final Source response)
-           throws TransformerFactoryConfigurationError, TransformerException, IOException, SOAPException;
-   
-   public void generateQR(MLMXDocument documentCFDI);
-   
-   public String getToken(MLMXDocument documentCFDI, String partnerID);
+   public void setDocument(PO document);
+   public void getQR(MLMXDocument documentCFDI);
+   public void getToken(MLMXDocument documentCFDI);
+   public void getCFDI(MLMXDocument documentCFDI);
+   public void getCancelCFDI(MLMXDocument documentCFID);
 }

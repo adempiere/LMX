@@ -39,6 +39,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.adempiere.exceptions.AdempiereException;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.compiere.model.PO;
 import org.compiere.util.Env;
 import org.eevolution.LMX.engine.LMXVendorInterface;
 import org.eevolution.LMX.engine.LMXVendorServiceInterface;
@@ -83,23 +84,15 @@ public class LMXFoliosDigitalesService implements LMXVendorInterface {
 		return response;
 	}
 
-	public String parse(final Source response)
-			throws TransformerFactoryConfigurationError, TransformerException, IOException, SOAPException {
+	public String parse(final Source response) throws TransformerFactoryConfigurationError, TransformerException, IOException, SOAPException {
 		assert response != null;
-		final Transformer transformer = TransformerFactory.newInstance()
-				.newTransformer();
-
+		final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF8");
 		final StringWriter writer = new StringWriter();
 		final StreamResult result = new StreamResult(writer);
 		transformer.transform(response, result);
-
-		//String respxml = StringEscapeUtils.unescapeXml(writer.toString());
         String respxml = "";
-        
         respxml = getXMLSealed(writer.toString());
-
-
 		return respxml;
 	}
 
@@ -140,12 +133,25 @@ public String getXMLSealed(final String respxml) throws AdempiereException, IOEx
 
 
 	@Override
-	public void generateQR(MLMXDocument documentCFDI) {
+	public void setDocument(PO document) {
+
+	}
+
+	public void getQR(MLMXDocument document) {
 
 	}
 
 	@Override
-	public String getToken(MLMXDocument documentCFDI, String partnerID) {
-		return "No Supported";
+	public void getToken(MLMXDocument document) {
+
+	}
+
+
+	public void getCFDI(MLMXDocument document) {
+
+	}
+
+	public void getCancelCFDI(MLMXDocument document) {
+
 	}
 }
