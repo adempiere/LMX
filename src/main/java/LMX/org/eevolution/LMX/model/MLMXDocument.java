@@ -18,7 +18,6 @@
 
 package org.eevolution.LMX.model;
 
-import org.compiere.model.MInvoice;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 

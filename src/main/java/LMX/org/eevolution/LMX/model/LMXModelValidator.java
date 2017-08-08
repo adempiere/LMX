@@ -18,8 +18,6 @@
 package org.eevolution.LMX.model;
 
 
-import org.compiere.model.MAttachment;
-import org.compiere.model.MAttachmentNote;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MClient;
 import org.compiere.model.MDocType;
@@ -28,14 +26,11 @@ import org.compiere.model.MSequence;
 import org.compiere.model.ModelValidationEngine;
 import org.compiere.model.ModelValidator;
 import org.compiere.model.PO;
-import org.compiere.model.Query;
 import org.compiere.util.CLogger;
 import org.eevolution.LMX.process.LMXCFDI;
 import org.eevolution.model.MHRPaySelectionCheck;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**

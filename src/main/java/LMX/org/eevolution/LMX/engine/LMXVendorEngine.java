@@ -53,7 +53,7 @@ public final class LMXVendorEngine {
      */
     public LMXVendorInterface getLMXVendorFactory(String className) {
         if (m_VendorService.containsKey(className)) {
-            return (LMXVendorInterface) m_VendorService.get(className);
+            return m_VendorService.get(className);
         }
 
         try {

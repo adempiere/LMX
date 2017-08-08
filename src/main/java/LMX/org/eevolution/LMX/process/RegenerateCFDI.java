@@ -107,8 +107,10 @@ public class RegenerateCFDI extends SvrProcess {
 		}
 
 		return new Query(getCtx(), I_C_Invoice.Table_Name, whereClause
-				.toString(), get_TrxName()).setClient_ID().setParameters(
-						parameters).list();
+				.toString(), get_TrxName())
+				.setClient_ID()
+				.setParameters(parameters)
+				.list();
 	}
 
 }

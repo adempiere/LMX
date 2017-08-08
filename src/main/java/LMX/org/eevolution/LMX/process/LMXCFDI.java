@@ -182,8 +182,7 @@ public final class LMXCFDI {
 
 		try {
 			
-			if (document != null && document.get_ColumnIndex(I_C_Invoice.COLUMNNAME_DocStatus) > 0 &&
-				DocAction.STATUS_Reversed.equals(document.get_ValueAsString(I_C_Invoice.COLUMNNAME_DocStatus)))
+			if (document.get_ColumnIndex(MInvoice.COLUMNNAME_Reversal_ID) > 0  && document.get_ValueAsInt(MInvoice.COLUMNNAME_Reversal_ID) > 0)
 				return cancelCFDI(getReversal(document));
 			else
 				return createCFDI();

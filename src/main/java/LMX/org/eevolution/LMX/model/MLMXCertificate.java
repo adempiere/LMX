@@ -20,8 +20,6 @@ package org.eevolution.LMX.model;
 
 
 import org.compiere.model.I_C_DocType;
-import org.compiere.model.MInvoice;
-import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
 import org.eevolution.model.MHRProcess;

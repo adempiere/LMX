@@ -38,6 +38,7 @@ public class MLMXTax extends X_LMX_Tax {
         StringBuilder whereClause = new StringBuilder();
         whereClause.append("AD_Tree_Org_ID IN(SELECT AD_Tree_ID FROM AD_Tree WHERE AD_Tree_ID IN (SELECT AD_Tree_ID FROM AD_TreeNode WHERE  Node_ID = ?) AND TreeType = 'OO')");
         m_tax = new Query(ctx, MLMXTax.Table_Name, whereClause.toString(), trxName)
+                .setClient_ID()
                 .setParameters(AD_Org_ID)
                 .first();
        return m_tax;

@@ -32,6 +32,7 @@ public class MLMXAddenda extends X_LMX_Addenda {
     {
         return new Query(ctx, MLMXAddenda.Table_Name, "C_BPartner_ID=?", trxName)
                 .setParameters(C_BPartner_ID)
+                .setClient_ID()
                 .setOnlyActiveRecords(true)
                 .first();
     }
