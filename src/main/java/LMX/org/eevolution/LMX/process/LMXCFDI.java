@@ -98,22 +98,25 @@ public final class LMXCFDI {
 	private static MLMXDocument documentCFDI = null;
     private static KeyStore keyStore = null;
     private static String stringCFDI = "";
+	private static CCache<Integer , LMXCFDI> cfdiCache = new CCache<>("LMXCFDI" , 5 , 1440);
 
 
-	/**
-	 * get WMRule Engine like singleton instance
-	 * 
-	 * @return WM Rule Engine
-	 */
+	/***
+	* get WMRule Engine like singleton instance
+	*
+	* @return WM Rule Engine
+	**/
 	public static LMXCFDI get() {
-		if (instance == null)
+		Integer clientId = Env.getAD_Client_ID(Env.getCtx());
+		if (cfdiCache.containsKey(clientId))
+			instance = cfdiCache.get(clientId);
+		else {
 			instance = new LMXCFDI();
+			cfdiCache.put(clientId , instance);
+		}
 		return instance;
 	}
 
-	public LMXCFDI() {
-		certificate = MLMXCertificate.get();
-	}
 
 	public void setDocument(PO po) {
 
