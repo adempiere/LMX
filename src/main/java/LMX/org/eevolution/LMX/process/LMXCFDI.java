@@ -117,6 +117,10 @@ public final class LMXCFDI {
 		return instance;
 	}
 
+	public LMXCFDI() {
+		certificate = MLMXCertificate.get();
+	}
+
 
 	public void setDocument(PO po) {
 
@@ -184,12 +188,22 @@ public final class LMXCFDI {
 	public MLMXDocument generate() {
 
 		try {
-			
-			if (document.get_ColumnIndex(MInvoice.COLUMNNAME_Reversal_ID) > 0  && document.get_ValueAsInt(MInvoice.COLUMNNAME_Reversal_ID) > 0)
-				return cancelCFDI(getReversal(document));
-			else
-				return createCFDI();
-
+			if (document != null && document.get_Table_ID() == MInvoice.Table_ID) {
+				MInvoice invoice = (MInvoice) document;
+				if (invoice.isReversal())
+					return cancelCFDI(getReversal(document));
+				else
+					return createCFDI();
+			}
+			else if (document != null && document.get_Table_ID() == MPayment.Table_ID)
+			{
+				MPayment payment = (MPayment) document;
+				if (payment.isReversal())
+					return cancelCFDI(getReversal(document));
+				else
+					return createCFDI();
+			}
+			return null;
 		} catch (Exception e) {
 			throw new AdempiereException(e.getMessage());
 		}

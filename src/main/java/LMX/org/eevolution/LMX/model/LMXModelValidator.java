@@ -72,7 +72,7 @@ public class LMXModelValidator implements ModelValidator
 		else  {
 			log.info("Initializing global validator: "+this.toString());
 		}
-		System.err.println("======================================= monitor");
+
 		//	Tables to be monitored
 		engine.addModelChange(MInvoice.Table_Name, this);
 		engine.addDocValidate(MInvoice.Table_Name, this);
