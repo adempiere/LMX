@@ -57,7 +57,7 @@ public class MLMXCertificate extends X_LMX_Certificate {
 
     public List<MLMXCertificateLine> getLines() {
 
-        if (certificateLines != null)
+        if (certificateLines != null && certificateLines.size() > 0)
             return certificateLines;
 
         certificateLines = new Query(getCtx(), I_LMX_CertificateLine.Table_Name , I_LMX_CertificateLine.COLUMNNAME_LMX_Certificate_ID +  "=?", get_TrxName())
