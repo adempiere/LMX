@@ -21,6 +21,7 @@ package org.eevolution.LMX.model;
 
 import org.compiere.model.I_C_DocType;
 import org.compiere.model.Query;
+import org.compiere.util.CCache;
 import org.compiere.util.Env;
 import org.eevolution.model.MHRProcess;
 
@@ -33,17 +34,21 @@ import java.util.Properties;
  */
 public class MLMXCertificate extends X_LMX_Certificate {
 
-    private static MLMXCertificate certificate;
     private List<MLMXCertificateLine> certificateLines;
 
+    private static CCache<String, MLMXCertificate> cachecertificate = new CCache<>(Table_Name, 5);
     public static MLMXCertificate get()
     {
+        String key = String.valueOf(Env.getAD_Client_ID(Env.getCtx()));
+        MLMXCertificate certificate = cachecertificate.get(key);
         if (certificate != null)
             return certificate;
 
         certificate =  new Query(Env.getCtx(), I_LMX_Certificate.Table_Name, "" , null)
                 .setClient_ID()
                 .first();
+        if (certificate != null)
+            cachecertificate.put(key, certificate);
         return certificate;
     }
 
@@ -56,7 +61,6 @@ public class MLMXCertificate extends X_LMX_Certificate {
     }
 
     public List<MLMXCertificateLine> getLines() {
-
         if (certificateLines != null && certificateLines.size() > 0)
             return certificateLines;
 
@@ -73,7 +77,6 @@ public class MLMXCertificate extends X_LMX_Certificate {
         for (MLMXCertificateLine line : getLines())
             if (line.getC_DocType_ID() == docType.getC_DocType_ID())
                 return line.getLMX_Vendor();
-
         return null;
     }
     

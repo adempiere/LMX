@@ -19,6 +19,8 @@
 package org.eevolution.LMX.model;
 
 import org.compiere.model.Query;
+import org.compiere.util.CCache;
+import org.compiere.util.Env;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -28,17 +30,27 @@ import java.util.Properties;
  */
 public class MLMXAddenda extends X_LMX_Addenda {
 
-    public static MLMXAddenda getByBPartnerId(Properties ctx , int C_BPartner_ID ,String  trxName)
+    private static CCache<String, MLMXAddenda> cacheAddenda = new CCache<>(Table_Name, 5);
+
+    public static MLMXAddenda getByBPartnerId(Properties ctx , int partnerId ,String  trxName)
     {
-        return new Query(ctx, MLMXAddenda.Table_Name, "C_BPartner_ID=?", trxName)
-                .setParameters(C_BPartner_ID)
+        String key = String.valueOf(Env.getAD_Client_ID(Env.getCtx())) + "-" + String.valueOf(partnerId);
+        MLMXAddenda addenda = cacheAddenda.get(key);
+        if (addenda != null)
+            return addenda;
+
+        addenda =  new Query(ctx, MLMXAddenda.Table_Name, "C_BPartner_ID=?", trxName)
                 .setClient_ID()
+                .setParameters(partnerId)
                 .setOnlyActiveRecords(true)
                 .first();
+        if (addenda != null)
+            cacheAddenda.put(key, addenda);
+        return addenda;
     }
 
-    public MLMXAddenda(Properties ctx, int LMX_Addenda_ID, String trxName) {
-        super(ctx, LMX_Addenda_ID, trxName);
+    public MLMXAddenda(Properties ctx, int addendaId, String trxName) {
+        super(ctx, addendaId, trxName);
     }
 
     public MLMXAddenda(Properties ctx, ResultSet rs, String trxName) {

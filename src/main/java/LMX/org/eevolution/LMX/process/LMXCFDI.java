@@ -123,27 +123,23 @@ public final class LMXCFDI {
 
 
 	public void setDocument(PO po) {
-
 		try {
 			this.document = po;
 			I_C_DocType docType = null;
 
-			int docTypeId = document.get_ValueAsInt(I_C_DocType.COLUMNNAME_C_DocType_ID);
-			docType = MDocType.get(document.getCtx() , docTypeId);
+			int docTypeId = po.get_ValueAsInt(I_C_DocType.COLUMNNAME_C_DocType_ID);
+			docType = MDocType.get(po.getCtx() , docTypeId);
 			if (docType == null)
 				throw  new AdempiereException("El documento no valido");
 
-			taxInfo = MLMXTax.getTax(document.getCtx(), document.getAD_Org_ID(), document.get_TrxName());
+			taxInfo = MLMXTax.getTax(po.getCtx(), po.getAD_Org_ID(), po.get_TrxName());
 			if (taxInfo == null)
 				throw new AdempiereException("No existe infomración de la compañia para el timbrado");
 
 			if (addendaInfo == null)
-				addendaInfo = MLMXAddenda.getByBPartnerId(document.getCtx(), taxInfo.getC_BPartner_ID(), document.get_TrxName());
+				addendaInfo = MLMXAddenda.getByBPartnerId(po.getCtx(), taxInfo.getC_BPartner_ID(), po.get_TrxName());
 
-			MLMXAddenda addInfoCustomer = MLMXAddenda.getByBPartnerId(
-					document
-					.getCtx(), document.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID), document
-					.get_TrxName());
+			MLMXAddenda addInfoCustomer = MLMXAddenda.getByBPartnerId(po.getCtx(), po.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID), po.get_TrxName());
 			if (addInfoCustomer != null)
 				addendaInfo = addInfoCustomer;
 
@@ -167,14 +163,13 @@ public final class LMXCFDI {
 				if (keyStore == null)
 					throw new AdempiereException("La Llave PKCS12 no corresponde a la Clave del Certificado");
 			}
-
-			CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
+				CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
 			//	ADempiere Transformera
-			CFDI_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDIADTransformer_ID()).getData());
+				CFDI_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDIADTransformer_ID()).getData());
 			// CFDI String Transformer
-			CFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformerString_ID()).getData());
+				CFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformerString_ID()).getData());
 			//	CFDI Transformer
-			CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformer_ID()).getData());
+				CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformer_ID()).getData());
 
 			if (CFDI_ADDENDA_XSLT == null)
 				throw new AdempiereException("No hay esquema para Comprobante Fiscal Digital");
@@ -192,8 +187,7 @@ public final class LMXCFDI {
 				MInvoice invoice = (MInvoice) document;
 				if (invoice.isReversal())
 					return cancelCFDI(getReversal(document));
-				else
-					return createCFDI();
+				else return createCFDI();
 			}
 			else if (document != null && document.get_Table_ID() == MPayment.Table_ID)
 			{

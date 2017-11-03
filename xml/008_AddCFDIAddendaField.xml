@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="D" Name="LMX Mantenimiento a Vistas" ReleaseNo="" SeqNo="8">
+  <Migration EntityType="D" Name="LMX Mantenimiento a Vistas" ReleaseNo="LMX#1.0.0" SeqNo="8">
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="100" Action="U" Record_ID="53904" Table="AD_Table">
         <Data AD_Column_ID="102" Column="Name" oldValue="Localization MÃ©xico Addenda">Localization México Addenda</Data>

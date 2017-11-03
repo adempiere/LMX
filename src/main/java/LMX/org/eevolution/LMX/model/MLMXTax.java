@@ -19,6 +19,8 @@
 package org.eevolution.LMX.model;
 
 import org.compiere.model.Query;
+import org.compiere.util.CCache;
+import org.compiere.util.Env;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -28,21 +30,7 @@ import java.util.Properties;
  */
 public class MLMXTax extends X_LMX_Tax {
 
-    private static MLMXTax m_tax = null;
-
-    public static  MLMXTax getTax(Properties ctx , int AD_Org_ID , String trxName)
-    {
-        if (m_tax != null)
-            return m_tax;
-
-        StringBuilder whereClause = new StringBuilder();
-        whereClause.append("AD_Tree_Org_ID IN(SELECT AD_Tree_ID FROM AD_Tree WHERE AD_Tree_ID IN (SELECT AD_Tree_ID FROM AD_TreeNode WHERE  Node_ID = ?) AND TreeType = 'OO')");
-        m_tax = new Query(ctx, MLMXTax.Table_Name, whereClause.toString(), trxName)
-                .setClient_ID()
-                .setParameters(AD_Org_ID)
-                .first();
-       return m_tax;
-    }
+    private static CCache<String, MLMXTax> cacheTaxInfo = new CCache<>(Table_Name, 5);
 
     public MLMXTax(Properties ctx, int LMX_Tax_ID, String trxName) {
         super(ctx, LMX_Tax_ID, trxName);
@@ -50,5 +38,23 @@ public class MLMXTax extends X_LMX_Tax {
 
     public MLMXTax(Properties ctx, ResultSet rs, String trxName) {
         super(ctx, rs, trxName);
+    }
+
+    public static MLMXTax getTax(Properties ctx, int orgId, String trxName) {
+        String key = String.valueOf(Env.getAD_Client_ID(Env.getCtx())) + "-" + String.valueOf(orgId);
+        MLMXTax taxInfo = cacheTaxInfo.get(key);
+        if (taxInfo != null)
+            return taxInfo;
+
+        StringBuilder whereClause = new StringBuilder();
+        whereClause.append("AD_Tree_Org_ID IN(SELECT AD_Tree_ID FROM AD_Tree WHERE AD_Tree_ID IN (SELECT AD_Tree_ID FROM AD_TreeNode WHERE  Node_ID = ?) AND TreeType = 'OO')");
+        taxInfo = new Query(ctx, MLMXTax.Table_Name, whereClause.toString(), trxName)
+                .setClient_ID()
+                .setParameters(orgId)
+                .first();
+        if (taxInfo != null)
+            cacheTaxInfo.put(key, taxInfo);
+
+        return taxInfo;
     }
 }
