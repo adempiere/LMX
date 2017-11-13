@@ -53,22 +53,22 @@ import org.w3c.dom.NodeList;
  */
 public class LMXFoliosDigitalesService implements LMXVendorInterface {
 
-	public MLMXVendor m_vendor;
+	public MLMXVendor vendor;
 
 	public LMXFoliosDigitalesService()
 	{
-		m_vendor = MLMXVendor.getByClassName(getClass().getCanonicalName());
-		if (m_vendor == null)
+		vendor = MLMXVendor.getByClassName(getClass().getCanonicalName());
+		if (vendor == null)
 			throw new AdempiereException("Implementación para este proveedor de servicios no existe: "+ getClass().getCanonicalName());
 	}
 
 	public Source execute(MLMXDocument document  , String SOAPType)  throws Exception {
-		LMXVendorServiceInterface service = m_vendor.getService(SOAPType);
+		LMXVendorServiceInterface service = vendor.getService(SOAPType);
 		final WebServiceConnector wsc = new WebServiceConnector();
 		document.setCFDIXML(document.getCFDIXML().replace("\n", "").replaceAll(" +", " "));
 		document.saveEx();
 		String request = Env.parseVariable(service.getSOAPRequest(), document, document.get_TrxName(), true);
-		request = Env.parseVariable(request, m_vendor, m_vendor.get_TrxName(), false);
+		request = Env.parseVariable(request, vendor, vendor.get_TrxName(), false);
 		//request = request.replaceAll("\n", "");
 		//System.out.println("Llamada del servicio :" + request);
 		wsc.setRequest(request);

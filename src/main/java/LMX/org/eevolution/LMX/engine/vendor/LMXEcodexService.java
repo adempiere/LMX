@@ -200,7 +200,7 @@ public class LMXEcodexService implements LMXVendorInterface {
 
 	private void fillCFDIInfo(MLMXDocument documentCFDI, String CFDI) {
 		try {
-			String date = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI.indexOf("fecha=") + 26);
+			String date = CFDI.substring(CFDI.indexOf("Fecha=") + 7, CFDI.indexOf("Fecha=") + 26);
 			date = date.replace("T", " ");
 			DateFormat formatter;
 			formatter = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
@@ -224,24 +224,24 @@ public class LMXEcodexService implements LMXVendorInterface {
 	}
 
 	private String getSeal(String CFDI) {
-		String tmpString = CFDI.substring(CFDI.indexOf("sello=") + 7);
+		String tmpString = CFDI.substring(CFDI.indexOf("Sello=") + 7);
 		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
 	private String getSealSAT(String CFDI) {
 
-		String tmpSeal = CFDI.substring(CFDI.indexOf("selloSAT=") + 10);
+		String tmpSeal = CFDI.substring(CFDI.indexOf("SelloSAT=") + 10);
 		return tmpSeal.substring(0, tmpSeal.indexOf("\""));
 
 	}
 
 	private String getNoCertificateSAT(String CFDI) {
-		String tmpString = CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18);
+		String tmpString = CFDI.substring(CFDI.indexOf("NoCertificadoSAT=") + 18);
 		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
 	private String getDate(String CFDI) {
-		String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7);
+		String fecha = CFDI.substring(CFDI.indexOf("Fecha=") + 7);
 		fecha = fecha.substring(0, fecha.indexOf("\""));
 		fecha = fecha.replace("T", " ");
 		return fecha;

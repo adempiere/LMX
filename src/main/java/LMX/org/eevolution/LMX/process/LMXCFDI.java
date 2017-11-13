@@ -340,6 +340,10 @@ public final class LMXCFDI {
 		stringCFDI = getOriginalString(xmlCFDI);
 		documentCFDI.setCFDIString(stringCFDI);
 		documentCFDI.setCFDIXML(xmlCFDI);
+
+		//Generate Stamp
+		generateStamp(documentCFDI);
+
 		service.getCFDI(documentCFDI);
 		service.getQR(documentCFDI);
 		MAttachment attachment = new MAttachment(documentCFDI.getCtx(), documentCFDI
@@ -491,7 +495,7 @@ public final class LMXCFDI {
 
 	private void updateDate(String CFDI) {
 		try {
-			String date = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI
+			String date = CFDI.substring(CFDI.indexOf("Fecha=") + 7, CFDI
 					.indexOf("\" xsi:schemaLocation="));
 			date = date.replace("T", " ");
 			DateFormat formatter;
@@ -546,7 +550,7 @@ public final class LMXCFDI {
 		/*return CFDI.substring(CFDI.indexOf("sello=") + 7, CFDI
 				.indexOf("\" certificado="));*/
 		
-		String tmpString = CFDI.substring(CFDI.indexOf("sello=") + 7);
+		String tmpString = CFDI.substring(CFDI.indexOf("Sello=") + 7);
 		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
@@ -556,7 +560,7 @@ public final class LMXCFDI {
 
 	private String getSealSAT() {
 
-		String tmpSeal = CFDI.substring(CFDI.indexOf("selloSAT=") + 10);
+		String tmpSeal = CFDI.substring(CFDI.indexOf("SelloSAT=") + 10);
 		return tmpSeal.substring(0, tmpSeal.indexOf("\""));
 
 	}
@@ -565,7 +569,7 @@ public final class LMXCFDI {
 		/*return CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18, CFDI
 				.indexOf("\" selloSAT="));*/
 		
-		String tmpString = CFDI.substring(CFDI.indexOf("noCertificadoSAT=") + 18);
+		String tmpString = CFDI.substring(CFDI.indexOf("NoCertificadoSAT=") + 18);
 		return tmpString.substring(0, tmpString.indexOf("\""));
 	}
 
@@ -621,15 +625,15 @@ public final class LMXCFDI {
 	// Old, do not remove
 	public String generateCFDIWithStamp(String xml) {
 		try {
-			int ind = xml.indexOf("sello=\"") + 7;
+			int ind = xml.indexOf("Sello=\"") + 7;
 			String fp = xml.substring(0, ind);
 			String sp = xml.substring(ind, xml.length());
-			ind = xml.indexOf("noCertificado=\"");
+			ind = xml.indexOf("NoCertificado=\"");
 			fp = xml.substring(0, ind);
 			sp = xml.substring(ind, xml.length());
-			xml = fp + " certificado=\"\" " + sp;
+			xml = fp + " Certificado=\"\" " + sp;
 
-			ind = xml.indexOf("noCertificado=\"") + 15;
+			ind = xml.indexOf("NoCertificado=\"") + 15;
 			fp = xml.substring(0, ind);
 			sp = xml.substring(ind, xml.length());
 			xml = fp + certificate.getDocumentNo() + sp;
@@ -669,12 +673,12 @@ public final class LMXCFDI {
 	private void generateStamp(MLMXDocument documentCFD) {
 		try {
 			String xml = documentCFD.getCFDIXML();
-            int ind = xml.indexOf("sello=\"") + 7;
+            int ind = xml.indexOf("Sello=\"") + 7;
             String fp = xml.substring(0, ind);
             String sp = xml.substring(ind, xml.length());
             String sello = getSignedChain(keyStore, stringCFDI, certificate.getPassword());
             xml = fp + sello.replaceAll("\n", "").replaceAll("\r", "") + sp;
-            ind = xml.indexOf("certificado=\"") + 13;
+            ind = xml.indexOf("Certificado=\"") + 13;
             fp = xml.substring(0, ind);
             sp = xml.substring(ind, xml.length());
             xml = fp + getCertificateBASE64Encoder(keyStore).replaceAll("\n", "").replaceAll("\r", "") + sp;
@@ -703,7 +707,6 @@ public final class LMXCFDI {
         for (int i = 0; i < aliases.length; i++) {
             alias = aliases[i];
         }
-
         try {
             PrivateKey priv = (PrivateKey) keystore.getKey(alias, password.toCharArray());
             byte[] binary_chain = original.getBytes("UTF8");
