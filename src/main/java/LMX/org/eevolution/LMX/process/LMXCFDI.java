@@ -19,34 +19,27 @@
 package org.eevolution.LMX.process;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStream;
-import java.io.StringReader;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.security.GeneralSecurityException;
+import java.security.KeyFactory;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
-import java.security.Security;
 import java.security.Signature;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
-import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,19 +55,42 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.adempiere.exceptions.AdempiereException;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.compiere.model.*;
-import org.compiere.process.DocAction;
-import org.compiere.util.*;
+import org.compiere.model.I_C_BPartner;
+import org.compiere.model.I_C_DocType;
+import org.compiere.model.I_C_Invoice;
+import org.compiere.model.I_C_PaySelectionCheck;
+import org.compiere.model.I_C_Payment;
+import org.compiere.model.MAttachment;
+import org.compiere.model.MAttachmentNote;
+import org.compiere.model.MClient;
+import org.compiere.model.MDocType;
+import org.compiere.model.MImage;
+import org.compiere.model.MInvoice;
+import org.compiere.model.MPayment;
+import org.compiere.model.MQuery;
+import org.compiere.model.PO;
+import org.compiere.model.PrintInfo;
+import org.compiere.model.Query;
+import org.compiere.util.CCache;
+import org.compiere.util.DB;
+import org.compiere.util.Env;
+import org.compiere.util.Ini;
+import org.compiere.util.Language;
+import org.compiere.util.Login;
 import org.eevolution.LMX.engine.LMXVendorEngine;
 import org.eevolution.LMX.engine.LMXVendorInterface;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportEngine;
-import org.eevolution.LMX.model.*;
+import org.eevolution.LMX.model.I_LMX_Vendor;
+import org.eevolution.LMX.model.MLMXAddenda;
+import org.eevolution.LMX.model.MLMXCertificate;
+import org.eevolution.LMX.model.MLMXDocument;
+import org.eevolution.LMX.model.MLMXTax;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import org.apache.commons.ssl.PKCS8Key;
 import sun.misc.BASE64Encoder;
 
 
@@ -87,17 +103,8 @@ public final class LMXCFDI {
 	private String CFDI = null;
 
 	private static LMXCFDI instance = null;
-
-	private static InputStream CFDI_XSLT = null;
-	private static InputStream CFDI_STRING_XSLT = null;
-	private static InputStream CFDI_ADDENDA_XSLT = null;
-	private static InputStream CFDI_SCHEMA = null;
-	private static InputStream PKCS12_CER = null;
-
 	private static PO document  = null;
 	private static MLMXDocument documentCFDI = null;
-    private static KeyStore keyStore = null;
-    private static String stringCFDI = "";
 	private static CCache<Integer , LMXCFDI> cfdiCache = new CCache<>("LMXCFDI" , 5 , 1440);
 
 
@@ -126,6 +133,9 @@ public final class LMXCFDI {
 		try {
 			this.document = po;
 			I_C_DocType docType = null;
+
+			if (certificate.getCertificateFile_ID() > 0 && !getNoCertificado().equals(certificate.getDocumentNo()))
+				throw new AdempiereException("Numero Certificado no coincide con el ");
 
 			int docTypeId = po.get_ValueAsInt(I_C_DocType.COLUMNNAME_C_DocType_ID);
 			docType = MDocType.get(po.getCtx() , docTypeId);
@@ -157,27 +167,76 @@ public final class LMXCFDI {
 
 			service.setDocument(po);
 
-			if (certificate.getPKCS12_ID() > 0) {
-				PKCS12_CER = new ByteArrayInputStream(MImage.get(Env.getCtx(), certificate.getPKCS12_ID()).getData());
-				setKeyStore(PKCS12_CER, certificate.getPassword());
-				if (keyStore == null)
-					throw new AdempiereException("La Llave PKCS12 no corresponde a la Clave del Certificado");
-			}
-				CFDI_SCHEMA = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
-			//	ADempiere Transformera
-				CFDI_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDIADTransformer_ID()).getData());
-			// CFDI String Transformer
-				CFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformerString_ID()).getData());
-			//	CFDI Transformer
-				CFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformer_ID()).getData());
-
-			if (CFDI_ADDENDA_XSLT == null)
-				throw new AdempiereException("No hay esquema para Comprobante Fiscal Digital");
-
 		} catch (Exception e) {
 			throw new AdempiereException(e.getMessage());
 		}
 
+	}
+
+	private InputStream getCertificate()
+	{
+		InputStream inputStramCertificate = null;
+		// Certificate File
+		if (certificate.getCertificateFile_ID() > 0 )
+			inputStramCertificate = new ByteArrayInputStream(MImage.get(Env.getCtx(), certificate.getCertificateFile_ID()).getData());
+		else
+			throw new AdempiereException("No existe archivo certificado .cer adjunto");
+		return inputStramCertificate;
+	}
+
+	private InputStream getKey(){
+		InputStream inputStramCertificateKey = null;
+		// Key file
+		if (certificate.getKeyFile_ID() > 0)
+			inputStramCertificateKey = new ByteArrayInputStream(MImage.get(Env.getCtx(), certificate.getKeyFile_ID()).getData());
+		else
+			throw new AdempiereException("No existe archivo .key de clave adjunta ");
+
+		return inputStramCertificateKey;
+
+	}
+
+	private InputStream getCFDI_SCHEMA()
+	{
+		InputStream inputStramSchema = null;
+		// ADempiere Schema
+		if (addendaInfo.getCFDISchema_ID() > 0)
+			inputStramSchema = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDISchema_ID()).getData());
+		else
+			throw new AdempiereException("No existe esquema para CFDI");
+
+		return inputStramSchema;
+
+	}
+
+	private InputStream getCFDI_XSLT() {
+		InputStream inputStramCFDIXSLT = null;
+		//	ADempiere Transformera
+		if (addendaInfo.getCFDIADTransformer_ID() > 0)
+			inputStramCFDIXSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDIADTransformer_ID()).getData());
+		else
+			throw new AdempiereException("No existe plantilla para para CFDI");
+		return inputStramCFDIXSLT;
+	}
+
+	private InputStream getCFDI_STRING_XSLT(){
+		InputStream 	inputStreamCFDI_STRING_XSLT = null;
+		// CFDI String Transformer
+		if (addendaInfo.getCFDITransformerString_ID() > 0)
+			inputStreamCFDI_STRING_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformerString_ID()).getData());
+		else
+			throw new AdempiereException("No existe plantilla para Cadena Orginal");
+		return inputStreamCFDI_STRING_XSLT;
+	}
+
+	private InputStream getCFDI_ADDENDA_XSLT (){
+		InputStream inputStreamCFDI_ADDENDA_XSLT = null;
+		//	CFDI Transformer
+		if (addendaInfo.getCFDITransformer_ID() > 0)
+			inputStreamCFDI_ADDENDA_XSLT = new ByteArrayInputStream(MImage.get(Env.getCtx(), addendaInfo.getCFDITransformer_ID()).getData());
+		else
+			throw new AdempiereException("No hay esquema para Comprobante Fiscal Digital");
+		return inputStreamCFDI_ADDENDA_XSLT;
 	}
 
 	public MLMXDocument generate() {
@@ -202,6 +261,69 @@ public final class LMXCFDI {
 			throw new AdempiereException(e.getMessage());
 		}
 
+	}
+
+	private static final String RSA = "RSA";
+	private static final String FIRMA = "SHA256withRSA";
+	private static final String X_509 = "X.509";
+
+	private  String getCertificateBASE64Encoder() {
+		try {
+			CertificateFactory cf = CertificateFactory.getInstance(X_509);
+			X509Certificate certificate = (X509Certificate) cf.generateCertificate(getCertificate());
+			byte[] binary_certificate = certificate.getEncoded();
+			String signatureB64 = new BASE64Encoder().encode(binary_certificate);
+			return signatureB64;
+		}
+		catch (CertificateException certificateBASE64Encoder)
+		{
+			throw new AdempiereException(certificateBASE64Encoder.getMessage());
+		}
+	}
+
+	private String singner(String originalString) {
+		try {
+			String keyFileString = getKeyString();
+			String keyWord = certificate.getPassword();
+			PKCS8Key pkcs8 = new PKCS8Key(Base64.getDecoder().decode(keyFileString), keyWord.toCharArray());
+			KeyFactory privateKeyFactory = KeyFactory.getInstance(RSA);
+			PKCS8EncodedKeySpec pkcs8Encoded = new PKCS8EncodedKeySpec(pkcs8.getDecryptedBytes());
+			PrivateKey privateKey = privateKeyFactory.generatePrivate(pkcs8Encoded);
+			Signature signature = Signature.getInstance(FIRMA);
+			signature.initSign(privateKey);
+			signature.update(originalString.getBytes());
+			String singnatureString = new String(Base64.getEncoder().encode(signature.sign()));
+			return singnatureString;
+		} catch (GeneralSecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private String getNoCertificado() {
+		try {
+			CertificateFactory cf = CertificateFactory.getInstance(X_509);
+			X509Certificate certificado = (X509Certificate) cf.generateCertificate(getCertificate());
+			byte[] byteArray = certificado.getSerialNumber().toByteArray();
+			String noCertificado = new String(byteArray);
+			return noCertificado;
+		} catch (CertificateException certificateException)
+		{
+			throw new AdempiereException(certificateException.getMessage());
+		}
+	}
+
+	private String getKeyString() {
+		try {
+			InputStream inputStreamKey = getKey();
+			byte[] fileBytes = new byte[inputStreamKey.available()];
+			inputStreamKey.read(fileBytes);
+			inputStreamKey.close();
+			String fileString = new String(Base64.getEncoder().encode(fileBytes));
+			return fileString;
+		} catch (IOException exeption) {
+			throw new AdempiereException(exeption.getMessage());
+		}
 	}
 
 
@@ -278,7 +400,7 @@ public final class LMXCFDI {
 
 		StringWriter transformedCFDI = new StringWriter();
 		// Generate CFDI using transformer
-		transform(new StreamSource(CFDI_XSLT), new StreamSource(
+		transform(new StreamSource(getCFDI_XSLT()), new StreamSource(
 						new StringReader(xmlReport)),
 				new StreamResult(transformedCFDI));
 		return transformedCFDI.getBuffer().toString();
@@ -286,7 +408,7 @@ public final class LMXCFDI {
 
 	public String getAddendaTransform(final String CFDI) throws TransformerException {
 		StringWriter transformedCFDI = new StringWriter();
-		transform(new StreamSource(CFDI_ADDENDA_XSLT), new StreamSource(
+		transform(new StreamSource(getCFDI_ADDENDA_XSLT()), new StreamSource(
 				new StringReader(CFDI)), new StreamResult(transformedCFDI));
 		return transformedCFDI.getBuffer().toString();
 	}
@@ -317,32 +439,25 @@ public final class LMXCFDI {
 			fileName = taxId + documentNo;
 		}*/
 
-		String xmlCFDI = "";
-		
-		if(document != null)
-			xmlCFDI = generateCFDIWithStamp(getCFDI(document));
+		if(document != null) {
+			documentCFDI.setCFDIXML(generateStamp(getCFDI(document)));
+			documentCFDI.saveEx();
+		}
 
 		if(document!=null && I_C_Invoice.Table_Name.equals(document.get_TableName()))
 		{
 			// Schema Validation
 			String schemaLang = "http://www.w3.org/2001/XMLSchema";
 			// get validation driver:
-			SchemaFactory schema_factory = SchemaFactory.newInstance(schemaLang);
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(schemaLang);
 			// create schema by reading it from an XSD file:
-			Schema schema = schema_factory.newSchema(new StreamSource(CFDI_SCHEMA));
+			Schema schema = schemaFactory.newSchema(new StreamSource(getCFDI_SCHEMA()));
 			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(new StringReader(xmlCFDI)));
+			validator.validate(new StreamSource(new StringReader(documentCFDI.getCFDIXML())));
 		}
 
-		if ("".equals(xmlCFDI) || xmlCFDI == null)
+		if ("".equals(documentCFDI.getCFDIXML()) || documentCFDI.getCFDIXML() == null)
 			throw new AdempiereException("El CFDI no es Válido");
-
-		stringCFDI = getOriginalString(xmlCFDI);
-		documentCFDI.setCFDIString(stringCFDI);
-		documentCFDI.setCFDIXML(xmlCFDI);
-
-		//Generate Stamp
-		generateStamp(documentCFDI);
 
 		service.getCFDI(documentCFDI);
 		service.getQR(documentCFDI);
@@ -353,7 +468,7 @@ public final class LMXCFDI {
 		String CFDName = "CFD" + documentCFDI.getCFDIUUID() +  ".xml";
 		attachment.addEntry(CFDName, getCFDI()
 				.getBytes("UTF-8"));
-		attachment.addTextMsg(stringCFDI);
+		attachment.addTextMsg(documentCFDI.getCFDIString());
 		attachment.saveEx();
 
 		MAttachmentNote attachmentNote = new MAttachmentNote(documentCFDI.getCtx(), 0,
@@ -578,7 +693,7 @@ public final class LMXCFDI {
 		/*String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7, CFDI
 				.indexOf("\" version="));*/
 		
-		String fecha = CFDI.substring(CFDI.indexOf("fecha=") + 7);
+		String fecha = CFDI.substring(CFDI.indexOf("Fecha=") + 7);
 		fecha = fecha.substring(0, fecha.indexOf("\""));
 		fecha = fecha.replace("T", " ");
 		return fecha;
@@ -620,34 +735,10 @@ public final class LMXCFDI {
 		return xml;
 	}
 
-	
-
-	// Old, do not remove
-	public String generateCFDIWithStamp(String xml) {
-		try {
-			int ind = xml.indexOf("Sello=\"") + 7;
-			String fp = xml.substring(0, ind);
-			String sp = xml.substring(ind, xml.length());
-			ind = xml.indexOf("NoCertificado=\"");
-			fp = xml.substring(0, ind);
-			sp = xml.substring(ind, xml.length());
-			xml = fp + " Certificado=\"\" " + sp;
-
-			ind = xml.indexOf("NoCertificado=\"") + 15;
-			fp = xml.substring(0, ind);
-			sp = xml.substring(ind, xml.length());
-			xml = fp + certificate.getDocumentNo() + sp;
-			return xml;
-		} catch (Exception e) {
-			throw new AdempiereException(
-					"No se pudo generar el sello para este documento");
-		}
-	}
-
 	private String getOriginalString(String CFDI) throws TransformerException,
 			IOException {
 		StringWriter transformed = new StringWriter();
-		transform(new StreamSource(CFDI_STRING_XSLT), new StreamSource(
+		transform(new StreamSource(getCFDI_STRING_XSLT()), new StreamSource(
 				new StringReader(CFDI)), new StreamResult(transformed));
 		return transformed.getBuffer().toString();
 	}
@@ -670,97 +761,24 @@ public final class LMXCFDI {
 	}
 	
 
-	private void generateStamp(MLMXDocument documentCFD) {
+	private String generateStamp(String CFDIXML) {
 		try {
-			String xml = documentCFD.getCFDIXML();
-            int ind = xml.indexOf("Sello=\"") + 7;
-            String fp = xml.substring(0, ind);
-            String sp = xml.substring(ind, xml.length());
-            String sello = getSignedChain(keyStore, stringCFDI, certificate.getPassword());
-            xml = fp + sello.replaceAll("\n", "").replaceAll("\r", "") + sp;
-            ind = xml.indexOf("Certificado=\"") + 13;
-            fp = xml.substring(0, ind);
-            sp = xml.substring(ind, xml.length());
-            xml = fp + getCertificateBASE64Encoder(keyStore).replaceAll("\n", "").replaceAll("\r", "") + sp;
-	        documentCFD.setCFDIXML(xml);
-	        documentCFD.saveEx();
+			int certificateNoIndex = CFDIXML.indexOf(" NoCertificado=\"") + 16;
+			String firstCertificateXml = CFDIXML.substring(0, certificateNoIndex);
+			String lastCertificateXml = CFDIXML.substring(certificateNoIndex, CFDIXML.length());
+			String xmlWithCertificateNo = firstCertificateXml + certificate.getDocumentNo().replaceAll("\n", "").replaceAll("\r", "") + lastCertificateXml;
+
+			documentCFDI.setCFDIString(getOriginalString(xmlWithCertificateNo));
+			documentCFDI.saveEx();
+			String stamp =  singner(documentCFDI.getCFDIString());
+            int stampIndex = xmlWithCertificateNo.indexOf(" Sello=\"") + 8;
+            String firstStampXml = xmlWithCertificateNo.substring(0, stampIndex);
+            String lastStampXml = xmlWithCertificateNo.substring(stampIndex, xmlWithCertificateNo.length());
+            String xmlWithStamp = firstStampXml + stamp + "\" Certificado=\"" + getCertificateBASE64Encoder().replaceAll("\n", "").replaceAll("\r", "") + lastStampXml;
+			return xmlWithStamp;
 	        
         } catch (Exception e) {
             throw new AdempiereException("No se pudo generar sellado en este momento");
         }
 	}
-
-    private static void setKeyStore(InputStream stream, String password) {
-        Security.addProvider(new BouncyCastleProvider());
-        KeyStore ks;
-        try {
-            ks = KeyStore.getInstance("PKCS12");
-            ks.load(stream, password.toCharArray()); 
-            keyStore = ks;
-        } catch (Exception e) {
-        }
-    }
-    
-    private static String getSignedChain(KeyStore keystore, String original, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchProviderException {
-        String[] aliases = getAliasArray(keystore);
-        String alias = null;
-        for (int i = 0; i < aliases.length; i++) {
-            alias = aliases[i];
-        }
-        try {
-            PrivateKey priv = (PrivateKey) keystore.getKey(alias, password.toCharArray());
-            byte[] binary_chain = original.getBytes("UTF8");
-            Signature signature = Signature.getInstance("SHA1withRSA", "BC");
-            signature.initSign(priv);
-            signature.update(binary_chain);
-            byte[] binary_signature = signature.sign();
-            String signatureB64 = new BASE64Encoder().encode(binary_signature);
-            return signatureB64;
-        } catch (Exception e) {
-        }
-        return null;
-    }
-    
-    public static String getCertificateBASE64Encoder(KeyStore ks) throws CertificateEncodingException {
-        X509Certificate certificate = getCertificate(ks);
-        byte[] binary_certificate = certificate.getEncoded();
-        String signatureB64 = new BASE64Encoder().encode(binary_certificate);
-        return signatureB64;
-    }
-    
-    public static String[] getAliasArray(KeyStore keystore) {
-        Enumeration e = null;
-        try {
-            // List the aliases 
-            e = keystore.aliases();
-        } catch (KeyStoreException err) {
-        }
-        Vector v = new Vector();
-        while (e.hasMoreElements()) {
-            String alias = (String) e.nextElement();
-            v.addElement(alias);
-        }
-        String s[] = new String[v.size()];
-        v.copyInto(s);
-        return s;
-    }
-    
-    public static X509Certificate getCertificate(KeyStore ks) {
-        try {
-            String alias = getKeyStoreAlias(ks);
-            return (X509Certificate) ks.getCertificate(alias);
-        } catch (KeyStoreException e) {
-        }
-        return null;
-    }
-    
-    public static String getKeyStoreAlias(KeyStore s) {
-        String[] aliases = getAliasArray(s);
-        String alias = null;
-        for (int i = 0; i < aliases.length; i++) {
-            alias = aliases[i];
-        }
-        return alias;
-    }
-
 }

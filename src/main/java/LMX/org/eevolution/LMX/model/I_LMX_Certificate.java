@@ -50,19 +50,6 @@ public interface I_LMX_Certificate
 	  */
 	public int getAD_Client_ID();
 
-    /** Column name AD_Org_ID */
-    public static final String COLUMNNAME_AD_Org_ID = "AD_Org_ID";
-
-	/** Set Organization.
-	  * Organizational entity within client
-	  */
-	public void setAD_Org_ID (int AD_Org_ID);
-
-	/** Get Organization.
-	  * Organizational entity within client
-	  */
-	public int getAD_Org_ID();
-
     /** Column name AD_OrgTrx_ID */
     public static final String COLUMNNAME_AD_OrgTrx_ID = "AD_OrgTrx_ID";
 
@@ -75,6 +62,19 @@ public interface I_LMX_Certificate
 	  * Performing or initiating organization
 	  */
 	public int getAD_OrgTrx_ID();
+
+    /** Column name AD_Org_ID */
+    public static final String COLUMNNAME_AD_Org_ID = "AD_Org_ID";
+
+	/** Set Organization.
+	  * Organizational entity within client
+	  */
+	public void setAD_Org_ID (int AD_Org_ID);
+
+	/** Get Organization.
+	  * Organizational entity within client
+	  */
+	public int getAD_Org_ID();
 
     /** Column name AD_Sequence_ID */
     public static final String COLUMNNAME_AD_Sequence_ID = "AD_Sequence_ID";
@@ -91,15 +91,6 @@ public interface I_LMX_Certificate
 
 	public org.compiere.model.I_AD_Sequence getAD_Sequence() throws RuntimeException;
 
-    /** Column name CertificatePass */
-    public static final String COLUMNNAME_CertificatePass = "CertificatePass";
-
-	/** Set Certificate Password	  */
-	public void setCertificatePass (String CertificatePass);
-
-	/** Get Certificate Password	  */
-	public String getCertificatePass();
-
     /** Column name C_Location_ID */
     public static final String COLUMNNAME_C_Location_ID = "C_Location_ID";
 
@@ -114,6 +105,24 @@ public interface I_LMX_Certificate
 	public int getC_Location_ID();
 
 	public org.compiere.model.I_C_Location getC_Location() throws RuntimeException;
+
+    /** Column name CertificateFile_ID */
+    public static final String COLUMNNAME_CertificateFile_ID = "CertificateFile_ID";
+
+	/** Set Certificate File	  */
+	public void setCertificateFile_ID (int CertificateFile_ID);
+
+	/** Get Certificate File	  */
+	public int getCertificateFile_ID();
+
+    /** Column name CertificatePass */
+    public static final String COLUMNNAME_CertificatePass = "CertificatePass";
+
+	/** Set Certificate Password	  */
+	public void setCertificatePass (String CertificatePass);
+
+	/** Get Certificate Password	  */
+	public String getCertificatePass();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -170,13 +179,26 @@ public interface I_LMX_Certificate
 	  */
 	public boolean isActive();
 
+    /** Column name KeyFile_ID */
+    public static final String COLUMNNAME_KeyFile_ID = "KeyFile_ID";
+
+	/** Set Key File	  */
+	public void setKeyFile_ID (int KeyFile_ID);
+
+	/** Get Key File	  */
+	public int getKeyFile_ID();
+
     /** Column name LMX_Certificate_ID */
     public static final String COLUMNNAME_LMX_Certificate_ID = "LMX_Certificate_ID";
 
-	/** Set Certificado de la compañia ID	  */
+	/** Set Localization México Certificate.
+	  * Localization México Certificate
+	  */
 	public void setLMX_Certificate_ID (int LMX_Certificate_ID);
 
-	/** Get Certificado de la compañia ID	  */
+	/** Get Localization México Certificate.
+	  * Localization México Certificate
+	  */
 	public int getLMX_Certificate_ID();
 
     /** Column name Name */
@@ -192,6 +214,15 @@ public interface I_LMX_Certificate
 	  */
 	public String getName();
 
+    /** Column name PKCS12_ID */
+    public static final String COLUMNNAME_PKCS12_ID = "PKCS12_ID";
+
+	/** Set Public-Key Cryptography Standards File	  */
+	public void setPKCS12_ID (int PKCS12_ID);
+
+	/** Get Public-Key Cryptography Standards File	  */
+	public int getPKCS12_ID();
+
     /** Column name Password */
     public static final String COLUMNNAME_Password = "Password";
 
@@ -204,15 +235,6 @@ public interface I_LMX_Certificate
 	  * Password of any length (case sensitive)
 	  */
 	public String getPassword();
-
-    /** Column name PKCS12_ID */
-    public static final String COLUMNNAME_PKCS12_ID = "PKCS12_ID";
-
-	/** Set Public-Key Cryptography Standards File	  */
-	public void setPKCS12_ID (int PKCS12_ID);
-
-	/** Get Public-Key Cryptography Standards File	  */
-	public int getPKCS12_ID();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
