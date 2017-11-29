@@ -30,7 +30,7 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20170613L;
+	private static final long serialVersionUID = 20171129L;
 
     /** Standard Constructor */
     public X_LMX_Document (Properties ctx, int LMX_Document_ID, String trxName)
@@ -98,8 +98,8 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set CFDI QR Id.
-		@param CFDIQR_ID CFDI QR Id	  */
+	/** Set CFDI QR ID.
+		@param CFDIQR_ID CFDI QR ID	  */
 	public void setCFDIQR_ID (int CFDIQR_ID)
 	{
 		if (CFDIQR_ID < 1) 
@@ -108,8 +108,8 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 			set_Value (COLUMNNAME_CFDIQR_ID, Integer.valueOf(CFDIQR_ID));
 	}
 
-	/** Get CFDI QR Id.
-		@return CFDI QR Id	  */
+	/** Get CFDI QR ID.
+		@return CFDI QR ID	  */
 	public int getCFDIQR_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_CFDIQR_ID);
@@ -343,5 +343,89 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 	public String getTaxID () 
 	{
 		return (String)get_Value(COLUMNNAME_TaxID);
+	}
+
+	/** TipoDeComprobante AD_Reference_ID=53947 */
+	public static final int TIPODECOMPROBANTE_AD_Reference_ID=53947;
+	/** Ingreso = I */
+	public static final String TIPODECOMPROBANTE_Ingreso = "I";
+	/** Egreso = E */
+	public static final String TIPODECOMPROBANTE_Egreso = "E";
+	/** Traslado = T */
+	public static final String TIPODECOMPROBANTE_Traslado = "T";
+	/** Nómina = N */
+	public static final String TIPODECOMPROBANTE_Nómina = "N";
+	/** Pago = P */
+	public static final String TIPODECOMPROBANTE_Pago = "P";
+	/** Set TipoDeComprobante.
+		@param TipoDeComprobante TipoDeComprobante	  */
+	public void setTipoDeComprobante (String TipoDeComprobante)
+	{
+
+		set_Value (COLUMNNAME_TipoDeComprobante, TipoDeComprobante);
+	}
+
+	/** Get TipoDeComprobante.
+		@return TipoDeComprobante	  */
+	public String getTipoDeComprobante () 
+	{
+		return (String)get_Value(COLUMNNAME_TipoDeComprobante);
+	}
+
+	/** TipoRelacion AD_Reference_ID=53990 */
+	public static final int TIPORELACION_AD_Reference_ID=53990;
+	/** Nota de crédito de los documentos relacionados = 01 */
+	public static final String TIPORELACION_NotaDeCréditoDeLosDocumentosRelacionados = "01";
+	/** Nota de débito de los documentos relacionados = 02 */
+	public static final String TIPORELACION_NotaDeDébitoDeLosDocumentosRelacionados = "02";
+	/** Devolución de mercancía sobre facturas o traslados previos = 03 */
+	public static final String TIPORELACION_DevoluciónDeMercancíaSobreFacturasOTrasladosPrevios = "03";
+	/** Sustitución de los CFDI previos = 04 */
+	public static final String TIPORELACION_SustituciónDeLosCFDIPrevios = "04";
+	/** Traslados de mercancias facturados previamente. = 05 */
+	public static final String TIPORELACION_TrasladosDeMercanciasFacturadosPreviamente = "05";
+	/** Factura generada por los traslados previos = 06 */
+	public static final String TIPORELACION_FacturaGeneradaPorLosTrasladosPrevios = "06";
+	/** CFDI por aplicación de anticipo = 07 */
+	public static final String TIPORELACION_CFDIPorAplicaciónDeAnticipo = "07";
+	/** Set Tipo Relacion.
+		@param TipoRelacion Tipo Relacion	  */
+	public void setTipoRelacion (String TipoRelacion)
+	{
+
+		set_Value (COLUMNNAME_TipoRelacion, TipoRelacion);
+	}
+
+	/** Get Tipo Relacion.
+		@return Tipo Relacion	  */
+	public String getTipoRelacion () 
+	{
+		return (String)get_Value(COLUMNNAME_TipoRelacion);
+	}
+
+	/** UsoCFDI AD_Reference_ID=53948 */
+	public static final int USOCFDI_AD_Reference_ID=53948;
+	/** Adquisición de mercancías = G01 */
+	public static final String USOCFDI_AdquisiciónDeMercancías = "G01";
+	/** Devoluciones, descuentos o bonificaciones = G02 */
+	public static final String USOCFDI_DevolucionesDescuentosOBonificaciones = "G02";
+	/** Gastos en general = G03 */
+	public static final String USOCFDI_GastosEnGeneral = "G03";
+	/** Set UsoCFDI.
+		@param UsoCFDI 
+		UsoCFDI
+	  */
+	public void setUsoCFDI (String UsoCFDI)
+	{
+
+		set_Value (COLUMNNAME_UsoCFDI, UsoCFDI);
+	}
+
+	/** Get UsoCFDI.
+		@return UsoCFDI
+	  */
+	public String getUsoCFDI () 
+	{
+		return (String)get_Value(COLUMNNAME_UsoCFDI);
 	}
 }

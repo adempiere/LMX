@@ -81,10 +81,10 @@ public interface I_LMX_Document
     /** Column name CFDIQR_ID */
     public static final String COLUMNNAME_CFDIQR_ID = "CFDIQR_ID";
 
-	/** Set CFDI QR Id	  */
+	/** Set CFDI QR ID	  */
 	public void setCFDIQR_ID (int CFDIQR_ID);
 
-	/** Get CFDI QR Id	  */
+	/** Get CFDI QR ID	  */
 	public int getCFDIQR_ID();
 
     /** Column name CFDISATCertificate */
@@ -255,6 +255,24 @@ public interface I_LMX_Document
 	  */
 	public String getTaxID();
 
+    /** Column name TipoDeComprobante */
+    public static final String COLUMNNAME_TipoDeComprobante = "TipoDeComprobante";
+
+	/** Set TipoDeComprobante	  */
+	public void setTipoDeComprobante (String TipoDeComprobante);
+
+	/** Get TipoDeComprobante	  */
+	public String getTipoDeComprobante();
+
+    /** Column name TipoRelacion */
+    public static final String COLUMNNAME_TipoRelacion = "TipoRelacion";
+
+	/** Set Tipo Relacion	  */
+	public void setTipoRelacion (String TipoRelacion);
+
+	/** Get Tipo Relacion	  */
+	public String getTipoRelacion();
+
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
 
@@ -270,4 +288,17 @@ public interface I_LMX_Document
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
+
+    /** Column name UsoCFDI */
+    public static final String COLUMNNAME_UsoCFDI = "UsoCFDI";
+
+	/** Set UsoCFDI.
+	  * UsoCFDI
+	  */
+	public void setUsoCFDI (String UsoCFDI);
+
+	/** Get UsoCFDI.
+	  * UsoCFDI
+	  */
+	public String getUsoCFDI();
 }

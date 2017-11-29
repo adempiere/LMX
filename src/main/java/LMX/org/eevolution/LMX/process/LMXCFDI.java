@@ -19,7 +19,6 @@
 package org.eevolution.LMX.process;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -27,7 +26,6 @@ import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
-import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.cert.CertificateException;
@@ -62,6 +60,7 @@ import org.compiere.model.I_C_PaySelectionCheck;
 import org.compiere.model.I_C_Payment;
 import org.compiere.model.MAttachment;
 import org.compiere.model.MAttachmentNote;
+import org.compiere.model.MBPartner;
 import org.compiere.model.MClient;
 import org.compiere.model.MDocType;
 import org.compiere.model.MImage;
@@ -83,7 +82,9 @@ import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportEngine;
 import org.eevolution.LMX.model.I_LMX_Vendor;
 import org.eevolution.LMX.model.MLMXAddenda;
+import org.eevolution.LMX.model.MLMXBPartner;
 import org.eevolution.LMX.model.MLMXCertificate;
+import org.eevolution.LMX.model.MLMXDocType;
 import org.eevolution.LMX.model.MLMXDocument;
 import org.eevolution.LMX.model.MLMXTax;
 import org.w3c.dom.Document;
@@ -106,6 +107,7 @@ public final class LMXCFDI {
 	private static PO document  = null;
 	private static MLMXDocument documentCFDI = null;
 	private static CCache<Integer , LMXCFDI> cfdiCache = new CCache<>("LMXCFDI" , 5 , 1440);
+	private MDocType docType = null;
 
 
 	/***
@@ -132,8 +134,6 @@ public final class LMXCFDI {
 	public void setDocument(PO po) {
 		try {
 			this.document = po;
-			I_C_DocType docType = null;
-
 			if (certificate.getCertificateFile_ID() > 0 && !getNoCertificado().equals(certificate.getDocumentNo()))
 				throw new AdempiereException("Numero Certificado no coincide con el ");
 
@@ -424,6 +424,20 @@ public final class LMXCFDI {
 			documentCFDI.setAD_Table_ID(document.get_Table_ID());
 			documentCFDI.setRecord_ID(document.get_ID());
 			documentCFDI.setTaxID(getRFC());
+			// Set Relation Tipe
+			if (docType != null)
+			{
+				MLMXDocType.getByDocType(docType).ifPresent(
+						documentType -> documentCFDI.setTipoRelacion(documentType.getTipoRelacion())
+				);
+			} ;
+			// Set Uso CFDI
+			if (document.get_ColumnIndex(MBPartner.COLUMNNAME_C_BPartner_ID) > 0) {
+				MBPartner bPartner = MBPartner.get(document.getCtx(), document.get_ValueAsInt(MBPartner.COLUMNNAME_C_BPartner_ID));
+				MLMXBPartner.getByBPartner(bPartner).ifPresent(
+						partner -> documentCFDI.setUsoCFDI(partner.getUsoCFDI())
+				);
+			}
 			documentCFDI.saveEx();
 		}
 
