@@ -80,9 +80,11 @@ public class LMXModelValidator implements ModelValidator
 		//	Tables to be monitored
 		engine.addModelChange(MInvoice.Table_Name, this);
 		engine.addDocValidate(MInvoice.Table_Name, this);
+		engine.addDocValidate(MAllocationHdr.Table_Name, this);
 		//engine.addDocValidate(MInOut.Table_Name, this);
 		engine.addModelChange(MBPartner.Table_Name, this);
 		engine.addModelChange(MHRPaySelectionCheck.Table_Name, this);
+
 	}	//	initialize
 
     /**
