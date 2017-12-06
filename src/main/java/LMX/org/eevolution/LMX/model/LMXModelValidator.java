@@ -18,6 +18,8 @@
 package org.eevolution.LMX.model;
 
 
+import org.compiere.model.I_C_DocType;
+import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MClient;
 import org.compiere.model.MDocType;
@@ -31,6 +33,8 @@ import org.eevolution.LMX.process.LMXCFDI;
 import org.eevolution.model.MHRPaySelectionCheck;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Optional;
 
 
 /**
@@ -123,38 +127,52 @@ public class LMXModelValidator implements ModelValidator
 			{
 				/**	Order Discount Example	**/
 				MInvoice invoice = (MInvoice)po;
-				if(invoice.isSOTrx())
+				I_C_DocType docType = invoice.getC_DocType();
+				if(invoice.isSOTrx() && MDocType.DOCBASETYPE_ARInvoice.equals(docType.getDocBaseType()))
 				{	
 					LMXCFDI cdfdi = LMXCFDI.get();
 					cdfdi.setDocument(invoice);
 					cdfdi.generate();
 				}
 			}
+			if (MAllocationHdr.Table_Name.equals(po.get_TableName())) {
+				MAllocationHdr allocationHdr = (MAllocationHdr) po;
+				Arrays.stream(allocationHdr.getLines(true))
+						.forEach(allocationLine -> {
+							if (allocationLine.getC_Invoice_ID() > 0) {
+								MInvoice invoice = allocationLine.getInvoice();
+								Optional<MLMXDocument> cfdiOptional = Optional.of(MLMXDocument.get(invoice));
+								if (!cfdiOptional.isPresent()) {
+									LMXCFDI cfdi = LMXCFDI.get();
+									cfdi.setDocument(invoice);
+									cfdi.generate();
+								}
+							}
+						});
+			}
 		}
-		
-		
+
+
 		if (timing == this.TIMING_AFTER_REVERSECORRECT) {
-			if (po.get_TableName().equals(MInvoice.Table_Name))
-			{
-				/**	Order Discount Example	**/
-				MInvoice invoice = (MInvoice)po;
-				if(invoice.isSOTrx())
-				{	
-				MInvoice reversal = new MInvoice(invoice.getCtx(), invoice.getReversal_ID(), po.get_TrxName());
-				reversal.setDocumentNo(invoice.getDocumentNo() + "-" + reversal.getC_Invoice_ID());
-				invoice.setDocumentNo(invoice.getDocumentNo()+"+"+invoice.getC_Invoice_ID());				
-				invoice.setDescription("(" + invoice.getDocumentNo() + ") <- (" + reversal.getDocumentNo() + ")");
-				invoice.saveEx();
-				reversal.setDescription("(" +reversal.getDocumentNo() + ") -> ("+invoice.getDocumentNo()+")");
-				reversal.saveEx();
+			if (po.get_TableName().equals(MInvoice.Table_Name)) {
+				/**    Order Discount Example	**/
+				MInvoice invoice = (MInvoice) po;
+				if (invoice.isSOTrx()) {
+					MInvoice reversal = new MInvoice(invoice.getCtx(), invoice.getReversal_ID(), po.get_TrxName());
+					reversal.setDocumentNo(invoice.getDocumentNo() + "-" + reversal.getC_Invoice_ID());
+					invoice.setDocumentNo(invoice.getDocumentNo() + "+" + invoice.getC_Invoice_ID());
+					invoice.setDescription("(" + invoice.getDocumentNo() + ") <- (" + reversal.getDocumentNo() + ")");
+					invoice.saveEx();
+					reversal.setDescription("(" + reversal.getDocumentNo() + ") -> (" + invoice.getDocumentNo() + ")");
+					reversal.saveEx();
 
-				MDocType  eDocType = MDocType.get(invoice.getCtx(),invoice.getC_DocType_ID());
-				MSequence eSeq     = new MSequence(invoice.getCtx(),eDocType.getDocNoSequence_ID(),invoice.get_TrxName());
+					MDocType eDocType = MDocType.get(invoice.getCtx(), invoice.getC_DocType_ID());
+					MSequence eSeq = new MSequence(invoice.getCtx(), eDocType.getDocNoSequence_ID(), invoice.get_TrxName());
 
-				eSeq.setCurrentNext(eSeq.getCurrentNext() -1);
-				eSeq.save();
-				/** Order Discount Example */
-				log.info(po.toString());
+					eSeq.setCurrentNext(eSeq.getCurrentNext() - 1);
+					eSeq.save();
+					/** Order Discount Example */
+					log.info(po.toString());
 				}
 			}
 		}
