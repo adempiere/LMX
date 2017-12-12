@@ -425,12 +425,16 @@ public final class LMXCFDI {
 			documentCFDI.setRecord_ID(document.get_ID());
 			documentCFDI.setTaxID(getRFC());
 			// Set Relation Tipe
-			if (docType != null)
-			{
+			if (docType != null) {
 				MLMXDocType.getByDocType(docType).ifPresent(
-						documentType -> documentCFDI.setTipoRelacion(documentType.getTipoRelacion())
+						documentType ->
+						{
+							documentCFDI.setTipoDeComprobante(documentType.getTipoDeComprobante());
+							documentCFDI.setTipoRelacion(documentType.getTipoRelacion());
+						}
 				);
-			} ;
+			}
+			;
 			// Set Uso CFDI
 			if (document.get_ColumnIndex(MBPartner.COLUMNNAME_C_BPartner_ID) > 0) {
 				MBPartner bPartner = MBPartner.get(document.getCtx(), document.get_ValueAsInt(MBPartner.COLUMNNAME_C_BPartner_ID));
@@ -773,26 +777,26 @@ public final class LMXCFDI {
 	private String getRFC() {
 		return getTax().getC_BPartner().getTaxID();
 	}
-	
 
-	private String generateStamp(String CFDIXML) {
-		try {
-			int certificateNoIndex = CFDIXML.indexOf(" NoCertificado=\"") + 16;
-			String firstCertificateXml = CFDIXML.substring(0, certificateNoIndex);
-			String lastCertificateXml = CFDIXML.substring(certificateNoIndex, CFDIXML.length());
-			String xmlWithCertificateNo = firstCertificateXml + certificate.getDocumentNo().replaceAll("\n", "").replaceAll("\r", "") + lastCertificateXml;
 
-			documentCFDI.setCFDIString(getOriginalString(xmlWithCertificateNo));
-			documentCFDI.saveEx();
-			String stamp =  singner(documentCFDI.getCFDIString());
-            int stampIndex = xmlWithCertificateNo.indexOf(" Sello=\"") + 8;
-            String firstStampXml = xmlWithCertificateNo.substring(0, stampIndex);
-            String lastStampXml = xmlWithCertificateNo.substring(stampIndex, xmlWithCertificateNo.length());
-            String xmlWithStamp = firstStampXml + stamp + "\" Certificado=\"" + getCertificateBASE64Encoder().replaceAll("\n", "").replaceAll("\r", "") + lastStampXml;
-			return xmlWithStamp;
-	        
-        } catch (Exception e) {
-            throw new AdempiereException("No se pudo generar sellado en este momento");
-        }
-	}
+    private String generateStamp(String CFDIXML) {
+    try {
+        int certificateNoIndex = CFDIXML.indexOf(" NoCertificado=\"") + 16;
+        String firstCertificateXml = CFDIXML.substring(0, certificateNoIndex);
+        String lastCertificateXml = CFDIXML.substring(certificateNoIndex, CFDIXML.length());
+        String xmlWithCertificateNo = firstCertificateXml + certificate.getDocumentNo().replaceAll("\n", "").replaceAll("\r", "") + lastCertificateXml;
+
+        documentCFDI.setCFDIString(getOriginalString(xmlWithCertificateNo));
+        documentCFDI.saveEx();
+        String stamp =  singner(documentCFDI.getCFDIString());
+        int stampIndex = xmlWithCertificateNo.indexOf(" Sello=\"") + 8;
+        String firstStampXml = xmlWithCertificateNo.substring(0, stampIndex);
+        String lastStampXml = xmlWithCertificateNo.substring(stampIndex, xmlWithCertificateNo.length());
+        String xmlWithStamp = firstStampXml + stamp + "\" Certificado=\"" + getCertificateBASE64Encoder().replaceAll("\n", "").replaceAll("\r", "") + lastStampXml;
+        return xmlWithStamp;
+
+    } catch (Exception e) {
+        throw new AdempiereException("No se pudo generar sellado en este momento");
+    }
+}
 }

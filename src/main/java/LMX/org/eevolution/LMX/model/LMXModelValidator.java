@@ -143,8 +143,9 @@ public class LMXModelValidator implements ModelValidator
 						.forEach(allocationLine -> {
 							if (allocationLine.getC_Invoice_ID() > 0) {
 								MInvoice invoice = allocationLine.getInvoice();
-								Optional<MLMXDocument> cfdiOptional = Optional.of(MLMXDocument.get(invoice));
-								if (!cfdiOptional.isPresent()) {
+								I_C_DocType docType = invoice.getC_DocType();
+								Optional<MLMXDocument> cfdiOptional = Optional.ofNullable(MLMXDocument.get(invoice));
+								if (!cfdiOptional.isPresent() && MDocType.DOCBASETYPE_ARCreditMemo.equals(docType.getDocBaseType())) {
 									LMXCFDI cfdi = LMXCFDI.get();
 									cfdi.setDocument(invoice);
 									cfdi.generate();

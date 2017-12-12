@@ -510,7 +510,7 @@
         <Data AD_Column_ID="2638" Column="AD_Language" oldValue="es_MX">es_MX</Data>
         <Data AD_Column_ID="2637" Column="AD_Element_ID" oldValue="59691">59691</Data>
         <Data AD_Column_ID="2649" Column="IsTranslated" oldValue="false">true</Data>
-        <Data AD_Column_ID="4300" Column="PrintName" oldValue="TipoRelacion">Tipo Relación</Data>
+        <Data AD_Column_ID="4300" Column="PrintName" oldValue="TipoRelacion">TipoRelacion</Data>
       </PO>
     </Step>
     <Step SeqNo="270" StepType="AD">
@@ -1238,13 +1238,13 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6245" Column="ReadOnlyLogic" isNewNull="true"/>
         <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
         <Data AD_Column_ID="110" Column="Version">0</Data>
-        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID">53990</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
         <Data AD_Column_ID="116" Column="ColumnName">TipoRelacion</Data>
         <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="113" Column="Help" isNewNull="true"/>
         <Data AD_Column_ID="118" Column="FieldLength">2</Data>
-        <Data AD_Column_ID="226" Column="AD_Reference_ID">17</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">10</Data>
         <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
         <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
         <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>
@@ -1440,7 +1440,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6945" Column="AD_PrintFormatChild_ID" isNewNull="true"/>
         <Data AD_Column_ID="6956" Column="IsSummarized">false</Data>
         <Data AD_Column_ID="6949" Column="AD_Column_ID">85849</Data>
-        <Data AD_Column_ID="6943" Column="IsNextLine">true</Data>
+        <Data AD_Column_ID="6943" Column="IsNextLine">false</Data>
         <Data AD_Column_ID="6950" Column="IsPageBreak">false</Data>
         <Data AD_Column_ID="7030" Column="LineAlignmentType">X</Data>
         <Data AD_Column_ID="6957" Column="YPosition">0</Data>
@@ -1465,7 +1465,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="56351" Column="FormatPattern" isNewNull="true"/>
         <Data AD_Column_ID="6970" Column="IsOrderBy">false</Data>
         <Data AD_Column_ID="6948" Column="SortNo">0</Data>
-        <Data AD_Column_ID="6965" Column="IsHeightOneLine">true</Data>
+        <Data AD_Column_ID="6965" Column="IsHeightOneLine">false</Data>
         <Data AD_Column_ID="6967" Column="XPosition">0</Data>
         <Data AD_Column_ID="7031" Column="PrintFormatType">F</Data>
         <Data AD_Column_ID="6960" Column="AD_PrintFormat_ID">50356</Data>
@@ -1526,7 +1526,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6945" Column="AD_PrintFormatChild_ID" isNewNull="true"/>
         <Data AD_Column_ID="6956" Column="IsSummarized">false</Data>
         <Data AD_Column_ID="6949" Column="AD_Column_ID">85848</Data>
-        <Data AD_Column_ID="6943" Column="IsNextLine">true</Data>
+        <Data AD_Column_ID="6943" Column="IsNextLine">false</Data>
         <Data AD_Column_ID="6950" Column="IsPageBreak">false</Data>
         <Data AD_Column_ID="7030" Column="LineAlignmentType">X</Data>
         <Data AD_Column_ID="6957" Column="YPosition">0</Data>
@@ -1551,7 +1551,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="56351" Column="FormatPattern" isNewNull="true"/>
         <Data AD_Column_ID="6970" Column="IsOrderBy">false</Data>
         <Data AD_Column_ID="6948" Column="SortNo">0</Data>
-        <Data AD_Column_ID="6965" Column="IsHeightOneLine">true</Data>
+        <Data AD_Column_ID="6965" Column="IsHeightOneLine">false</Data>
         <Data AD_Column_ID="6967" Column="XPosition">0</Data>
         <Data AD_Column_ID="7031" Column="PrintFormatType">F</Data>
         <Data AD_Column_ID="6960" Column="AD_PrintFormat_ID">50356</Data>
@@ -1573,7 +1573,7 @@ There are two reasons for de-activating and not deleting records:
     <Step SeqNo="590" StepType="AD">
       <PO AD_Table_ID="522" Action="I" Record_ID="0" Table="AD_PrintFormatItem_Trl">
         <Data AD_Column_ID="7612" Column="Updated">2017-11-29 10:52:54.786</Data>
-        <Data AD_Column_ID="7610" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="7610" Column="IsTranslated">true</Data>
         <Data AD_Column_ID="7607" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="7608" Column="Created">2017-11-29 10:52:54.786</Data>
         <Data AD_Column_ID="7611" Column="AD_Client_ID">0</Data>
@@ -1623,7 +1623,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6945" Column="AD_PrintFormatChild_ID" isNewNull="true"/>
         <Data AD_Column_ID="6956" Column="IsSummarized">false</Data>
         <Data AD_Column_ID="6949" Column="AD_Column_ID">85847</Data>
-        <Data AD_Column_ID="6943" Column="IsNextLine">true</Data>
+        <Data AD_Column_ID="6943" Column="IsNextLine">false</Data>
         <Data AD_Column_ID="6950" Column="IsPageBreak">false</Data>
         <Data AD_Column_ID="7030" Column="LineAlignmentType">X</Data>
         <Data AD_Column_ID="6957" Column="YPosition">0</Data>
@@ -1648,7 +1648,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="56351" Column="FormatPattern" isNewNull="true"/>
         <Data AD_Column_ID="6970" Column="IsOrderBy">false</Data>
         <Data AD_Column_ID="6948" Column="SortNo">0</Data>
-        <Data AD_Column_ID="6965" Column="IsHeightOneLine">true</Data>
+        <Data AD_Column_ID="6965" Column="IsHeightOneLine">false</Data>
         <Data AD_Column_ID="6967" Column="XPosition">0</Data>
         <Data AD_Column_ID="7031" Column="PrintFormatType">F</Data>
         <Data AD_Column_ID="6960" Column="AD_PrintFormat_ID">50356</Data>
@@ -1659,7 +1659,7 @@ There are two reasons for de-activating and not deleting records:
     <Step SeqNo="610" StepType="AD">
       <PO AD_Table_ID="522" Action="I" Record_ID="0" Table="AD_PrintFormatItem_Trl">
         <Data AD_Column_ID="7612" Column="Updated">2017-11-29 10:53:20.337</Data>
-        <Data AD_Column_ID="7610" Column="IsTranslated">false</Data>
+        <Data AD_Column_ID="7610" Column="IsTranslated">true</Data>
         <Data AD_Column_ID="7607" Column="AD_Org_ID">0</Data>
         <Data AD_Column_ID="7608" Column="Created">2017-11-29 10:53:20.337</Data>
         <Data AD_Column_ID="7611" Column="AD_Client_ID">0</Data>
@@ -1697,7 +1697,7 @@ There are two reasons for de-activating and not deleting records:
         <Data AD_Column_ID="6945" Column="AD_PrintFormatChild_ID">50356</Data>
         <Data AD_Column_ID="6956" Column="IsSummarized">false</Data>
         <Data AD_Column_ID="6949" Column="AD_Column_ID">75151</Data>
-        <Data AD_Column_ID="6943" Column="IsNextLine">true</Data>
+        <Data AD_Column_ID="6943" Column="IsNextLine">false</Data>
         <Data AD_Column_ID="6950" Column="IsPageBreak">false</Data>
         <Data AD_Column_ID="7030" Column="LineAlignmentType">X</Data>
         <Data AD_Column_ID="6957" Column="YPosition">0</Data>
