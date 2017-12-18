@@ -26,7 +26,7 @@ import java.util.Properties;
 public class MLMXDocType  extends X_LMX_DocType{
 
     public static Optional<MLMXDocType> getByDocType(MDocType docType) {
-        return Optional.of(new Query(docType.getCtx(), Table_Name, MDocType.COLUMNNAME_C_DocType_ID + "=?", docType.get_TrxName())
+        return Optional.ofNullable(new Query(docType.getCtx(), Table_Name, MDocType.COLUMNNAME_C_DocType_ID + "=?", docType.get_TrxName())
                 .setClient_ID()
                 .setParameters(docType.getC_DocType_ID())
                 .first());

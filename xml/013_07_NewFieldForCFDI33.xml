@@ -704,13 +704,13 @@ INNER JOIN c_tax t on t.c_tax_id=it.c_tax_id and t.rate &gt;= 0;</RollbackStatem
         <Data AD_Column_ID="56352" Column="FormatPattern" isNewNull="true"/>
         <Data AD_Column_ID="50218" Column="MandatoryLogic" isNewNull="true"/>
         <Data AD_Column_ID="110" Column="Version">0</Data>
-        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID">53948</Data>
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true"/>
         <Data AD_Column_ID="13448" Column="ColumnSQL" isNewNull="true"/>
         <Data AD_Column_ID="116" Column="ColumnName">UsoCFDI</Data>
         <Data AD_Column_ID="115" Column="AD_Val_Rule_ID" isNewNull="true"/>
         <Data AD_Column_ID="113" Column="Help">Attributo requerido para expresar la clave del uso que dará a esta factura el receptor del CFDI.</Data>
         <Data AD_Column_ID="118" Column="FieldLength">3</Data>
-        <Data AD_Column_ID="226" Column="AD_Reference_ID">17</Data>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID">10</Data>
         <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
         <Data AD_Column_ID="552" Column="UpdatedBy">100</Data>
         <Data AD_Column_ID="1692" Column="Callout" isNewNull="true"/>

@@ -434,6 +434,10 @@ public final class LMXCFDI {
 						}
 				);
 			}
+
+			if (documentCFDI.getTipoDeComprobante() == null)
+				throw  new AdempiereException("@TipoDeComprobante@ @NotFound@");
+
 			;
 			// Set Uso CFDI
 			if (document.get_ColumnIndex(MBPartner.COLUMNNAME_C_BPartner_ID) > 0) {
@@ -442,6 +446,10 @@ public final class LMXCFDI {
 						partner -> documentCFDI.setUsoCFDI(partner.getUsoCFDI())
 				);
 			}
+
+			if (documentCFDI.getUsoCFDI() == null)
+				throw  new AdempiereException("@UsoCFDI@ @NotFound@");
+
 			documentCFDI.saveEx();
 		}
 

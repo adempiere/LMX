@@ -26,7 +26,7 @@ import java.util.Properties;
 public class MLMXBPartner extends X_LMX_BPartner
 {
     public static Optional<MLMXBPartner> getByBPartner(MBPartner partner) {
-        return Optional.of(
+        return Optional.ofNullable(
                 new Query(partner.getCtx(), Table_Name, MBPartner.COLUMNNAME_C_BPartner_ID + "=?", partner.get_TrxName())
                         .setClient_ID()
                         .setParameters(partner.getC_BPartner_ID())
