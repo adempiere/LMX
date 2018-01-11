@@ -71,7 +71,6 @@ class LoadInvoiceFromXMLCFDI extends LoadInvoiceFromXMLCFDIAbstract {
     val nombreEmisor = Option((cfdi \\ "Emisor" \ "@Nombre").text).getOrElse((cfdi \\ "Emisor" \ "@nombre").text)
     val regimenFiscalEmisor = Option((cfdi \\ "Emisor" \ "@RegimenFiscal").text).getOrElse((cfdi \\ "Emisor" \ "@regimenFiscal").text)
     val logEmisor = s"RFC ${rfcEmisor} Nombre : ${nombreEmisor} Regimen Fiscal : ${regimenFiscalEmisor}"
-    )
     addLog(logEmisor)
     // Genera o Acualiza Factura basado en los datos del CFDI
     val invoice = createInvoice(uuid, rfcEmisor, nombreEmisor, regimenFiscalEmisor, folio, fechaTimbrado, moneda, null, selloSAT, sello, fechaTimbrado, usoCFDI, cfdi.toString())
