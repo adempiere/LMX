@@ -31,7 +31,7 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20170613L;
+	private static final long serialVersionUID = 20180109L;
 
     /** Standard Constructor */
     public X_LMX_Addenda (Properties ctx, int LMX_Addenda_ID, String trxName)
@@ -71,6 +71,34 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	public org.compiere.model.I_AD_Column getAD_Column() throws RuntimeException
+    {
+		return (org.compiere.model.I_AD_Column)MTable.get(getCtx(), org.compiere.model.I_AD_Column.Table_Name)
+			.getPO(getAD_Column_ID(), get_TrxName());	}
+
+	/** Set Column.
+		@param AD_Column_ID 
+		Column in the table
+	  */
+	public void setAD_Column_ID (int AD_Column_ID)
+	{
+		if (AD_Column_ID < 1) 
+			set_Value (COLUMNNAME_AD_Column_ID, null);
+		else 
+			set_Value (COLUMNNAME_AD_Column_ID, Integer.valueOf(AD_Column_ID));
+	}
+
+	/** Get Column.
+		@return Column in the table
+	  */
+	public int getAD_Column_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Column_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	public org.compiere.model.I_AD_PrintFormat getAD_PrintFormat() throws RuntimeException
     {
@@ -272,6 +300,54 @@ public class X_LMX_Addenda extends PO implements I_LMX_Addenda, I_Persistent
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);
+	}
+
+	public org.compiere.model.I_AD_Column getParent_Column() throws RuntimeException
+    {
+		return (org.compiere.model.I_AD_Column)MTable.get(getCtx(), org.compiere.model.I_AD_Column.Table_Name)
+			.getPO(getParent_Column_ID(), get_TrxName());	}
+
+	/** Set Parent Column.
+		@param Parent_Column_ID 
+		The link column on the parent tab.
+	  */
+	public void setParent_Column_ID (int Parent_Column_ID)
+	{
+		if (Parent_Column_ID < 1) 
+			set_Value (COLUMNNAME_Parent_Column_ID, null);
+		else 
+			set_Value (COLUMNNAME_Parent_Column_ID, Integer.valueOf(Parent_Column_ID));
+	}
+
+	/** Get Parent Column.
+		@return The link column on the parent tab.
+	  */
+	public int getParent_Column_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Parent_Column_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Sequence.
+		@param SeqNo 
+		Method of ordering records; lowest number comes first
+	  */
+	public void setSeqNo (int SeqNo)
+	{
+		set_Value (COLUMNNAME_SeqNo, Integer.valueOf(SeqNo));
+	}
+
+	/** Get Sequence.
+		@return Method of ordering records; lowest number comes first
+	  */
+	public int getSeqNo () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_SeqNo);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Search Key.

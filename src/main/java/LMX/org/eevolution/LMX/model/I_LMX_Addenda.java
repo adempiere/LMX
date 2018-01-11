@@ -50,6 +50,21 @@ public interface I_LMX_Addenda
 	  */
 	public int getAD_Client_ID();
 
+    /** Column name AD_Column_ID */
+    public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
+
+	/** Set Column.
+	  * Column in the table
+	  */
+	public void setAD_Column_ID (int AD_Column_ID);
+
+	/** Get Column.
+	  * Column in the table
+	  */
+	public int getAD_Column_ID();
+
+	public org.compiere.model.I_AD_Column getAD_Column() throws RuntimeException;
+
     /** Column name AD_Org_ID */
     public static final String COLUMNNAME_AD_Org_ID = "AD_Org_ID";
 
@@ -208,6 +223,36 @@ public interface I_LMX_Addenda
 	  * Alphanumeric identifier of the entity
 	  */
 	public String getName();
+
+    /** Column name Parent_Column_ID */
+    public static final String COLUMNNAME_Parent_Column_ID = "Parent_Column_ID";
+
+	/** Set Parent Column.
+	  * The link column on the parent tab.
+	  */
+	public void setParent_Column_ID (int Parent_Column_ID);
+
+	/** Get Parent Column.
+	  * The link column on the parent tab.
+	  */
+	public int getParent_Column_ID();
+
+	public org.compiere.model.I_AD_Column getParent_Column() throws RuntimeException;
+
+    /** Column name SeqNo */
+    public static final String COLUMNNAME_SeqNo = "SeqNo";
+
+	/** Set Sequence.
+	  * Method of ordering records;
+ lowest number comes first
+	  */
+	public void setSeqNo (int SeqNo);
+
+	/** Get Sequence.
+	  * Method of ordering records;
+ lowest number comes first
+	  */
+	public int getSeqNo();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
