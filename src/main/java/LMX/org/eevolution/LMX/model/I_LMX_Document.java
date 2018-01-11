@@ -81,10 +81,10 @@ public interface I_LMX_Document
     /** Column name CFDIQR_ID */
     public static final String COLUMNNAME_CFDIQR_ID = "CFDIQR_ID";
 
-	/** Set CFDI QR ID	  */
+	/** Set CFDI QR Id	  */
 	public void setCFDIQR_ID (int CFDIQR_ID);
 
-	/** Get CFDI QR ID	  */
+	/** Get CFDI QR Id	  */
 	public int getCFDIQR_ID();
 
     /** Column name CFDISATCertificate */

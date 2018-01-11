@@ -30,7 +30,7 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20171129L;
+	private static final long serialVersionUID = 20180108L;
 
     /** Standard Constructor */
     public X_LMX_Document (Properties ctx, int LMX_Document_ID, String trxName)
@@ -98,8 +98,8 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set CFDI QR ID.
-		@param CFDIQR_ID CFDI QR ID	  */
+	/** Set CFDI QR Id.
+		@param CFDIQR_ID CFDI QR Id	  */
 	public void setCFDIQR_ID (int CFDIQR_ID)
 	{
 		if (CFDIQR_ID < 1) 
@@ -108,8 +108,8 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 			set_Value (COLUMNNAME_CFDIQR_ID, Integer.valueOf(CFDIQR_ID));
 	}
 
-	/** Get CFDI QR ID.
-		@return CFDI QR ID	  */
+	/** Get CFDI QR Id.
+		@return CFDI QR Id	  */
 	public int getCFDIQR_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_CFDIQR_ID);
@@ -411,6 +411,44 @@ public class X_LMX_Document extends PO implements I_LMX_Document, I_Persistent
 	public static final String USOCFDI_DevolucionesDescuentosOBonificaciones = "G02";
 	/** Gastos en general = G03 */
 	public static final String USOCFDI_GastosEnGeneral = "G03";
+	/** Construcciones = I01 */
+	public static final String USOCFDI_Construcciones = "I01";
+	/** Mobilario y equipo de oficina por inversiones = I02 */
+	public static final String USOCFDI_MobilarioYEquipoDeOficinaPorInversiones = "I02";
+	/** Equipo de transporte = I03 */
+	public static final String USOCFDI_EquipoDeTransporte = "I03";
+	/** Equipo de computo y accesorios = I04 */
+	public static final String USOCFDI_EquipoDeComputoYAccesorios = "I04";
+	/** Dados, troqueles, moldes, matrices y herramental = I05 */
+	public static final String USOCFDI_DadosTroquelesMoldesMatricesYHerramental = "I05";
+	/** Comunicaciones telefónicas = I06 */
+	public static final String USOCFDI_ComunicacionesTelefónicas = "I06";
+	/** Comunicaciones satelitales = I07 */
+	public static final String USOCFDI_ComunicacionesSatelitales = "I07";
+	/** Otra maquinaria y equipo = I08 */
+	public static final String USOCFDI_OtraMaquinariaYEquipo = "I08";
+	/** Honorarios médicos, dentales y gastos hospitalarios. = D01 */
+	public static final String USOCFDI_HonorariosMédicosDentalesYGastosHospitalarios = "D01";
+	/** Gastos médicos por incapacidad o discapacidad = D02 */
+	public static final String USOCFDI_GastosMédicosPorIncapacidadODiscapacidad = "D02";
+	/** Gastos funerales. = D03 */
+	public static final String USOCFDI_GastosFunerales = "D03";
+	/** Donativos. = D04 */
+	public static final String USOCFDI_Donativos = "D04";
+	/** Intereses reales efectivamente pagados por créditos = D05 */
+	public static final String USOCFDI_InteresesRealesEfectivamentePagadosPorCréditos = "D05";
+	/** Aportaciones voluntarias al SAR. = D06 */
+	public static final String USOCFDI_AportacionesVoluntariasAlSAR = "D06";
+	/** Primas por seguros de gastos médicos. = D07 */
+	public static final String USOCFDI_PrimasPorSegurosDeGastosMédicos = "D07";
+	/** Gastos de transportación escolar obligatoria. = D08 */
+	public static final String USOCFDI_GastosDeTransportaciónEscolarObligatoria = "D08";
+	/** Depósitos en cuentas para el ahorro = D09 */
+	public static final String USOCFDI_DepósitosEnCuentasParaElAhorro = "D09";
+	/** Pagos por servicios educativos (colegiaturas) = D10 */
+	public static final String USOCFDI_PagosPorServiciosEducativosColegiaturas = "D10";
+	/** Por definir = P01 */
+	public static final String USOCFDI_PorDefinir = "P01";
 	/** Set UsoCFDI.
 		@param UsoCFDI 
 		UsoCFDI

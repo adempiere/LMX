@@ -57,6 +57,8 @@ public class MLMXDocument extends X_LMX_Document {
     public MLMXDocument(PO po)
     {
         super(po.getCtx() , 0 , po.get_TrxName());
+        setAD_Table_ID(po.get_Table_ID());
+        setRecord_ID(po.get_ID());
         setC_Invoice_ID(po.get_ID());
     }
 }
