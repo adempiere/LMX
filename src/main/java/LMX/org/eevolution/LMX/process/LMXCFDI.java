@@ -35,6 +35,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +63,7 @@ import org.compiere.model.MAttachment;
 import org.compiere.model.MAttachmentNote;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MClient;
+import org.compiere.model.MColumn;
 import org.compiere.model.MDocType;
 import org.compiere.model.MImage;
 import org.compiere.model.MInvoice;
@@ -100,7 +102,7 @@ public final class LMXCFDI {
 	private MLMXCertificate certificate = null;
 	private LMXVendorInterface service = null;
 	private MLMXTax taxInfo = null;
-	private MLMXAddenda addendaInfo = null;
+	private List<MLMXAddenda> addendaInfoList = new ArrayList<>();
 	private String CFDI = null;
 
 	private static LMXCFDI instance = null;
@@ -146,14 +148,16 @@ public final class LMXCFDI {
 			if (taxInfo == null)
 				throw new AdempiereException("No existe infomración de la compañia para el timbrado");
 
-			if (addendaInfo == null)
-				addendaInfo = MLMXAddenda.getByBPartnerId(po.getCtx(), taxInfo.getC_BPartner_ID(), po.get_TrxName());
+			//if (addendaInfo == null)
+			//	addendaInfo = MLMXAddenda.getByBPartnerId(po.getCtx(), taxInfo.getC_BPartner_ID(), po.get_TrxName());
+            if (addendaInfoList.size() <= 0)
+                addendaInfoList = MLMXAddenda.getByBPartnerId(MBPartner.get(po.getCtx() , taxInfo.getC_BPartner_ID()));
 
-			MLMXAddenda addInfoCustomer = MLMXAddenda.getByBPartnerId(po.getCtx(), po.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID), po.get_TrxName());
-			if (addInfoCustomer != null)
-				addendaInfo = addInfoCustomer;
+			List<MLMXAddenda> addInfoCustomerList = MLMXAddenda.getByBPartnerId(MBPartner.get(po.getCtx() , po.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID)));
+			if (addInfoCustomerList.size() <= 0)
+				addendaInfoList.addAll(addInfoCustomerList);
 
-			if (addendaInfo == null)
+			if (addendaInfoList.size() <= 0)
 				throw new AdempiereException("No hay esquema para comprobante Fiscal Digital");
 
 			LMXVendorEngine engine = LMXVendorEngine.get();
@@ -196,7 +200,7 @@ public final class LMXCFDI {
 
 	}
 
-	private InputStream getCFDI_SCHEMA()
+	private InputStream getCFDI_SCHEMA(MLMXAddenda addendaInfo)
 	{
 		InputStream inputStramSchema = null;
 		// ADempiere Schema
@@ -209,7 +213,7 @@ public final class LMXCFDI {
 
 	}
 
-	private InputStream getCFDI_XSLT() {
+	private InputStream getCFDI_XSLT(MLMXAddenda addendaInfo) {
 		InputStream inputStramCFDIXSLT = null;
 		//	ADempiere Transformera
 		if (addendaInfo.getCFDIADTransformer_ID() > 0)
@@ -219,7 +223,7 @@ public final class LMXCFDI {
 		return inputStramCFDIXSLT;
 	}
 
-	private InputStream getCFDI_STRING_XSLT(){
+	private InputStream getCFDI_STRING_XSLT(MLMXAddenda addendaInfo){
 		InputStream 	inputStreamCFDI_STRING_XSLT = null;
 		// CFDI String Transformer
 		if (addendaInfo.getCFDITransformerString_ID() > 0)
@@ -229,7 +233,7 @@ public final class LMXCFDI {
 		return inputStreamCFDI_STRING_XSLT;
 	}
 
-	private InputStream getCFDI_ADDENDA_XSLT (){
+	private InputStream getCFDI_ADDENDA_XSLT (MLMXAddenda addendaInfo){
 		InputStream inputStreamCFDI_ADDENDA_XSLT = null;
 		//	CFDI Transformer
 		if (addendaInfo.getCFDITransformer_ID() > 0)
@@ -357,27 +361,38 @@ public final class LMXCFDI {
 
 	}
 
-	public static String getXMLFromReportEngine(PO po , int printFormatId) {
+    /**
+     *
+     * @param po
+     * @param addendaInfo
+     * @return
+     */
+	public static String getXMLFromReportEngine(PO po , MLMXAddenda addendaInfo) {
 		MClient client = MClient.get(po.getCtx());
 		Language language = client.getLanguage();
 		// Get Format & Data
-		MPrintFormat format = MPrintFormat.get(po.getCtx(), printFormatId , false);
-		format.setLanguage(language);
-		format.setTranslationLanguage(language);
+		MPrintFormat printFormat = MPrintFormat.get(po.getCtx(), addendaInfo.getAD_PrintFormat_ID() , false);
+		printFormat.setLanguage(language);
+		printFormat.setTranslationLanguage(language);
 		// query
-		MQuery query = new MQuery(format.getAD_Table().getTableName());
-		
-		query.addRestriction(po.get_TableName() + "_ID", MQuery.EQUAL,
-				po.get_ID());
+		MQuery query = new MQuery(printFormat.getAD_Table().getTableName());
+		//Column Link
+		MColumn columnLink = MColumn.get(po.getCtx() , addendaInfo.getAD_Column_ID());
+		query.addRestriction(columnLink.getColumnName(), MQuery.EQUAL, po.get_Value(columnLink.getColumnName()));
+        // Parent Column Link
+		if(addendaInfo.getParent_Column_ID() > 0) {
+			MColumn columnParent = MColumn.get(po.getCtx(), addendaInfo.getParent_Column_ID());
+			query.addRestriction(columnParent.getColumnName(), MQuery.EQUAL, po.get_Value(columnParent.getColumnName()));
+		}
 		
 		PrintInfo printInfo = new PrintInfo(po.get_ValueAsString("DocumentNo"),
-				format.getAD_Table().getAD_Table_ID() , po.get_ID());
+				printFormat.getAD_Table().getAD_Table_ID() , po.get_ID());
 		printInfo.setCopies(1);
 		printInfo.setDocumentCopy(false); // true prints "Copy" on second
-		printInfo.setPrinterName(format.getPrinterName());
+		printInfo.setPrinterName(printFormat.getPrinterName());
 
 		// Engine
-		ReportEngine reportEngine = new ReportEngine(po.getCtx(), format,
+		ReportEngine reportEngine = new ReportEngine(po.getCtx(), printFormat,
 				query, printInfo, po.get_TrxName());
 		if (reportEngine == null)
 			throw new AdempiereException("@NotFound@ @M_PrintFormat_ID@");
@@ -389,26 +404,89 @@ public final class LMXCFDI {
 		return stringWriter.getBuffer().toString();
 	}
 
-	public String getCFDI(PO po) throws TransformerException {
-		String xmlReport = getXMLFromReportEngine(po, addendaInfo.getAD_PrintFormat_ID());
-		String transformedCFDI = getXMLTransform(xmlReport);
-		String documentCFDI = getAddendaTransform(transformedCFDI);
-		return documentCFDI;
-	}
+    public String getCFDI(PO po) {
+		List<StreamSource> schemas = new ArrayList<>();
+		StringBuilder documentCFDI = new StringBuilder();
+		// Generate Document XML for CFDI based on Addendas
+		addendaInfoList.stream()
+				// Validate if Column Link exists into Entity
+				.filter(addendaInfo ->
+						addendaInfo.getAD_Column_ID() > 0
+								&& po.get_ColumnIndex(MColumn.getColumnName(po.getCtx(), addendaInfo.getAD_Column_ID())) > 0)
+				.forEach(addendaInfo -> {
+					try {
+						// Generate XML from ADempiere
+						String xmlReport = getXMLFromReportEngine(po, addendaInfo);
+						// Transform ADempiere XML
+						String transformedCFDI = getXMLTransform(xmlReport, addendaInfo);
+						// Transform CFDI based on XSLT
+						String documentTransform = getAddendaTransform(transformedCFDI, addendaInfo);
+						if (documentTransform.toString().contains("<cfdi:Complemento "))
+							addComplement(documentCFDI, documentTransform);
+						else {
+							documentCFDI.append(documentTransform.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""));
+						}
 
-	public String getXMLTransform(final String xmlReport) throws TransformerException {
+						if (addendaInfo.getCFDISchema_ID() > 0)
+							schemas.add(new StreamSource(getCFDI_SCHEMA(addendaInfo)));
+
+					} catch (Exception exception) {
+						throw new AdempiereException(exception.getLocalizedMessage());
+					}
+					if (documentCFDI.toString().isEmpty())
+						throw new AdempiereException("El CFDI no es Válido");
+
+				});
+
+		String cfdiWithStamp = generateStamp(documentCFDI.toString());
+		try {
+			// Schema Validation
+			String schemaLang = "http://www.w3.org/2001/XMLSchema";
+			// get validation driver:
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(schemaLang);
+			// create schemas by reading it from an XSD file:
+			StreamSource[] arraySchemas = new StreamSource[schemas.size()];
+			arraySchemas = schemas.toArray(arraySchemas);
+			Schema schema = schemaFactory.newSchema(arraySchemas);
+			Validator validator = schema.newValidator();
+			validator.validate(new StreamSource(new StringReader(cfdiWithStamp)));
+		} catch (Exception exception) {
+			throw new AdempiereException(exception.getLocalizedMessage());
+		}
+
+		if (cfdiWithStamp.toString().isEmpty())
+			throw new AdempiereException("El CFDI no es Válido");
+
+		return cfdiWithStamp.toString();
+    }
+
+    /**
+     *
+     * @param xmlReport
+     * @param addendaInfo
+     * @return
+     * @throws TransformerException
+     */
+	public String getXMLTransform(final String xmlReport, MLMXAddenda addendaInfo) throws TransformerException {
 
 		StringWriter transformedCFDI = new StringWriter();
 		// Generate CFDI using transformer
-		transform(new StreamSource(getCFDI_XSLT()), new StreamSource(
+		transform(new StreamSource(getCFDI_XSLT(addendaInfo)), new StreamSource(
 						new StringReader(xmlReport)),
 				new StreamResult(transformedCFDI));
 		return transformedCFDI.getBuffer().toString();
 	}
 
-	public String getAddendaTransform(final String CFDI) throws TransformerException {
+    /**
+     *
+     * @param CFDI
+     * @param addendaInfo
+     * @return
+     * @throws TransformerException
+     */
+	public String getAddendaTransform(final String CFDI, MLMXAddenda addendaInfo) throws TransformerException {
 		StringWriter transformedCFDI = new StringWriter();
-		transform(new StreamSource(getCFDI_ADDENDA_XSLT()), new StreamSource(
+		transform(new StreamSource(getCFDI_ADDENDA_XSLT(addendaInfo)), new StreamSource(
 				new StringReader(CFDI)), new StreamResult(transformedCFDI));
 		return transformedCFDI.getBuffer().toString();
 	}
@@ -466,20 +544,8 @@ public final class LMXCFDI {
 		}*/
 
 		if(document != null) {
-			documentCFDI.setCFDIXML(generateStamp(getCFDI(document)));
+			documentCFDI.setCFDIXML(getCFDI(document));
 			documentCFDI.saveEx();
-		}
-
-		if(document!=null && I_C_Invoice.Table_Name.equals(document.get_TableName()))
-		{
-			// Schema Validation
-			String schemaLang = "http://www.w3.org/2001/XMLSchema";
-			// get validation driver:
-			SchemaFactory schemaFactory = SchemaFactory.newInstance(schemaLang);
-			// create schema by reading it from an XSD file:
-			Schema schema = schemaFactory.newSchema(new StreamSource(getCFDI_SCHEMA()));
-			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(new StringReader(documentCFDI.getCFDIXML())));
 		}
 
 		if ("".equals(documentCFDI.getCFDIXML()) || documentCFDI.getCFDIXML() == null)
@@ -487,6 +553,7 @@ public final class LMXCFDI {
 
 		service.getCFDI(documentCFDI);
 		service.getQR(documentCFDI);
+
 		MAttachment attachment = new MAttachment(documentCFDI.getCtx(), documentCFDI
 				.get_Table_ID(), documentCFDI.getLMX_Document_ID(), documentCFDI
 				.get_TrxName());
@@ -511,8 +578,8 @@ public final class LMXCFDI {
 
 		Ini.setProperty(Ini.P_UID, "SuperUser");
 		Ini.setProperty(Ini.P_PWD, "System");
-		Ini.setProperty(Ini.P_ROLE, "AHVR admin");
-		Ini.setProperty(Ini.P_CLIENT, "Aldo Hugo Vargas Rodríguez");
+		Ini.setProperty(Ini.P_ROLE, "Kernotek SA de CV Admin");
+		Ini.setProperty(Ini.P_CLIENT, "Kernotek SA de CV");
 		Ini.setProperty(Ini.P_ORG, "Matriz");
 		Ini.setProperty(Ini.P_WAREHOUSE, "Estándar");
 		Ini.setProperty(Ini.P_LANGUAGE, "English");
@@ -526,19 +593,17 @@ public final class LMXCFDI {
 		//		null).setClient_ID().setOrderBy("DateInvoiced").list();
 		
 		List<MInvoice> invoices = new Query(Env.getCtx(), MInvoice.Table_Name,
-				"DocumentNo='B1195'",
-				null).setClient_ID().setOrderBy("DateInvoiced").list();
+				"C_Invoice_ID=?", null)
+                .setClient_ID()
+                .setParameters(1008899)
+                .setOrderBy("DateInvoiced").list();
 		
 		for (MInvoice invoice : invoices) {
-			System.out.println("Factura ... "
-					+ invoice.getDocumentNo());
+			System.out.println("Factura ... " + invoice.getDocumentNo());
 			//regenerate(invoice);
 			LMXCFDI cdfdi = LMXCFDI.get();
 			cdfdi.setDocument(invoice);
 			cdfdi.generate();
-
-			System.out.println("Factura procesada ... "
-					+ invoice.getDocumentNo());
 		}
 		
 		
@@ -741,30 +806,46 @@ public final class LMXCFDI {
 		return xml;
 	}
 
-	private static String tmpComplemento = "<cfdi:Complemento/>";
+	private static String tmpComplement = "<cfdi:Complemento/>";
 
-	private static String cutComplemento(String xml) {
-		if (xml.contains("<cfdi:Complemento>")) {
-			tmpComplemento = xml.substring(
-					xml.indexOf("<cfdi:Complemento>") + 18, xml
-							.indexOf("</cfdi:Complemento>") + 19);
-			xml = xml.replace("<cfdi:Complemento>" + tmpComplemento,
-					"<cfdi:Complemento/>");
+	private static StringBuilder addComplement(StringBuilder xml, String newComplementXML) {
+		if (xml.toString().contains("<cfdi:Complemento>")) {
+			String complementXml = xml.substring(xml.indexOf("<cfdi:Complemento>") + 18, xml.indexOf("</cfdi:Complemento>") + 19);
+			xml.replace(xml.indexOf("<cfdi:Complemento>") + 18, xml.indexOf("</cfdi:Complemento>") + 19, complementXml + newComplementXML);
+		}
+		else if (xml.toString().contains("<cfdi:Complemento/>"))
+		{
+			newComplementXML = newComplementXML.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+			xml.replace(xml.indexOf("<cfdi:Complemento/>") , xml.indexOf("<cfdi:Complemento/>") + 19,  newComplementXML);
 		}
 		return xml;
 	}
 
-	private static String pasteComplemento(String xml) {
-		if (!(tmpComplemento.equals("<cfdi:Complemento/>")))
-
-			xml = xml.replace("</cfdi:Complemento>", tmpComplemento);
+	private static String cutComplement(String xml) {
+		if (xml.contains("<cfdi:Complemento>")) {
+			tmpComplement = xml.substring(xml.indexOf("<cfdi:Complemento>") + 18, xml.indexOf("</cfdi:Complemento>") + 19);
+			xml.replace("<cfdi:Complemento>" + tmpComplement,"</cfdi:Complemento>");
+		}
 		return xml;
 	}
 
+	/*private static StringBuilder pasteComplement(StringBuilder xml) {
+		if (!(tmpComplement.equals("<cfdi:Complemento/>")))
+			xml.replace("</cfdi:Complemento>", tmpComplement);
+		return xml;
+	}*/
+
+    /**
+     *
+     * @param CFDI
+     * @return
+     * @throws TransformerException
+     * @throws IOException
+     */
 	private String getOriginalString(String CFDI) throws TransformerException,
 			IOException {
 		StringWriter transformed = new StringWriter();
-		transform(new StreamSource(getCFDI_STRING_XSLT()), new StreamSource(
+		transform(new StreamSource(getCFDI_STRING_XSLT(addendaInfoList.get(0))), new StreamSource(
 				new StringReader(CFDI)), new StreamResult(transformed));
 		return transformed.getBuffer().toString();
 	}

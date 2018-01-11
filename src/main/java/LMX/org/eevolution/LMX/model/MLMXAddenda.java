@@ -18,11 +18,14 @@
 
 package org.eevolution.LMX.model;
 
+import org.adempiere.exceptions.AdempiereException;
+import org.compiere.model.MBPartner;
 import org.compiere.model.Query;
 import org.compiere.util.CCache;
 import org.compiere.util.Env;
 
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -32,6 +35,16 @@ public class MLMXAddenda extends X_LMX_Addenda {
 
     private static CCache<String, MLMXAddenda> cacheAddenda = new CCache<>(Table_Name, 5);
 
+    private static CCache<String, List<MLMXAddenda>> cacheAddendaList = new CCache<>(Table_Name, 5);
+
+    /**
+     *
+     * @param ctx
+     * @param partnerId
+     * @param trxName
+     * @return
+     */
+    @Deprecated
     public static MLMXAddenda getByBPartnerId(Properties ctx , int partnerId ,String  trxName)
     {
         String key = String.valueOf(Env.getAD_Client_ID(Env.getCtx())) + "-" + String.valueOf(partnerId);
@@ -49,11 +62,59 @@ public class MLMXAddenda extends X_LMX_Addenda {
         return addenda;
     }
 
+
+    /**
+     * Get Addenda by Partner
+     * @param partner
+     * @return
+     */
+    public static List<MLMXAddenda> getByBPartnerId(MBPartner partner)
+    {
+        String key = String.valueOf(Env.getAD_Client_ID(Env.getCtx())) + "-" + String.valueOf(partner.getC_BPartner_ID());
+        List<MLMXAddenda> addendaList = cacheAddendaList.get(key);
+        if (addendaList != null)
+            return addendaList;
+
+        addendaList =  new Query(partner.getCtx(), MLMXAddenda.Table_Name, "C_BPartner_ID=?", partner.get_TrxName())
+                .setClient_ID()
+                .setParameters(partner.getC_BPartner_ID())
+                .setOnlyActiveRecords(true)
+                .setOrderBy(MLMXAddenda.COLUMNNAME_SeqNo)
+                .list();
+        if (cacheAddendaList != null)
+            cacheAddendaList.put(key, addendaList);
+        return addendaList;
+    }
+
     public MLMXAddenda(Properties ctx, int addendaId, String trxName) {
         super(ctx, addendaId, trxName);
     }
 
     public MLMXAddenda(Properties ctx, ResultSet rs, String trxName) {
         super(ctx, rs, trxName);
+    }
+
+    protected boolean beforeSave (boolean newRecord)
+    {
+        if (getValue() == null)
+            throw  new AdempiereException("@Value@ @IsMandatory@");
+
+        if (getName() == null)
+            throw  new AdempiereException("@Value@ @IsMandatory@");
+
+        if (getC_BPartner_ID() <= 0)
+            throw  new AdempiereException("@C_BPartner_ID@ @IsMandatory@");
+
+        if (getAD_PrintFormat_ID() <= 0)
+            throw  new AdempiereException("@AD_PrintFormat_ID@ @IsMandatory@");
+
+        if (getAD_Column_ID() <= 0)
+            throw  new AdempiereException("@AD_Column_ID@ @IsMandatory@");
+
+        return  true;
+    }
+
+    protected boolean afterSave (boolean newRecord, boolean success) {
+        return true;
     }
 }
