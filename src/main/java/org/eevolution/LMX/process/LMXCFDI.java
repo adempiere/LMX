@@ -404,15 +404,17 @@ public final class LMXCFDI {
 		return stringWriter.getBuffer().toString();
 	}
 
+	public static String ENCODING = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+
     public String getCFDI(PO po) {
 		List<StreamSource> schemas = new ArrayList<>();
 		StringBuilder documentCFDI = new StringBuilder();
 		// Generate Document XML for CFDI based on Addendas
 		addendaInfoList.stream()
-				// Validate if Column Link exists into Entity
+				// Validate if Column Link exists into Entity as key column
 				.filter(addendaInfo ->
 						addendaInfo.getAD_Column_ID() > 0
-								&& po.get_ColumnIndex(MColumn.getColumnName(po.getCtx(), addendaInfo.getAD_Column_ID())) > 0)
+								&& po.get_ValueAsInt(MColumn.getColumnName(po.getCtx() , addendaInfo.getAD_Column_ID())) > 0 )
 				.forEach(addendaInfo -> {
 					try {
 						// Generate XML from ADempiere
@@ -421,24 +423,27 @@ public final class LMXCFDI {
 						String transformedCFDI = getXMLTransform(xmlReport, addendaInfo);
 						// Transform CFDI based on XSLT
 						String documentTransform = getAddendaTransform(transformedCFDI, addendaInfo);
-						if (documentTransform.toString().contains("<cfdi:Complemento "))
+						if (documentTransform.toString().contains("<cfdi:Complemento ")) {
 							addComplement(documentCFDI, documentTransform);
-						else {
-							documentCFDI.append(documentTransform.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""));
+							if (addendaInfo.getCFDISchema_ID() > 0)
+								schemas.add(new StreamSource(getCFDI_SCHEMA(addendaInfo)));
 						}
-
-						if (addendaInfo.getCFDISchema_ID() > 0)
-							schemas.add(new StreamSource(getCFDI_SCHEMA(addendaInfo)));
-
+						else {
+							if (!ENCODING.equals(documentTransform)) {
+								documentCFDI.append(documentTransform);
+								if (addendaInfo.getCFDISchema_ID() > 0)
+									schemas.add(new StreamSource(getCFDI_SCHEMA(addendaInfo)));
+							}
+						}
 					} catch (Exception exception) {
-						throw new AdempiereException(exception.getLocalizedMessage());
+						throw new AdempiereException("Error al validar CFDI" + exception.getMessage());
 					}
 					if (documentCFDI.toString().isEmpty())
 						throw new AdempiereException("El CFDI no es Válido");
 
 				});
 
-		String cfdiWithStamp = generateStamp(documentCFDI.toString());
+		String cfdiWithStamp = generateStamp(documentCFDI.toString().trim());
 		try {
 			// Schema Validation
 			String schemaLang = "http://www.w3.org/2001/XMLSchema";
@@ -451,7 +456,7 @@ public final class LMXCFDI {
 			Validator validator = schema.newValidator();
 			validator.validate(new StreamSource(new StringReader(cfdiWithStamp)));
 		} catch (Exception exception) {
-			throw new AdempiereException(exception.getLocalizedMessage());
+			throw new AdempiereException("Error al validar XML CFDI : \n" +  cfdiWithStamp + " \n \n Excepción : \n \n"+ exception.getMessage());
 		}
 
 		if (cfdiWithStamp.toString().isEmpty())
