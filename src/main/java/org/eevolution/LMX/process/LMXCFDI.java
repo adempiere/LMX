@@ -496,8 +496,7 @@ public final class LMXCFDI {
 		return transformedCFDI.getBuffer().toString();
 	}
 
-	private MLMXDocument createCFDI() throws TransformerException, IOException,
-			SAXException, URISyntaxException {
+	private MLMXDocument createCFDI() throws  IOException {
 
 		documentCFDI = MLMXDocument.get(document);
 		if (documentCFDI != null && documentCFDI.getCFDIUUID() != null && !documentCFDI.getCFDIUUID().isEmpty())
@@ -535,18 +534,6 @@ public final class LMXCFDI {
 
 			documentCFDI.saveEx();
 		}
-
-		/*String fileName = null;
-
-		if (I_C_Invoice.Table_Name.equals(document.get_TableName()))
-			fileName = document.get_ValueAsString("DocumentNo");
-		if (I_C_Payment.Table_Name.equals(document.get_TableName())) {
-			String taxId = DB.getSQLValueString(document.get_TrxName(),
-					"SELECT TaxID  FROM C_BPartner bp WHERE C_BPartner_ID=?", document.get_ValueAsInt(I_C_BPartner.COLUMNNAME_C_BPartner_ID));
-			String documentNo = DB.getSQLValueString(document.get_TrxName(),
-					"SELECT DocumentNo FROM C_Payment p WHERE p.C_Payment_ID = ?" , document.get_ValueAsInt(I_C_Payment.COLUMNNAME_C_Payment_ID));
-			fileName = taxId + documentNo;
-		}*/
 
 		if(document != null) {
 			documentCFDI.setCFDIXML(getCFDI(document));
